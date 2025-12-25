@@ -1,455 +1,452 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Оцифровка кассет — Ринат</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://unpkg.com/imask"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
-        
-        body {
-            font-family: 'Montserrat', sans-serif;
-            scroll-behavior: smooth;
-            font-weight: 400;
-            letter-spacing: 0.01em;
-            font-size: 16px;
-        }
-        
-        h1, h2, h3, .font-bold {
-            font-weight: 500 !important;
-            letter-spacing: 0.05em;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оцифровка кассет — Ринат</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/imask"></script>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            font-size: 16px;
+        }
+        
+        h1, h2, h3, .font-bold {
+            font-weight: 500 !important;
+            letter-spacing: 0.05em;
+        }
 
-        .thin-header {
-            font-weight: 300 !important;
-            text-transform: uppercase;
-        }
+        .thin-header {
+            font-weight: 300 !important;
+            text-transform: uppercase;
+        }
 
-        .soft-card {
-            background: white;
-            border: 1px solid #f1f5f9;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.05);
-            padding: 24px 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 70px;
-        }
+        .soft-card {
+            background: white;
+            border: 1px solid #f1f5f9;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.05);
+            padding: 24px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70px;
+            transition: transform 0.2s ease;
+        }
 
-        .hero-pattern {
-            background-color: #ffffff;
-            background-image: radial-gradient(#e2e8f0 0.8px, transparent 0.8px);
-            background-size: 24px 24px;
-        }
+        .soft-card:hover {
+            transform: translateY(-2px);
+        }
 
-        .counter-btn {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #e2e8f0;
-            border-radius: 50%;
-            transition: all 0.2s;
-            color: #64748b;
-        }
+        .hero-pattern {
+            background-color: #ffffff;
+            background-image: radial-gradient(#e2e8f0 0.8px, transparent 0.8px);
+            background-size: 24px 24px;
+        }
 
-        .counter-btn:hover {
-            background-color: #f8fafc;
-            border-color: #2563eb;
-            color: #2563eb;
-        }
+        .counter-btn {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #e2e8f0;
+            border-radius: 50%;
+            transition: all 0.2s;
+            color: #64748b;
+            cursor: pointer;
+        }
 
-        .rounded-btn {
-            border-radius: 8px;
-        }
+        .counter-btn:hover {
+            background-color: #f8fafc;
+            border-color: #2563eb;
+            color: #2563eb;
+        }
 
-        .card-label {
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            font-weight: 600;
-            color: #334155;
-        }
+        .rounded-btn {
+            border-radius: 8px;
+        }
 
-        #orderModal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(4px);
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+        .card-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            color: #334155;
+        }
 
-        .modal-content {
-            background: white;
-            width: 100%;
-            max-width: 500px;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            transform: scale(0.95);
-            transition: all 0.3s ease;
-        }
+        #orderModal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
 
-        #orderModal.active {
-            display: flex;
-        }
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: scale(0.95);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
 
-        #orderModal.active .modal-content {
-            transform: scale(1);
-        }
+        #orderModal.active {
+            display: flex;
+        }
 
-        .form-input {
-            width: 100%;
-            padding: 14px 16px;
-            border: 1px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 15px;
-            margin-top: 8px;
-            transition: all 0.3s;
-        }
+        #orderModal.active .modal-content {
+            transform: scale(1);
+        }
 
-        .form-input:focus {
-            outline: none;
-            border-color: #2563eb;
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-        
-        .success-message {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 15px;
+            margin-top: 8px;
+            transition: all 0.3s;
+            appearance: none;
+        }
 
-        .no-italic {
-            font-style: normal !important;
-        }
+        .form-input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
 
-        @keyframes pulse-opacity {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
+        .shimmer-text {
+            animation: pulse-opacity 2s ease-in-out infinite;
+        }
 
-        .shimmer-text {
-            animation: pulse-opacity 1.5s ease-in-out infinite;
-        }
-    </style>
+        @keyframes pulse-opacity {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        .price-value {
+            transition: all 0.5s ease-out;
+        }
+    </style>
 </head>
 <body class="bg-white text-slate-800">
 
-    <!-- Header -->
-    <header class="fixed w-full z-50 bg-white/90 backdrop-blur-lg border-b border-slate-100">
-        <div class="container mx-auto px-6 h-24 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 border border-blue-600 flex items-center justify-center rounded-sm">
-                    <i class="fas fa-film text-blue-600 text-sm"></i>
-                </div>
-                <span class="text-lg thin-header tracking-[0.3em] text-slate-900 font-medium">DigiMemo</span>
-            </div>
-            <nav class="hidden md:flex gap-10 text-[12px] uppercase tracking-[0.2em] font-semibold text-slate-500">
-                <a href="#delivery" class="hover:text-blue-600 transition">Условия</a>
-                <a href="#types" class="hover:text-blue-600 transition">Типы кассет</a>
-                <a href="#calc" class="hover:text-blue-600 transition">Расчет</a>
-            </nav>
-            <button onclick="toggleModal(true)" class="text-[12px] uppercase tracking-widest border border-slate-900 px-6 py-3 font-semibold hover:bg-slate-900 hover:text-white transition duration-500 rounded-btn">
-                Сделать заказ
-            </button>
-        </div>
-    </header>
+    <!-- Header -->
+    <header class="fixed w-full z-50 bg-white/90 backdrop-blur-lg border-b border-slate-100">
+        <div class="container mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 border border-blue-600 flex items-center justify-center rounded-sm">
+                    <i class="fas fa-film text-blue-600 text-sm"></i>
+                </div>
+                <span class="text-base md:text-lg thin-header tracking-[0.3em] text-slate-900 font-medium">DigiMemo</span>
+            </div>
+            <nav class="hidden lg:flex gap-10 text-[11px] uppercase tracking-[0.2em] font-semibold text-slate-500">
+                <a href="#delivery" class="hover:text-blue-600 transition">Условия</a>
+                <a href="#types" class="hover:text-blue-600 transition">Типы кассет</a>
+                <a href="#calc" class="hover:text-blue-600 transition">Расчет</a>
+            </nav>
+            <button onclick="toggleModal(true)" class="text-[10px] md:text-[12px] uppercase tracking-widest border border-slate-900 px-4 md:px-6 py-2.5 md:py-3 font-semibold hover:bg-slate-900 hover:text-white transition duration-500 rounded-btn">
+                Сделать заказ
+            </button>
+        </div>
+    </header>
 
-    <!-- Modal Form -->
-    <div id="orderModal">
-        <div class="modal-content relative">
-            <button onclick="toggleModal(false)" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600">
-                <i class="fas fa-times text-xl"></i>
-            </button>
-            
-            <div id="formContainer">
-                <div class="text-center mb-10">
-                    <h3 class="thin-header text-2xl tracking-[0.2em] text-slate-900 mb-2">Оформить заказ</h3>
-                    <p class="text-[12px] text-slate-400 uppercase tracking-widest">Заполните данные для выезда курьера</p>
-                </div>
+    <!-- Modal Form -->
+    <div id="orderModal" role="dialog" aria-modal="true">
+        <div class="modal-content relative">
+            <button onclick="toggleModal(false)" class="absolute top-6 right-6 text-slate-400 hover:text-slate-600 p-2" aria-label="Закрыть">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            
+            <div id="formContainer">
+                <div class="text-center mb-8">
+                    <h3 class="thin-header text-xl md:text-2xl tracking-[0.2em] text-slate-900 mb-2">Оформить заказ</h3>
+                    <p class="text-[11px] text-slate-400 uppercase tracking-widest">Заполните данные для выезда курьера</p>
+                </div>
 
-                <form id="orderForm" action="https://formspree.io/f/xkowabkp" method="POST" class="space-y-6">
-                    <input type="hidden" name="_subject" value="Новый заказ на оцифровку (Сайт)">
-                    
-                    <div>
-                        <label class="text-[11px] uppercase tracking-widest font-bold text-slate-500 ml-1">Номер телефона</label>
-                        <input type="tel" id="phoneInput" name="phone" required placeholder="+7 (___) ___-__-__" class="form-input">
-                    </div>
-                    
-                    <div>
-                        <label class="text-[11px] uppercase tracking-widest font-bold text-slate-500 ml-1">Ваш точный адрес (МКАД)</label>
-                        <textarea name="address" required rows="3" placeholder="Улица, дом, квартира" class="form-input"></textarea>
-                    </div>
+                <form id="orderForm" action="https://formspree.io/f/xkowabkp" method="POST" class="space-y-5">
+                    <input type="hidden" name="_subject" value="Новый заказ на оцифровку (Сайт)">
+                    
+                    <div>
+                        <label class="text-[11px] uppercase tracking-widest font-bold text-slate-500 ml-1">Номер телефона</label>
+                        <input type="tel" id="phoneInput" name="phone" required placeholder="+7 (___) ___-__-__" class="form-input">
+                    </div>
+                    
+                    <div>
+                        <label class="text-[11px] uppercase tracking-widest font-bold text-slate-500 ml-1">Ваш точный адрес (МКАД)</label>
+                        <textarea name="address" required rows="3" placeholder="Улица, дом, квартира" class="form-input"></textarea>
+                    </div>
 
-                    <input type="hidden" name="qty_camera_tapes" id="hiddenCamQty" value="0">
-                    <input type="hidden" name="qty_vhs_tapes" id="hiddenVhsQty" value="0">
-                    <input type="hidden" name="calculated_total" id="hiddenTotalPrice" value="0">
+                    <input type="hidden" name="qty_camera_tapes" id="hiddenCamQty" value="0">
+                    <input type="hidden" name="qty_vhs_tapes" id="hiddenVhsQty" value="0">
+                    <input type="hidden" name="calculated_total" id="hiddenTotalPrice" value="0">
 
-                    <button type="submit" id="submitBtn" class="w-full text-[12px] uppercase tracking-[0.3em] bg-blue-600 text-white py-5 font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-100 rounded-btn">
-                        Отправить заявку
-                    </button>
-                </form>
-            </div>
+                    <button type="submit" id="submitBtn" class="w-full text-[12px] uppercase tracking-[0.3em] bg-blue-600 text-white py-4 md:py-5 font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-100 rounded-btn">
+                        Отправить заявку
+                    </button>
+                </form>
+            </div>
 
-            <div id="successMessage" class="success-message">
-                <i class="fas fa-check-circle text-5xl text-green-500 mb-6"></i>
-                <h3 class="thin-header text-xl tracking-[0.2em] text-slate-900 mb-2">Заявка принята</h3>
-                <p class="text-[11px] text-slate-400 uppercase tracking-widest">Спасибо за заказ. Я сейчас свяжусь с Вами</p>
-                <button onclick="toggleModal(false)" class="mt-8 text-[11px] uppercase tracking-widest font-bold text-blue-600">Закрыть</button>
-            </div>
-        </div>
-    </div>
+            <div id="successMessage" class="success-message">
+                <i class="fas fa-check-circle text-5xl text-green-500 mb-6"></i>
+                <h3 class="thin-header text-xl tracking-[0.2em] text-slate-900 mb-2">Заявка принята</h3>
+                <p class="text-[11px] text-slate-400 uppercase tracking-widest">Спасибо за заказ, Ринат свяжется с Вами в ближайшее время</p>
+                <button onclick="toggleModal(false)" class="mt-8 text-[11px] uppercase tracking-widest font-bold text-blue-600">Закрыть</button>
+            </div>
+        </div>
+    </div>
 
-    <!-- 1. Hero Section -->
-    <section class="relative pt-32 pb-12 hero-pattern border-b border-slate-50">
-        <div class="container mx-auto px-6 text-center">
-            <div class="inline-block text-[11px] tracking-[0.4em] uppercase text-blue-600 mb-6 font-bold">
-                Premium Digital Service
-            </div>
-            <h1 class="text-4xl md:text-6xl thin-header leading-tight text-slate-900 mb-8 font-normal no-italic">
-                Готово будет <br> уже завтра
-            </h1>
-            <p class="text-base md:text-lg text-slate-500 max-w-xl mx-auto font-normal leading-loose">
-                Профессиональный перевод аналоговых архивов в цифровое качество. Ваш личный специалист по оцифровке.
-            </p>
-        </div>
-    </section>
+    <!-- 1. Hero Section -->
+    <section class="relative pt-32 pb-16 md:pt-48 md:pb-24 hero-pattern border-b border-slate-50">
+        <div class="container mx-auto px-6 text-center">
+            <div class="inline-block text-[10px] md:text-[11px] tracking-[0.4em] uppercase text-blue-600 mb-6 font-bold">
+                Premium Digital Service
+            </div>
+            <h1 class="text-3xl md:text-6xl thin-header leading-tight text-slate-900 mb-8 italic-none" style="font-style: normal;">
+                Готово будет <br class="hidden md:block"> уже завтра
+            </h1>
+            <p class="text-sm md:text-lg text-slate-500 max-w-xl mx-auto font-normal leading-relaxed md:leading-loose">
+                Профессиональный перевод аналоговых архивов в цифровое качество. Ваш личный специалист по оцифровке.
+            </p>
+        </div>
+    </section>
 
-    <!-- 2. Info Summary Section -->
-    <section id="delivery" class="py-12 bg-white border-b border-slate-100">
-        <div class="container mx-auto px-6">
-            <div class="grid md:grid-cols-3 gap-12 max-w-5xl mx-auto">
-                <div class="flex flex-col items-center text-center">
-                    <div class="w-20 h-20 bg-blue-50 text-blue-600 rounded-full flex-shrink-0 flex items-center justify-center mb-6">
-                        <i class="fas fa-truck-fast text-3xl"></i>
-                    </div>
-                    <div>
-                        <h5 class="text-[13px] uppercase tracking-[0.2em] font-bold text-slate-900 mb-3">Бесплатная доставка</h5>
-                        <p class="text-[14px] text-slate-500 leading-relaxed uppercase max-w-[260px]">Заберу кассеты и привезу готовый заказ по любому адресу в пределах МКАД.</p>
-                    </div>
-                </div>
-                <div class="flex flex-col items-center text-center">
-                    <div class="w-20 h-20 bg-blue-50 text-blue-600 rounded-full flex-shrink-0 flex items-center justify-center mb-6">
-                        <i class="fas fa-bolt text-3xl"></i>
-                    </div>
-                    <div>
-                        <h5 class="text-[13px] uppercase tracking-[0.2em] font-bold text-slate-900 mb-3">Срок от 1 дня</h5>
-                        <p class="text-[14px] text-slate-500 leading-relaxed uppercase max-w-[240px]">До 5 кассет сделаю за 24 часа. Отправлю вам ссылкой на скачивание или запишу на вашу флешку.</p>
-                    </div>
-                </div>
-                <div class="flex flex-col items-center text-center">
-                    <div class="w-20 h-20 bg-blue-50 text-blue-600 rounded-full flex-shrink-0 flex items-center justify-center mb-6">
-                        <i class="fas fa-wallet text-3xl"></i>
-                    </div>
-                    <div>
-                        <h5 class="text-[13px] uppercase tracking-[0.2em] font-bold text-slate-900 mb-3">Честная оплата</h5>
-                        <p class="text-[14px] text-slate-500 leading-relaxed uppercase max-w-[240px]">
-                            20 ₽/мин. оцифровывается только личное.<br>
-                            Записи с ТВ и фильмы — удаляю бесплатно.<br>
-                            Минимальный заказ 1,5 часа.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- 2. Info Summary Section -->
+    <section id="delivery" class="py-16 bg-white border-b border-slate-100">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
+                <div class="flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mb-6 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                        <i class="fas fa-truck-fast text-2xl md:text-3xl"></i>
+                    </div>
+                    <h5 class="text-[12px] md:text-[13px] uppercase tracking-[0.2em] font-bold text-slate-900 mb-3">Бесплатная доставка</h5>
+                    <p class="text-[13px] md:text-[14px] text-slate-500 leading-relaxed uppercase max-w-[260px]">Заберу кассеты и привезу готовый заказ по любому адресу в пределах МКАД.</p>
+                </div>
+                <div class="flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mb-6 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                        <i class="fas fa-bolt text-2xl md:text-3xl"></i>
+                    </div>
+                    <h5 class="text-[12px] md:text-[13px] uppercase tracking-[0.2em] font-bold text-slate-900 mb-3">Срок от 1 дня</h5>
+                    <p class="text-[13px] md:text-[14px] text-slate-500 leading-relaxed uppercase max-w-[240px]">До 5 кассет сделаю за 24 часа. Ссылка на облако или запись на вашу флешку.</p>
+                </div>
+                <div class="flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 md:w-20 md:h-20 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mb-6 transition-colors group-hover:bg-blue-600 group-hover:text-white">
+                        <i class="fas fa-wallet text-2xl md:text-3xl"></i>
+                    </div>
+                    <h5 class="text-[12px] md:text-[13px] uppercase tracking-[0.2em] font-bold text-slate-900 mb-3">Честная оплата</h5>
+                    <p class="text-[13px] md:text-[14px] text-slate-500 leading-relaxed uppercase max-w-[240px]">
+                        20 ₽/мин. Личное — оставляем. Фильмы и ТВ — удаляем бесплатно. Мин. заказ 1.5 часа.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- 3. Types Section -->
-    <section id="types" class="py-16">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="thin-header text-3xl tracking-[0.4em] mb-12 text-slate-900">Любые типы кассет</h2>
-            <div class="flex flex-wrap justify-center gap-4 max-w-6xl mx-auto">
-                <div class="soft-card w-[calc(50%-8px)] md:w-40">
-                    <span class="card-label">VHS</span>
-                </div>
-                <div class="soft-card w-[calc(50%-8px)] md:w-40">
-                    <span class="card-label">VHS-C</span>
-                </div>
-                <div class="soft-card w-[calc(50%-8px)] md:w-40">
-                    <span class="card-label">HI8</span>
-                </div>
-                <div class="soft-card w-[calc(50%-8px)] md:w-40">
-                    <span class="card-label">8MM</span>
-                </div>
-                <div class="soft-card w-[calc(50%-8px)] md:w-40">
-                    <span class="card-label">DIGITAL8</span>
-                </div>
-                <div class="soft-card w-[calc(50%-8px)] md:w-40">
-                    <span class="card-label">MINI DV</span>
-                </div>
-                <div class="soft-card w-[calc(50%-8px)] md:w-40">
-                    <span class="card-label">AUDIO</span>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- 3. Types Section -->
+    <section id="types" class="py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="thin-header text-2xl md:text-3xl tracking-[0.4em] mb-12 text-slate-900">Форматы кассет</h2>
+            <div class="flex flex-wrap justify-center gap-3 md:gap-4 max-w-6xl mx-auto">
+                <div class="soft-card w-[calc(50%-6px)] md:w-40"><span class="card-label">VHS</span></div>
+                <div class="soft-card w-[calc(50%-6px)] md:w-40"><span class="card-label">VHS-C</span></div>
+                <div class="soft-card w-[calc(50%-6px)] md:w-40"><span class="card-label">HI8</span></div>
+                <div class="soft-card w-[calc(50%-6px)] md:w-40"><span class="card-label">8MM</span></div>
+                <div class="soft-card w-[calc(50%-6px)] md:w-40"><span class="card-label">DIGITAL8</span></div>
+                <div class="soft-card w-[calc(50%-6px)] md:w-40"><span class="card-label">MINI DV</span></div>
+                <div class="soft-card w-[calc(50%-6px)] md:w-40"><span class="card-label">AUDIO</span></div>
+            </div>
+        </div>
+    </section>
 
-    <!-- 4. Calculator Section -->
-    <section id="calc" class="py-16 bg-slate-50/50 border-y border-slate-100">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto bg-white border border-slate-100 p-8 md:p-12 shadow-sm rounded-[16px]">
-                <div class="text-center mb-10">
-                    <h2 class="thin-header text-3xl tracking-[0.3em] mb-4 text-slate-900">Калькулятор заказа</h2>
-                    <p class="text-[12px] uppercase tracking-widest text-slate-500 font-semibold">Тариф: 20 руб / минута оцифровки</p>
-                </div>
+    <!-- 4. Calculator Section -->
+    <section id="calc" class="py-20 bg-slate-50/50 border-y border-slate-100">
+        <div class="container mx-auto px-6">
+            <div class="max-w-4xl mx-auto bg-white border border-slate-100 p-6 md:p-12 shadow-sm rounded-[24px]">
+                <div class="text-center mb-12">
+                    <h2 class="thin-header text-2xl md:text-3xl tracking-[0.3em] mb-4 text-slate-900">Калькулятор</h2>
+                    <p class="text-[11px] md:text-[12px] uppercase tracking-widest text-slate-500 font-semibold">Фиксированный тариф: 20 руб / минута</p>
+                </div>
 
-                <!-- Строки с выбором количества -->
-                <div class="space-y-8 mb-10">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-50">
-                        <div class="text-center md:text-left">
-                            <h4 class="text-sm uppercase tracking-widest font-bold text-slate-900 mb-2">Кассеты от видеокамер</h4>
-                            <p class="text-[11px] text-slate-400 uppercase tracking-tight">MINIDV, HI8, 8MM, VHS-C</p>
-                        </div>
-                        <div class="flex items-center justify-center md:justify-end gap-6 md:w-32">
-                            <button onclick="changeQty('cam', -1)" class="counter-btn"><i class="fas fa-minus text-sm"></i></button>
-                            <span id="camQty" class="text-2xl font-light w-8 text-center">0</span>
-                            <button onclick="changeQty('cam', 1)" class="counter-btn"><i class="fas fa-plus text-sm"></i></button>
-                        </div>
-                    </div>
+                <div class="space-y-6 md:space-y-8 mb-12">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-50">
+                        <div class="text-center md:text-left">
+                            <h4 class="text-[13px] md:text-sm uppercase tracking-widest font-bold text-slate-900 mb-1">Кассеты от видеокамер</h4>
+                            <p class="text-[10px] text-slate-400 uppercase tracking-tight">MINIDV, HI8, 8MM, VHS-C</p>
+                        </div>
+                        <div class="flex items-center justify-center gap-6">
+                            <button onclick="changeQty('cam', -1)" class="counter-btn" aria-label="Уменьшить"><i class="fas fa-minus text-xs"></i></button>
+                            <span id="camQty" class="text-2xl font-light w-10 text-center">0</span>
+                            <button onclick="changeQty('cam', 1)" class="counter-btn" aria-label="Увеличить"><i class="fas fa-plus text-xs"></i></button>
+                        </div>
+                    </div>
 
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-slate-50">
-                        <div class="text-center md:text-left">
-                            <h4 class="text-sm uppercase tracking-widest font-bold text-slate-900 mb-2">Стандартные VHS кассеты</h4>
-                            <p class="text-[11px] text-slate-400 uppercase tracking-tight">От видеомагнитофона</p>
-                        </div>
-                        <div class="flex items-center justify-center md:justify-end gap-6 md:w-32">
-                            <button onclick="changeQty('vhs', -1)" class="counter-btn"><i class="fas fa-minus text-sm"></i></button>
-                            <span id="vhsQty" class="text-2xl font-light w-8 text-center">0</span>
-                            <button onclick="changeQty('vhs', 1)" class="counter-btn"><i class="fas fa-plus text-sm"></i></button>
-                        </div>
-                    </div>
-                </div>
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-slate-50">
+                        <div class="text-center md:text-left">
+                            <h4 class="text-[13px] md:text-sm uppercase tracking-widest font-bold text-slate-900 mb-1">VHS кассеты</h4>
+                            <p class="text-[10px] text-slate-400 uppercase tracking-tight">Стандартные видеокассеты</p>
+                        </div>
+                        <div class="flex items-center justify-center gap-6">
+                            <button onclick="changeQty('vhs', -1)" class="counter-btn" aria-label="Уменьшить"><i class="fas fa-minus text-xs"></i></button>
+                            <span id="vhsQty" class="text-2xl font-light w-10 text-center">0</span>
+                            <button onclick="changeQty('vhs', 1)" class="counter-btn" aria-label="Увеличить"><i class="fas fa-plus text-xs"></i></button>
+                        </div>
+                    </div>
+                </div>
 
-                <!-- Итоговый блок -->
-                <div class="flex flex-col md:flex-row items-center justify-between pt-6 gap-8">
-                    <div class="hidden md:block"></div>
-                    
-                    <div class="text-center md:w-full md:flex md:flex-col md:items-center">
-                        <span class="block text-[11px] uppercase tracking-widest text-slate-500 mb-2 font-bold whitespace-nowrap">Максимально возможная сумма заказа</span>
-                        <div class="text-6xl font-light text-slate-900 flex items-baseline justify-center">
-                            <span id="totalPrice">0</span><span class="text-2xl ml-1">₽</span>
-                        </div>
-                        <div class="flex flex-col items-center mt-4">
-                            <p id="totalMinutes" class="text-[12px] uppercase tracking-widest text-slate-400 font-bold mb-3">Всего минут: 0</p>
-                            <!-- Увеличен шрифт и добавлена четкость -->
-                            <p class="text-[13px] md:text-[14px] text-slate-500 uppercase tracking-tight leading-relaxed max-w-[500px] font-medium no-italic shimmer-text text-center">
-                                Окончательная стоимость как правило значительно ниже, так как кассеты крайне редко записаны полностью
-                            </p>
-                        </div>
-                    </div>
+                <div class="flex flex-col items-center gap-8">
+                    <div class="text-center w-full">
+                        <span class="block text-[10px] md:text-[11px] uppercase tracking-widest text-slate-500 mb-3 font-bold">Максимально возможная сумма</span>
+                        <div class="text-5xl md:text-7xl font-light text-slate-900 flex items-baseline justify-center">
+                            <span id="totalPrice" class="price-value">0</span><span class="text-2xl md:text-3xl ml-2">₽</span>
+                        </div>
+                        <div class="mt-4 space-y-3">
+                            <p id="totalMinutes" class="text-[11px] md:text-[12px] uppercase tracking-widest text-slate-400 font-bold">Всего минут: 0</p>
+                            <p class="text-[12px] md:text-[14px] text-slate-500 uppercase tracking-tight leading-relaxed max-w-2xl mx-auto font-medium shimmer-text" style="font-style: normal;">
+                                Итоговая стоимость обычно ниже, так как оплачивается только полезное видео
+                            </p>
+                        </div>
+                    </div>
 
-                    <div class="w-full md:w-auto">
-                        <button onclick="toggleModal(true)" class="text-[12px] uppercase tracking-[0.3em] bg-slate-900 text-white px-12 py-5 font-bold hover:bg-blue-600 transition duration-500 shadow-lg rounded-btn w-full md:w-auto">
-                            Сделать заказ
-                        </button>
-                    </div>
-                </div>
+                    <button onclick="toggleModal(true)" class="w-full md:w-auto text-[11px] md:text-[12px] uppercase tracking-[0.3em] bg-slate-900 text-white px-10 md:px-16 py-4 md:py-5 font-bold hover:bg-blue-600 transition duration-500 shadow-xl rounded-btn">
+                        Сделать заказ
+                    </button>
+                </div>
 
-                <div class="mt-10 pt-8 border-t border-slate-50 text-center">
-                    <p id="calcNote" class="text-[11px] uppercase tracking-widest text-blue-600 font-bold opacity-0 transition-all duration-500 no-italic mb-2">
-                        Минимальный заказ 1800 ₽ (1.5 часа оцифровки)
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+                <div class="mt-10 pt-8 border-t border-slate-50 text-center">
+                    <p id="calcNote" class="text-[10px] md:text-[11px] uppercase tracking-widest text-blue-600 font-bold opacity-0 transition-all duration-500" style="font-style: normal;">
+                        Минимальный заказ 1800 ₽ (1.5 часа оцифровки)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <footer class="py-12 border-t border-slate-50 text-center bg-white">
-        <p class="text-[10px] uppercase tracking-[0.5em] text-slate-400 font-bold">© 2024 Ринат — Digital Preservation</p>
-    </footer>
+    <footer class="py-16 border-t border-slate-50 text-center bg-white">
+        <div class="w-8 h-8 border border-slate-200 flex items-center justify-center rounded-sm mx-auto mb-6">
+            <i class="fas fa-film text-slate-300 text-xs"></i>
+        </div>
+        <p class="text-[10px] uppercase tracking-[0.4em] text-slate-400 font-bold">© 2024 Ринат — Digital Preservation</p>
+    </footer>
 
-    <script>
-        let quantities = { cam: 0, vhs: 0 };
-        const modal = document.getElementById('orderModal');
-        const orderForm = document.getElementById('orderForm');
-        const formContainer = document.getElementById('formContainer');
-        const successMessage = document.getElementById('successMessage');
+    <script>
+        let quantities = { cam: 0, vhs: 0 };
+        const modal = document.getElementById('orderModal');
+        const orderForm = document.getElementById('orderForm');
+        const formContainer = document.getElementById('formContainer');
+        const successMessage = document.getElementById('successMessage');
 
-        const phoneMask = IMask(
-            document.getElementById('phoneInput'),
-            { mask: '+{7} (000) 000-00-00' }
-        );
+        const phoneMask = IMask(
+            document.getElementById('phoneInput'),
+            { mask: '+{7} (000) 000-00-00' }
+        );
 
-        function toggleModal(show) {
-            if (show) {
-                modal.classList.add('active');
-                formContainer.style.display = 'block';
-                successMessage.style.display = 'none';
-                document.getElementById('hiddenCamQty').value = quantities.cam;
-                document.getElementById('hiddenVhsQty').value = quantities.vhs;
-                document.getElementById('hiddenTotalPrice').value = document.getElementById('totalPrice').innerText + ' руб.';
-            } else {
-                modal.classList.remove('active');
-            }
-        }
+        function toggleModal(show) {
+            if (show) {
+                modal.classList.add('active');
+                formContainer.style.display = 'block';
+                successMessage.style.display = 'none';
+                document.getElementById('hiddenCamQty').value = quantities.cam;
+                document.getElementById('hiddenVhsQty').value = quantities.vhs;
+                document.getElementById('hiddenTotalPrice').value = document.getElementById('totalPrice').innerText + ' руб.';
+            } else {
+                modal.classList.remove('active');
+            }
+        }
 
-        orderForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            const originalText = btn.innerText;
-            btn.innerText = 'ОТПРАВКА...';
-            btn.disabled = true;
-            const data = new FormData(orderForm);
-            try {
-                const response = await fetch(orderForm.action, {
-                    method: 'POST',
-                    body: data,
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (response.ok) {
-                    formContainer.style.display = 'none';
-                    successMessage.style.display = 'block';
-                    orderForm.reset();
-                    phoneMask.unmaskedValue = '';
-                } else {
-                    const errorData = await response.json();
-                    alert('Ошибка: ' + (errorData.errors ? errorData.errors[0].message : 'Не удалось отправить'));
-                }
-            } catch (error) {
-                alert('Произошла ошибка соединения. Попробуйте еще раз.');
-            } finally {
-                btn.innerText = originalText;
-                btn.disabled = false;
-            }
-        });
+        orderForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('submitBtn');
+            const originalText = btn.innerText;
+            btn.innerText = 'ОТПРАВКА...';
+            btn.disabled = true;
+            const data = new FormData(orderForm);
+            try {
+                const response = await fetch(orderForm.action, {
+                    method: 'POST',
+                    body: data,
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (response.ok) {
+                    formContainer.style.display = 'none';
+                    successMessage.style.display = 'block';
+                    orderForm.reset();
+                    phoneMask.unmaskedValue = '';
+                } else {
+                    const errorData = await response.json();
+                    alert('Ошибка: ' + (errorData.errors ? errorData.errors[0].message : 'Не удалось отправить'));
+                }
+            } catch (error) {
+                alert('Ошибка соединения. Попробуйте еще раз.');
+            } finally {
+                btn.innerText = originalText;
+                btn.disabled = false;
+            }
+        });
 
-        window.onclick = function(event) { if (event.target == modal) toggleModal(false); }
+        window.onclick = function(event) { if (event.target == modal) toggleModal(false); }
 
-        function changeQty(type, delta) {
-            quantities[type] = Math.max(0, quantities[type] + delta);
-            document.getElementById(type + 'Qty').innerText = quantities[type];
-            calculate();
-        }
+        function changeQty(type, delta) {
+            quantities[type] = Math.max(0, quantities[type] + delta);
+            document.getElementById(type + 'Qty').innerText = quantities[type];
+            calculate();
+        }
 
-        function calculate() {
-            const totalMin = (quantities.cam * 90) + (quantities.vhs * 180);
-            const rate = 20; const minSum = 1800;
-            let price = totalMin * rate;
-            document.getElementById('totalMinutes').innerText = "Всего минут: " + totalMin;
-            const priceDisplay = document.getElementById('totalPrice');
-            const calcNote = document.getElementById('calcNote');
-            
-            if (totalMin === 0) { 
-                priceDisplay.innerText = "0"; 
-                calcNote.style.opacity = "0";
-            } else if (price < minSum) { 
-                priceDisplay.innerText = minSum; 
-                calcNote.style.opacity = "1";
-            } else { 
-                priceDisplay.innerText = price; 
-                calcNote.style.opacity = "0.4";
-            }
-        }
-    </script>
+        function calculate() {
+            const totalMin = (quantities.cam * 90) + (quantities.vhs * 180);
+            const rate = 20; 
+            const minSum = 1800;
+            let price = totalMin * rate;
+            
+            document.getElementById('totalMinutes').innerText = "Всего минут: " + totalMin;
+            const priceDisplay = document.getElementById('totalPrice');
+            const calcNote = document.getElementById('calcNote');
+            
+            let finalPrice = 0;
+            if (totalMin > 0) {
+                finalPrice = Math.max(price, minSum);
+                calcNote.style.opacity = (price < minSum) ? "1" : "0.4";
+            } else {
+                calcNote.style.opacity = "0";
+            }
+
+            // Плавная анимация изменения цены
+            animateValue(priceDisplay, parseInt(priceDisplay.innerText), finalPrice, 400);
+        }
+
+        function animateValue(obj, start, end, duration) {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                obj.innerHTML = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+    </script>
 </body>
 </html>
