@@ -16,10 +16,17 @@
             scroll-behavior: smooth;
             font-weight: 400;
             letter-spacing: 0.01em;
-            font-size: 16px;
+            font-size: 16px; /* Базовый размер для десктопа */
             overflow-x: hidden;
             background-color: #ffffff;
             line-height: 1.6;
+        }
+
+        /* Адаптация шрифтов для мобильных устройств */
+        @media (max-width: 768px) {
+            body {
+                font-size: 17px; /* Чуть крупнее для мобильных */
+            }
         }
         
         h1, h2, h3, .font-bold {
@@ -61,542 +68,12 @@
             overflow: hidden;
         }
 
-        .icon-backdrop {
-            width: 60px;
-            height: 60px;
-            background: #ffffff;
-            border: 2px solid #f1f5f9; 
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            color: #1e293b;
-            font-size: 24px;
-        }
-
-        .soft-card-static {
-            background: #ffffff;
-            border: 2px solid #f1f5f9; 
-            border-radius: 16px;
-            padding: 25px 15px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 110px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
-            cursor: default;
-        }
-
-        .counter-btn {
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid #e2e8f0; 
-            border-radius: 50%;
-            transition: all 0.2s;
-            color: #1e293b;
-            cursor: pointer;
-            background: #ffffff;
-        }
-
-        .counter-btn:hover {
-            background-color: #000000;
-            color: #ffffff;
-            border-color: #000000;
-        }
-
-        .card-label {
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.15em; 
-            font-weight: 600;
-            color: #000000;
-            text-align: center;
-        }
-
-        /* Elegant Button */
-        .elegant-btn {
-            position: relative;
-            padding: 18px 48px;
-            background: #000000;
-            color: #ffffff;
-            border-radius: 100px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.25em;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            border: 1px solid rgba(0,0,0,0.1);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
-        }
-
-        .elegant-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.4);
-            background: #1a1a1a;
-        }
-
-        .elegant-btn:active {
-            transform: translateY(-1px);
-        }
-
-        .elegant-btn::after {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .elegant-btn:hover::after {
-            opacity: 1;
-        }
-
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(15px);
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal-overlay.active { display: flex; }
-
-        .modal-content {
-            background: #ffffff;
-            width: 100%;
-            max-width: 500px;
-            border-radius: 40px;
-            padding: 60px 40px;
-            border: 2px solid #e2e8f0; 
-            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 16px;
-            border: 2px solid #e2e8f0; 
-            background: #fcfdfe;
-            border-radius: 12px;
-            font-size: 16px;
-            margin-top: 8px;
-            outline: none;
-            transition: all 0.3s;
-        }
-
-        .form-input:focus {
-            border-color: #000000;
-            background: #ffffff;
-        }
-
-        .shimmer-text {
-            animation: pulse-opacity-active 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-opacity-active {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        .tg-float {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            z-index: 40;
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            background: #ffffff;
-            padding: 12px 22px;
-            border-radius: 80px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
-            border: 2px solid #e2e8f0; 
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .tg-icon {
-            width: 36px;
-            height: 36px;
-            background: #000000;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-    </style>
-</head>
-<body class="text-slate-900">
-
-    <div class="vhs-background">
-        <div class="vhs-pattern"></div>
-    </div>
-
-    <!-- Telegram Button -->
-    <a href="https://t.me/RinatZakiroff" target="_blank" class="tg-float group">
-        <div class="tg-icon">
-            <i class="fab fa-telegram-plane"></i>
-        </div>
-        <div class="flex flex-col">
-            <span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold leading-none mb-1">Написать мне</span>
-            <span class="text-[12px] uppercase tracking-[0.1em] text-slate-900 font-semibold">Telegram</span>
-        </div>
-    </a>
-
-    <!-- Header -->
-    <header class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b-2 border-slate-200">
-        <div class="container mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-8 h-8 border-2 border-black flex items-center justify-center">
-                    <i class="fas fa-film text-black text-xs"></i>
-                </div>
-                <span class="text-lg thin-header tracking-[0.3em] text-black font-medium">DigiMemo</span>
-            </div>
-            <nav class="hidden lg:flex gap-8 text-[11px] uppercase tracking-[0.2em] font-semibold text-slate-400">
-                <a href="#types" class="hover:text-black transition">Типы кассет</a>
-                <a href="#delivery" class="hover:text-black transition">Условия</a>
-                <a href="#calc" class="hover:text-black transition">Расчет</a>
-            </nav>
-            <button onclick="toggleModal('orderModal', true)" class="text-[10px] uppercase tracking-[0.2em] border-2 border-black px-6 py-2 rounded-full font-bold text-black hover:bg-black hover:text-white transition duration-300">
-                Заказать
-            </button>
-        </div>
-    </header>
-
-    <!-- Modal Window -->
-    <div id="orderModal" class="modal-overlay">
-        <div class="modal-content">
-            <button onclick="toggleModal('orderModal', false)" class="absolute top-6 right-6 text-slate-400 hover:text-slate-900 p-2 z-10">
-                <i class="fas fa-times text-xl"></i>
-            </button>
-            <div id="formContainer">
-                <div class="text-center mb-10">
-                    <h3 class="thin-header text-2xl tracking-[0.2em] text-black mb-4">Оформить заказ</h3>
-                    <p class="text-[11px] text-slate-400 uppercase tracking-widest font-bold">Данные для выезда курьера</p>
-                </div>
-                <form id="orderForm" action="https://formspree.io/f/xkowabkp" method="POST" class="space-y-4">
-                    <input type="hidden" name="_subject" value="Новый заказ на оцифровку (DigiMemo)">
-                    <div>
-                        <label class="text-[11px] uppercase tracking-widest font-bold text-slate-400 ml-2">Телефон</label>
-                        <input type="tel" id="phoneInput" name="phone" required placeholder="+7 (___) ___-__-__" class="form-input">
-                    </div>
-                    <div>
-                        <label class="text-[11px] uppercase tracking-widest font-bold text-slate-400 ml-2">Адрес (МКАД)</label>
-                        <textarea name="address" required rows="2" placeholder="Улица, дом, квартира" class="form-input"></textarea>
-                    </div>
-                    <input type="hidden" name="qty_camera_tapes" id="hiddenCamQty" value="0">
-                    <input type="hidden" name="qty_vhs_tapes" id="hiddenVhsQty" value="0">
-                    <input type="hidden" name="calculated_total" id="hiddenTotalPrice" value="0">
-                    <button type="submit" id="submitBtn" class="elegant-btn w-full mt-4">
-                        Отправить заявку
-                    </button>
-                </form>
-            </div>
-            <div id="successMessage" class="hidden text-center py-10">
-                <i class="fas fa-check-circle text-4xl text-black mb-6"></i>
-                <h3 class="thin-header text-lg tracking-[0.2em] text-black mb-4">Заявка принята</h3>
-                <p class="text-[11px] text-slate-400 uppercase tracking-widest">Я свяжусь с Вами в ближайшее время</p>
-                <button onclick="toggleModal('orderModal', false)" class="mt-8 text-[11px] uppercase tracking-widest font-bold text-slate-600 underline">Закрыть</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Section -->
-    <section class="relative pt-32 pb-6">
-        <div class="container mx-auto px-6 text-center">
-            <div class="glass-block inline-block py-20 px-12 w-full max-w-4xl mx-auto border-slate-200">
-                <div class="inline-block text-[11px] tracking-[0.4em] uppercase text-slate-400 mb-10 font-bold">
-                    Premium Digital Service
-                </div>
-                <h1 class="text-4xl md:text-5xl thin-header leading-tight text-black mb-12">
-                    Оцифровка <br class="hidden md:block"> видеокассет
-                </h1>
-                <p class="text-base text-slate-500 max-w-2xl mx-auto font-normal leading-relaxed mb-10">
-                    Профессиональный перевод аналоговых архивов в цифровое качество. Качественное оборудование и бережное отношение к записям.
-                </p>
-                <p class="shimmer-text text-[16px] md:text-[18px] uppercase tracking-[0.4em] font-bold text-black border-t-2 border-slate-100 pt-10 inline-block">
-                    готово будет уже завтра
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Cassette Types -->
-    <section id="types" class="py-10">
-        <div class="container mx-auto px-6 text-center">
-            <div class="glass-block py-20 px-10 max-w-6xl mx-auto">
-                <h2 class="thin-header text-2xl tracking-[0.4em] mb-6 text-black">Форматы кассет</h2>
-                <p class="text-[11px] uppercase tracking-widest text-slate-400 font-bold mb-16">Все стандарты бытовых видеокассет</p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <div class="soft-card-static w-36 border-slate-200">
-                        <span class="card-label">VHS</span>
-                    </div>
-                    <div class="soft-card-static w-36 border-slate-200">
-                        <span class="card-label">VHS-C</span>
-                    </div>
-                    <div class="soft-card-static w-36 border-slate-200">
-                        <span class="card-label">8mm</span>
-                    </div>
-                    <div class="soft-card-static w-36 border-slate-200">
-                        <span class="card-label">Hi8</span>
-                    </div>
-                    <div class="soft-card-static w-36 border-slate-200">
-                        <span class="card-label">Digital8</span>
-                    </div>
-                    <div class="soft-card-static w-36 border-slate-200">
-                        <span class="card-label">MiniDV</span>
-                    </div>
-                    <div class="soft-card-static w-36 border-slate-200">
-                        <span class="card-label">Audio</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Conditions -->
-    <section id="delivery" class="py-10">
-        <div class="container mx-auto px-6">
-            <div class="glass-block py-20 px-12 max-w-6xl mx-auto">
-                <div class="grid lg:grid-cols-3 gap-10">
-                    <div class="flex flex-col items-center text-center">
-                        <div class="icon-backdrop border-slate-100">
-                            <i class="fas fa-truck-fast"></i>
-                        </div>
-                        <h5 class="text-[13px] uppercase tracking-[0.2em] font-bold text-black mb-2">Бесплатная доставка</h5>
-                        <p class="text-[13px] text-slate-400 leading-relaxed uppercase max-w-[240px]">Заберу и привезу заказ по любому адресу в пределах МКАД.</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center">
-                        <div class="icon-backdrop border-slate-100">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <h5 class="text-[13px] uppercase tracking-[0.2em] font-bold text-black mb-2">Срок от 1 дня</h5>
-                        <p class="text-[13px] text-slate-400 leading-relaxed uppercase max-w-[240px]">До 5 кассет сделаю за 24 часа. Отправлю ссылку на скачивание.</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center">
-                        <div class="icon-backdrop border-slate-100">
-                            <i class="fas fa-wallet"></i>
-                        </div>
-                        <h5 class="text-[13px] uppercase tracking-[0.2em] font-bold text-black mb-2">Честная оплата</h5>
-                        <p class="text-[13px] text-slate-400 leading-relaxed uppercase max-w-[240px]">
-                            20 рублей за минуту. делаю только личные записи остальное бесплатно вырежу. <br>
-                            Минимальный заказ 1800 рублей.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Calculator -->
-    <section id="calc" class="py-12">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto glass-block p-12">
-                <div class="text-center mb-16">
-                    <h2 class="thin-header text-2xl tracking-[0.3em] mb-5 text-black">Калькулятор</h2>
-                    <p class="text-[11px] uppercase tracking-[0.2em] text-slate-400 font-bold">введите количество кассет</p>
-                </div>
-
-                <div class="space-y-6 mb-16">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-12 border-b-2 border-slate-100">
-                        <div class="text-center md:text-left">
-                            <h4 class="text-[14px] uppercase tracking-widest font-bold text-black">Видеокамеры</h4>
-                            <p class="text-[10px] text-slate-400 uppercase tracking-tight font-bold">MINIDV, HI8, 8MM, VHS-C</p>
-                        </div>
-                        <div class="flex items-center justify-center gap-6">
-                            <button onclick="changeQty('cam', -1)" class="counter-btn"><i class="fas fa-minus"></i></button>
-                            <span id="camQty" class="text-3xl font-light w-12 text-center text-black">0</span>
-                            <button onclick="changeQty('cam', 1)" class="counter-btn"><i class="fas fa-plus"></i></button>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-12 border-b-2 border-slate-100">
-                        <div class="text-center md:text-left">
-                            <h4 class="text-[14px] uppercase tracking-widest font-bold text-black">VHS кассеты</h4>
-                            <p class="text-[10px] text-slate-400 uppercase tracking-tight font-bold">Обычный видеомагнитофон</p>
-                        </div>
-                        <div class="flex items-center justify-center gap-6">
-                            <button onclick="changeQty('vhs', -1)" class="counter-btn"><i class="fas fa-minus"></i></button>
-                            <span id="vhsQty" class="text-3xl font-light w-12 text-center text-black">0</span>
-                            <button onclick="changeQty('vhs', 1)" class="counter-btn"><i class="fas fa-plus"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-center">
-                    <span class="block text-[11px] uppercase tracking-widest text-slate-400 mb-6 font-bold">Оценочная стоимость</span>
-                    <div class="text-6xl font-light text-black flex items-baseline justify-center mb-12">
-                        <span id="totalPrice">0</span><span class="text-2xl ml-4">₽</span>
-                    </div>
-                    
-                    <div id="priceInfoHint" class="opacity-0 scale-95 h-0 overflow-hidden mb-16">
-                         <p class="text-[12px] uppercase tracking-[0.15em] text-black font-bold shimmer-text leading-relaxed max-w-md mx-auto">
-                            Оцифровываются только личные записи. Итоговая сумма будет ниже.
-                        </p>
-                    </div>
-
-                    <button onclick="toggleModal('orderModal', true)" class="elegant-btn">
-                        Сделать заказ
-                    </button>
-                    <p class="mt-8 text-[10px] uppercase tracking-widest text-slate-300 font-bold">Минимальный заказ 1800 ₽</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-16 text-center border-t-2 border-slate-200">
-        <p class="text-[10px] uppercase tracking-[0.4em] text-slate-300 font-bold mb-6">© 2024 Ринат — Digital Preservation</p>
-        <p class="text-[8px] uppercase tracking-widest text-slate-300">г. Москва, в пределах МКАД</p>
-    </footer>
-
-    <script>
-        let quantities = { cam: 0, vhs: 0 };
-        const phoneInputEl = document.getElementById('phoneInput');
-        const phoneMask = IMask(phoneInputEl, { mask: '+{7} (000) 000-00-00' });
-
-        function toggleModal(id, show) {
-            const modal = document.getElementById(id);
-            if (show) {
-                modal.classList.add('active');
-                if (id === 'orderModal') {
-                    document.getElementById('hiddenCamQty').value = quantities.cam;
-                    document.getElementById('hiddenVhsQty').value = quantities.vhs;
-                    document.getElementById('hiddenTotalPrice').value = document.getElementById('totalPrice').innerText + ' руб.';
-                }
-            } else {
-                modal.classList.remove('active');
+        @media (max-width: 640px) {
+            .glass-block {
+                border-radius: 24px;
+                padding-left: 1.5rem !important;
+                padding-right: 1.5rem !important;
             }
-        }
-
-        function changeQty(type, delta) {
-            quantities[type] = Math.max(0, quantities[type] + delta);
-            document.getElementById(type + 'Qty').innerText = quantities[type];
-            calculate();
-        }
-
-        function calculate() {
-            const totalMin = (quantities.cam * 90) + (quantities.vhs * 180);
-            const price = totalMin * 20;
-            const finalPrice = totalMin > 0 ? Math.max(price, 1800) : 0;
-            document.getElementById('totalPrice').innerText = finalPrice;
-            
-            const hint = document.getElementById('priceInfoHint');
-            if (finalPrice > 0) {
-                hint.classList.remove('opacity-0', 'scale-95', 'h-0');
-                hint.classList.add('opacity-100', 'scale-100', 'h-auto', 'mt-8');
-            } else {
-                hint.classList.add('opacity-0', 'scale-95', 'h-0');
-                hint.classList.remove('opacity-100', 'scale-100', 'h-auto', 'mt-8');
-            }
-        }
-
-        document.getElementById('orderForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            const originalText = btn.innerText;
-            btn.innerText = 'ОТПРАВКА...';
-            btn.disabled = true;
-            try {
-                const response = await fetch(e.target.action, {
-                    method: 'POST',
-                    body: new FormData(e.target),
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (response.ok) {
-                    document.getElementById('formContainer').classList.add('hidden');
-                    document.getElementById('successMessage').classList.remove('hidden');
-                }
-            } finally {
-                btn.innerText = originalText;
-                btn.disabled = false;
-            }
-        });
-
-        window.onclick = function(event) { 
-            if (event.target.classList.contains('modal-overlay')) {
-                event.target.classList.remove('active');
-            }
-        }
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Оцифровка кассет — Ринат</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/imask"></script>
-    <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            scroll-behavior: smooth;
-            font-weight: 400;
-            letter-spacing: 0.01em;
-            font-size: 16px;
-            overflow-x: hidden;
-            background-color: #ffffff;
-            line-height: 1.6;
-        }
-        
-        h1, h2, h3, .font-bold {
-            font-weight: 500 !important;
-            letter-spacing: 0.05em;
-        }
-
-        .thin-header {
-            font-weight: 300 !important;
-            text-transform: uppercase;
-        }
-
-        /* Background Layer */
-        .vhs-background {
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            pointer-events: none;
-            background: #ffffff;
-        }
-
-        /* Pattern with icons */
-        .vhs-pattern {
-            position: absolute;
-            inset: 0;
-            opacity: 0.03;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='80' viewBox='0 0 100 60'%3E%3Cg fill='%23000000'%3E%3Cpath d='M10 10h80v40H10V10zm4 4v32h72V14H14z'/%3E%3Ccircle cx='35' cy='30' r='6'/%3E%3Ccircle cx='65' cy='30' r='6'/%3E%3Cpath d='M25 40h50v40H25z'/%3E%3C/g%3E%3C/svg%3E");
-            background-size: 120px 80px;
-        }
-
-        /* Main Block Style */
-        .glass-block {
-            background: rgba(255, 255, 255, 0.9);
-            backdrop-filter: blur(20px);
-            border: 2px solid #e2e8f0; 
-            border-radius: 40px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
-            position: relative;
-            overflow: hidden;
         }
 
         .icon-backdrop {
@@ -628,8 +105,8 @@
         }
 
         .counter-btn {
-            width: 48px;
-            height: 48px;
+            width: 56px; /* Увеличен размер для тача */
+            height: 56px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -659,11 +136,11 @@
         /* Elegant Button */
         .elegant-btn {
             position: relative;
-            padding: 18px 48px;
+            padding: 20px 48px;
             background: #000000;
             color: #ffffff;
             border-radius: 100px;
-            font-size: 12px;
+            font-size: 13px; /* Крупнее для читаемости */
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.25em;
@@ -671,32 +148,14 @@
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             border: 1px solid rgba(0,0,0,0.1);
             box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+            width: 100%; /* На мобильных на всю ширину */
+            max-width: 400px;
         }
 
         .elegant-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.4);
             background: #1a1a1a;
-        }
-
-        .elegant-btn:active {
-            transform: translateY(-1px);
-        }
-
-        .elegant-btn::after {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            opacity: 0;
-            transition: opacity 0.4s;
-        }
-
-        .elegant-btn:hover::after {
-            opacity: 1;
         }
 
         .modal-overlay {
@@ -708,7 +167,7 @@
             backdrop-filter: blur(15px);
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 15px;
         }
 
         .modal-overlay.active { display: flex; }
@@ -717,23 +176,26 @@
             background: #ffffff;
             width: 100%;
             max-width: 500px;
-            border-radius: 40px;
-            padding: 60px 40px;
+            border-radius: 30px;
+            padding: 40px 24px;
             border: 2px solid #e2e8f0; 
             box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.1);
             position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
         .form-input {
             width: 100%;
-            padding: 16px;
+            padding: 18px; /* Выше для мобильных */
             border: 2px solid #e2e8f0; 
             background: #fcfdfe;
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 16px;
             margin-top: 8px;
             outline: none;
             transition: all 0.3s;
+            appearance: none; /* Убираем стандартные тени iOS */
         }
 
         .form-input:focus {
@@ -752,31 +214,30 @@
 
         .tg-float {
             position: fixed;
-            bottom: 24px;
-            right: 24px;
+            bottom: 20px;
+            right: 20px;
             z-index: 40;
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
             background: #ffffff;
-            padding: 12px 22px;
+            padding: 10px 18px;
             border-radius: 80px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             border: 2px solid #e2e8f0; 
             text-decoration: none;
-            transition: all 0.3s ease;
         }
 
-        .tg-icon {
-            width: 36px;
-            height: 36px;
-            background: #000000;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
+        @media (max-width: 640px) {
+            .tg-float span {
+                display: none; /* Оставляем только иконку на очень маленьких экранах или сокращаем */
+            }
+            .tg-float {
+                padding: 12px;
+            }
+            .tg-icon-text {
+                display: block !important;
+            }
         }
     </style>
 </head>
@@ -791,7 +252,7 @@
         <div class="tg-icon">
             <i class="fab fa-telegram-plane"></i>
         </div>
-        <div class="flex flex-col">
+        <div class="flex flex-col tg-icon-text">
             <span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold leading-none mb-1">Написать мне</span>
             <span class="text-[12px] uppercase tracking-[0.1em] text-slate-900 font-semibold">Telegram</span>
         </div>
@@ -799,19 +260,19 @@
 
     <!-- Header -->
     <header class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b-2 border-slate-200">
-        <div class="container mx-auto px-6 h-20 flex items-center justify-between">
+        <div class="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 border-2 border-black flex items-center justify-center">
                     <i class="fas fa-film text-black text-xs"></i>
                 </div>
-                <span class="text-lg thin-header tracking-[0.3em] text-black font-medium">DigiMemo</span>
+                <span class="text-base md:text-lg thin-header tracking-[0.2em] md:tracking-[0.3em] text-black font-medium">DigiMemo</span>
             </div>
             <nav class="hidden lg:flex gap-8 text-[11px] uppercase tracking-[0.2em] font-semibold text-slate-400">
                 <a href="#types" class="hover:text-black transition">Типы кассет</a>
                 <a href="#delivery" class="hover:text-black transition">Условия</a>
                 <a href="#calc" class="hover:text-black transition">Расчет</a>
             </nav>
-            <button onclick="toggleModal('orderModal', true)" class="text-[10px] uppercase tracking-[0.2em] border-2 border-black px-6 py-2 rounded-full font-bold text-black hover:bg-black hover:text-white transition duration-300">
+            <button onclick="toggleModal('orderModal', true)" class="text-[10px] uppercase tracking-[0.2em] border-2 border-black px-5 py-2 rounded-full font-bold text-black hover:bg-black hover:text-white transition duration-300">
                 Заказать
             </button>
         </div>
@@ -820,15 +281,15 @@
     <!-- Modal Window -->
     <div id="orderModal" class="modal-overlay">
         <div class="modal-content">
-            <button onclick="toggleModal('orderModal', false)" class="absolute top-6 right-6 text-slate-400 hover:text-slate-900 p-2 z-10">
+            <button onclick="toggleModal('orderModal', false)" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 p-2 z-10">
                 <i class="fas fa-times text-xl"></i>
             </button>
             <div id="formContainer">
-                <div class="text-center mb-10">
-                    <h3 class="thin-header text-2xl tracking-[0.2em] text-black mb-4">Оформить заказ</h3>
+                <div class="text-center mb-8">
+                    <h3 class="thin-header text-xl md:text-2xl tracking-[0.2em] text-black mb-3">Оформить заказ</h3>
                     <p class="text-[11px] text-slate-400 uppercase tracking-widest font-bold">Данные для выезда курьера</p>
                 </div>
-                <form id="orderForm" action="https://formspree.io/f/xkowabkp" method="POST" class="space-y-4">
+                <form id="orderForm" action="https://formspree.io/f/xkowabkp" method="POST" class="space-y-5">
                     <input type="hidden" name="_subject" value="Новый заказ на оцифровку (DigiMemo)">
                     <div>
                         <label class="text-[11px] uppercase tracking-widest font-bold text-slate-400 ml-2">Телефон</label>
@@ -841,7 +302,7 @@
                     <input type="hidden" name="qty_camera_tapes" id="hiddenCamQty" value="0">
                     <input type="hidden" name="qty_vhs_tapes" id="hiddenVhsQty" value="0">
                     <input type="hidden" name="calculated_total" id="hiddenTotalPrice" value="0">
-                    <button type="submit" id="submitBtn" class="elegant-btn w-full mt-4">
+                    <button type="submit" id="submitBtn" class="elegant-btn w-full mt-2">
                         Отправить заявку
                     </button>
                 </form>
@@ -856,19 +317,19 @@
     </div>
 
     <!-- Main Section -->
-    <section class="relative pt-32 pb-6">
-        <div class="container mx-auto px-6 text-center">
-            <div class="glass-block inline-block py-20 px-12 w-full max-w-4xl mx-auto border-slate-200">
-                <div class="inline-block text-[11px] tracking-[0.4em] uppercase text-slate-400 mb-10 font-bold">
+    <section class="relative pt-28 md:pt-32 pb-6">
+        <div class="container mx-auto px-4 md:px-6 text-center">
+            <div class="glass-block inline-block py-16 md:py-20 px-6 md:px-12 w-full max-w-4xl mx-auto border-slate-200">
+                <div class="inline-block text-[10px] md:text-[11px] tracking-[0.3em] md:tracking-[0.4em] uppercase text-slate-400 mb-8 md:mb-10 font-bold">
                     Premium Digital Service
                 </div>
-                <h1 class="text-4xl md:text-5xl thin-header leading-tight text-black mb-12">
+                <h1 class="text-3xl md:text-5xl thin-header leading-tight text-black mb-10 md:mb-12">
                     Оцифровка <br class="hidden md:block"> видеокассет
                 </h1>
-                <p class="text-base text-slate-500 max-w-2xl mx-auto font-normal leading-relaxed mb-10">
+                <p class="text-base md:text-lg text-slate-500 max-w-2xl mx-auto font-normal leading-relaxed mb-10">
                     Профессиональный перевод аналоговых архивов в цифровое качество. Качественное оборудование и бережное отношение к записям.
                 </p>
-                <p class="shimmer-text text-[16px] md:text-[18px] uppercase tracking-[0.4em] font-bold text-black border-t-2 border-slate-100 pt-10 inline-block">
+                <p class="shimmer-text text-[14px] md:text-[18px] uppercase tracking-[0.3em] md:tracking-[0.4em] font-bold text-black border-t-2 border-slate-100 pt-10 inline-block">
                     готово будет уже завтра
                 </p>
             </div>
@@ -876,32 +337,32 @@
     </section>
 
     <!-- Cassette Types -->
-    <section id="types" class="py-10">
-        <div class="container mx-auto px-6 text-center">
-            <div class="glass-block py-20 px-10 max-w-6xl mx-auto">
-                <h2 class="thin-header text-2xl tracking-[0.4em] mb-6 text-black">Форматы кассет</h2>
-                <p class="text-[11px] uppercase tracking-widest text-slate-400 font-bold mb-16">Все стандарты бытовых видеокассет</p>
-                <div class="flex flex-wrap justify-center gap-4">
-                    <div class="soft-card-static w-36 border-slate-200">
-                        <span class="card-label">VHS</span>
+    <section id="types" class="py-6 md:py-10">
+        <div class="container mx-auto px-4 md:px-6 text-center">
+            <div class="glass-block py-16 md:py-20 px-4 md:px-10 max-w-6xl mx-auto">
+                <h2 class="thin-header text-xl md:text-2xl tracking-[0.3em] md:tracking-[0.4em] mb-6 text-black">Форматы кассет</h2>
+                <p class="text-[11px] uppercase tracking-widest text-slate-400 font-bold mb-12 md:mb-16">Все стандарты бытовых видеокассет</p>
+                <div class="flex flex-wrap justify-center gap-3 md:gap-4">
+                    <div class="soft-card-static w-28 md:w-36 border-slate-200">
+                        <span class="card-label text-xs md:text-sm">VHS</span>
                     </div>
-                    <div class="soft-card-static w-36 border-slate-200">
-                        <span class="card-label">VHS-C</span>
+                    <div class="soft-card-static w-28 md:w-36 border-slate-200">
+                        <span class="card-label text-xs md:text-sm">VHS-C</span>
                     </div>
-                    <div class="soft-card-static w-36 border-slate-200">
-                        <span class="card-label">8mm</span>
+                    <div class="soft-card-static w-28 md:w-36 border-slate-200">
+                        <span class="card-label text-xs md:text-sm">8mm</span>
                     </div>
-                    <div class="soft-card-static w-36 border-slate-200">
-                        <span class="card-label">Hi8</span>
+                    <div class="soft-card-static w-28 md:w-36 border-slate-200">
+                        <span class="card-label text-xs md:text-sm">Hi8</span>
                     </div>
-                    <div class="soft-card-static w-36 border-slate-200">
-                        <span class="card-label">Digital8</span>
+                    <div class="soft-card-static w-28 md:w-36 border-slate-200">
+                        <span class="card-label text-xs md:text-sm">Digital8</span>
                     </div>
-                    <div class="soft-card-static w-36 border-slate-200">
-                        <span class="card-label">MiniDV</span>
+                    <div class="soft-card-static w-28 md:w-36 border-slate-200">
+                        <span class="card-label text-xs md:text-sm">MiniDV</span>
                     </div>
-                    <div class="soft-card-static w-36 border-slate-200">
-                        <span class="card-label">Audio</span>
+                    <div class="soft-card-static w-28 md:w-36 border-slate-200">
+                        <span class="card-label text-xs md:text-sm">Audio</span>
                     </div>
                 </div>
             </div>
@@ -909,33 +370,33 @@
     </section>
 
     <!-- Conditions -->
-    <section id="delivery" class="py-10">
-        <div class="container mx-auto px-6">
-            <div class="glass-block py-20 px-12 max-w-6xl mx-auto">
-                <div class="grid lg:grid-cols-3 gap-10">
+    <section id="delivery" class="py-6 md:py-10">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="glass-block py-16 md:py-20 px-6 md:px-12 max-w-6xl mx-auto">
+                <div class="grid lg:grid-cols-3 gap-12 md:gap-10">
                     <div class="flex flex-col items-center text-center">
                         <div class="icon-backdrop border-slate-100">
                             <i class="fas fa-truck-fast"></i>
                         </div>
-                        <h5 class="text-[13px] uppercase tracking-[0.2em] font-bold text-black mb-2">Бесплатная доставка</h5>
-                        <p class="text-[13px] text-slate-400 leading-relaxed uppercase max-w-[240px]">Заберу и привезу заказ по любому адресу в пределах МКАД.</p>
+                        <h5 class="text-[13px] md:text-[14px] uppercase tracking-[0.2em] font-bold text-black mb-3">Бесплатная доставка</h5>
+                        <p class="text-[13px] md:text-[14px] text-slate-400 leading-relaxed uppercase max-w-[280px]">Заберу и привезу заказ по любому адресу в пределах МКАД.</p>
                     </div>
                     <div class="flex flex-col items-center text-center">
                         <div class="icon-backdrop border-slate-100">
                             <i class="fas fa-bolt"></i>
                         </div>
-                        <h5 class="text-[13px] uppercase tracking-[0.2em] font-bold text-black mb-2">Срок от 1 дня</h5>
-                        <p class="text-[13px] text-slate-400 leading-relaxed uppercase max-w-[240px]">До 5 кассет сделаю за 24 часа. Отправлю ссылку на скачивание.</p>
+                        <h5 class="text-[13px] md:text-[14px] uppercase tracking-[0.2em] font-bold text-black mb-3">Срок от 1 дня</h5>
+                        <p class="text-[13px] md:text-[14px] text-slate-400 leading-relaxed uppercase max-w-[280px]">До 5 кассет сделаю за 24 часа. Отправлю ссылку на скачивание.</p>
                     </div>
                     <div class="flex flex-col items-center text-center">
                         <div class="icon-backdrop border-slate-100">
                             <i class="fas fa-wallet"></i>
                         </div>
-                        <h5 class="text-[13px] uppercase tracking-[0.2em] font-bold text-black mb-2">Честная оплата</h5>
-                        <p class="text-[13px] text-slate-400 leading-relaxed uppercase max-w-[240px]">
-                            20 рублей за минуту. делаю только личные записи остальное бесплатно вырежу. <br>
-                            Минимальный заказ 1800 рублей.
-                        </p>
+                        <h5 class="text-[13px] md:text-[14px] uppercase tracking-[0.2em] font-bold text-black mb-3">Честная оплата</h5>
+                        <div class="text-[13px] md:text-[14px] text-slate-400 leading-relaxed uppercase max-w-[280px]">
+                            <p class="mb-2">20 рублей за минуту. делаю только личные записи остальное бесплатно вырежу.</p>
+                            <p class="font-bold text-black border-t border-slate-100 pt-2">Минимальный заказ 1800 рублей.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -943,65 +404,67 @@
     </section>
 
     <!-- Calculator -->
-    <section id="calc" class="py-12">
-        <div class="container mx-auto px-6">
-            <div class="max-w-4xl mx-auto glass-block p-12">
-                <div class="text-center mb-16">
-                    <h2 class="thin-header text-2xl tracking-[0.3em] mb-5 text-black">Калькулятор</h2>
+    <section id="calc" class="py-6 md:py-12">
+        <div class="container mx-auto px-4 md:px-6">
+            <div class="max-w-4xl mx-auto glass-block p-8 md:p-12">
+                <div class="text-center mb-12 md:min-h-[100px]">
+                    <h2 class="thin-header text-xl md:text-2xl tracking-[0.3em] mb-4 text-black">Калькулятор</h2>
                     <p class="text-[11px] uppercase tracking-[0.2em] text-slate-400 font-bold">введите количество кассет</p>
                 </div>
 
-                <div class="space-y-6 mb-16">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-12 border-b-2 border-slate-100">
+                <div class="space-y-8 mb-12">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-10 border-b-2 border-slate-100">
                         <div class="text-center md:text-left">
-                            <h4 class="text-[14px] uppercase tracking-widest font-bold text-black">Видеокамеры</h4>
-                            <p class="text-[10px] text-slate-400 uppercase tracking-tight font-bold">MINIDV, HI8, 8MM, VHS-C</p>
+                            <h4 class="text-[14px] md:text-[15px] uppercase tracking-widest font-bold text-black">Видеокамеры</h4>
+                            <p class="text-[11px] text-slate-400 uppercase tracking-tight font-bold mt-1">MINIDV, HI8, 8MM, VHS-C</p>
                         </div>
-                        <div class="flex items-center justify-center gap-6">
-                            <button onclick="changeQty('cam', -1)" class="counter-btn"><i class="fas fa-minus"></i></button>
-                            <span id="camQty" class="text-3xl font-light w-12 text-center text-black">0</span>
-                            <button onclick="changeQty('cam', 1)" class="counter-btn"><i class="fas fa-plus"></i></button>
+                        <div class="flex items-center justify-center gap-8">
+                            <button onclick="changeQty('cam', -1)" class="counter-btn"><i class="fas fa-minus text-lg"></i></button>
+                            <span id="camQty" class="text-3xl md:text-4xl font-light w-12 text-center text-black">0</span>
+                            <button onclick="changeQty('cam', 1)" class="counter-btn"><i class="fas fa-plus text-lg"></i></button>
                         </div>
                     </div>
 
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-12 border-b-2 border-slate-100">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-10 border-b-2 border-slate-100">
                         <div class="text-center md:text-left">
-                            <h4 class="text-[14px] uppercase tracking-widest font-bold text-black">VHS кассеты</h4>
-                            <p class="text-[10px] text-slate-400 uppercase tracking-tight font-bold">Обычный видеомагнитофон</p>
+                            <h4 class="text-[14px] md:text-[15px] uppercase tracking-widest font-bold text-black">VHS кассеты</h4>
+                            <p class="text-[11px] text-slate-400 uppercase tracking-tight font-bold mt-1">Обычный видеомагнитофон</p>
                         </div>
-                        <div class="flex items-center justify-center gap-6">
-                            <button onclick="changeQty('vhs', -1)" class="counter-btn"><i class="fas fa-minus"></i></button>
-                            <span id="vhsQty" class="text-3xl font-light w-12 text-center text-black">0</span>
-                            <button onclick="changeQty('vhs', 1)" class="counter-btn"><i class="fas fa-plus"></i></button>
+                        <div class="flex items-center justify-center gap-8">
+                            <button onclick="changeQty('vhs', -1)" class="counter-btn"><i class="fas fa-minus text-lg"></i></button>
+                            <span id="vhsQty" class="text-3xl md:text-4xl font-light w-12 text-center text-black">0</span>
+                            <button onclick="changeQty('vhs', 1)" class="counter-btn"><i class="fas fa-plus text-lg"></i></button>
                         </div>
                     </div>
                 </div>
 
                 <div class="text-center">
                     <span class="block text-[11px] uppercase tracking-widest text-slate-400 mb-6 font-bold">Оценочная стоимость</span>
-                    <div class="text-6xl font-light text-black flex items-baseline justify-center mb-12">
-                        <span id="totalPrice">0</span><span class="text-2xl ml-4">₽</span>
+                    <div class="text-5xl md:text-6xl font-light text-black flex items-baseline justify-center mb-10">
+                        <span id="totalPrice">0</span><span class="text-xl md:text-2xl ml-4">₽</span>
                     </div>
                     
-                    <div id="priceInfoHint" class="opacity-0 scale-95 h-0 overflow-hidden mb-16">
-                         <p class="text-[12px] uppercase tracking-[0.15em] text-black font-bold shimmer-text leading-relaxed max-w-md mx-auto">
+                    <div id="priceInfoHint" class="opacity-0 scale-95 h-0 overflow-hidden mb-12">
+                         <p class="text-[12px] md:text-[13px] uppercase tracking-[0.15em] text-black font-bold shimmer-text leading-relaxed max-w-md mx-auto">
                             Оцифровываются только личные записи. Итоговая сумма будет ниже.
                         </p>
                     </div>
 
-                    <button onclick="toggleModal('orderModal', true)" class="elegant-btn">
-                        Сделать заказ
-                    </button>
-                    <p class="mt-8 text-[10px] uppercase tracking-widest text-slate-300 font-bold">Минимальный заказ 1800 ₽</p>
+                    <div class="flex flex-col items-center">
+                        <button onclick="toggleModal('orderModal', true)" class="elegant-btn">
+                            Сделать заказ
+                        </button>
+                        <p class="mt-8 text-[11px] uppercase tracking-widest text-slate-400 font-bold">Минимальный заказ 1800 ₽</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-16 text-center border-t-2 border-slate-200">
-        <p class="text-[10px] uppercase tracking-[0.4em] text-slate-300 font-bold mb-6">© 2024 Ринат — Digital Preservation</p>
-        <p class="text-[8px] uppercase tracking-widest text-slate-300">г. Москва, в пределах МКАД</p>
+    <footer class="py-16 text-center border-t-2 border-slate-200 px-4">
+        <p class="text-[10px] uppercase tracking-[0.3em] md:tracking-[0.4em] text-slate-300 font-bold mb-4">© 2024 Ринат — Digital Preservation</p>
+        <p class="text-[9px] uppercase tracking-widest text-slate-300">г. Москва, в пределах МКАД</p>
     </footer>
 
     <script>
@@ -1013,6 +476,7 @@
             const modal = document.getElementById(id);
             if (show) {
                 modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Запрет скролла при модалке
                 if (id === 'orderModal') {
                     document.getElementById('hiddenCamQty').value = quantities.cam;
                     document.getElementById('hiddenVhsQty').value = quantities.vhs;
@@ -1020,6 +484,7 @@
                 }
             } else {
                 modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
             }
         }
 
@@ -1038,10 +503,10 @@
             const hint = document.getElementById('priceInfoHint');
             if (finalPrice > 0) {
                 hint.classList.remove('opacity-0', 'scale-95', 'h-0');
-                hint.classList.add('opacity-100', 'scale-100', 'h-auto', 'mt-8');
+                hint.classList.add('opacity-100', 'scale-100', 'h-auto', 'mt-6');
             } else {
                 hint.classList.add('opacity-0', 'scale-95', 'h-0');
-                hint.classList.remove('opacity-100', 'scale-100', 'h-auto', 'mt-8');
+                hint.classList.remove('opacity-100', 'scale-100', 'h-auto', 'mt-6');
             }
         }
 
@@ -1069,7 +534,7 @@
 
         window.onclick = function(event) { 
             if (event.target.classList.contains('modal-overlay')) {
-                event.target.classList.remove('active');
+                toggleModal(event.target.id, false);
             }
         }
     </script>
