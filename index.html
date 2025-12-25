@@ -107,7 +107,7 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 1.5rem;
-            color: #000000;
+            color: #24A1DE; /* Цвет Telegram */
             font-size: 28px;
         }
 
@@ -144,7 +144,7 @@
         }
 
         .elegant-btn {
-            background: #000000;
+            background: #24A1DE; /* Цвет Telegram */
             color: #ffffff;
             border-radius: 100px;
             font-size: 15px;
@@ -154,7 +154,7 @@
             padding: 22px 40px;
             width: 100%;
             max-width: 440px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 35px rgba(36, 161, 222, 0.3);
             transition: transform 0.2s;
         }
 
@@ -165,9 +165,9 @@
         }
 
         @keyframes button-attention {
-            0% { transform: scale(1); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); }
-            50% { transform: scale(1.05); box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3); background-color: #1a1a1a; }
-            100% { transform: scale(1); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); }
+            0% { transform: scale(1); box-shadow: 0 15px 35px rgba(36, 161, 222, 0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 20px 45px rgba(36, 161, 222, 0.4); background-color: #29b1f5; }
+            100% { transform: scale(1); box-shadow: 0 15px 35px rgba(36, 161, 222, 0.3); }
         }
 
         .form-input {
@@ -238,8 +238,12 @@
 
         @keyframes attention-blink {
             0% { opacity: 0.3; color: #64748b; transform: scale(1); }
-            50% { opacity: 1; color: #000000; transform: scale(1.02); }
+            50% { opacity: 1; color: #24A1DE; transform: scale(1.02); }
             100% { opacity: 0.3; color: #64748b; transform: scale(1); }
+        }
+
+        .tg-text-color {
+            color: #24A1DE;
         }
     </style>
 </head>
@@ -259,12 +263,12 @@
     <header class="fixed w-full z-40 bg-white/90 backdrop-blur-md border-b border-slate-100">
         <div class="container mx-auto px-5 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-black flex items-center justify-center rounded-lg">
+                <div class="w-10 h-10 bg-[#24A1DE] flex items-center justify-center rounded-lg">
                     <i class="fas fa-film text-white text-sm"></i>
                 </div>
                 <span class="text-lg thin-header tracking-widest text-black font-bold">DigiMemo</span>
             </div>
-            <button onclick="toggleModal('orderModal', true)" class="text-[12px] uppercase tracking-widest border-2 border-black px-5 py-2.5 rounded-full font-bold text-black active:bg-black active:text-white">
+            <button onclick="toggleModal('orderModal', true)" class="text-[12px] uppercase tracking-widest border-2 border-[#24A1DE] px-5 py-2.5 rounded-full font-bold text-[#24A1DE] active:bg-[#24A1DE] active:text-white">
                 Заказать
             </button>
         </div>
@@ -275,12 +279,12 @@
         <div class="container mx-auto px-4">
             <div class="glass-block py-16 px-6 text-center max-w-4xl mx-auto">
                 <div class="text-[12px] tracking-[0.4em] uppercase text-slate-400 mb-8 font-bold">Premium Digital</div>
-                <h1 class="text-4xl md:text-6xl text-black mb-10 leading-tight uppercase font-bold">Оцифровка <br> видеокассет</h1>
+                <h1 class="text-4xl md:text-6xl tg-text-color mb-10 leading-tight uppercase font-bold">Оцифровка <br> видеокассет</h1>
                 <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-10">
-                    Переведем ваши теплые воспоминания в современный цифровой формат.
+                    Переведу ваши теплые воспоминания в современный цифровой формат.
                 </p>
                 <div class="shimmer-text py-6 border-t border-slate-100">
-                    <span class="text-[15px] md:text-lg uppercase tracking-[0.3em] font-bold text-black">Сделаем всё уже завтра</span>
+                    <span class="text-[15px] md:text-lg uppercase tracking-[0.3em] font-bold text-[#24A1DE]">Сделаю всё уже завтра</span>
                 </div>
             </div>
         </div>
@@ -289,11 +293,19 @@
     <!-- Formats -->
     <section class="py-6">
         <div class="container mx-auto px-4">
-            <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
-                <div class="soft-card-static"><span class="card-label">VHS / VHS-C</span></div>
-                <div class="soft-card-static"><span class="card-label">8mm / Hi8</span></div>
-                <div class="soft-card-static"><span class="card-label">Digital8</span></div>
-                <div class="soft-card-static"><span class="card-label">MiniDV</span></div>
+            <div class="max-w-4xl mx-auto">
+                <!-- Added Label above formats -->
+                <div class="text-center mb-8">
+                    <p class="text-[11px] md:text-[13px] uppercase tracking-[0.25em] font-bold text-slate-400">
+                        Работаю со всеми типами бытовых видеокассет
+                    </p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="soft-card-static"><span class="card-label">VHS / VHS-C</span></div>
+                    <div class="soft-card-static"><span class="card-label">8mm / Hi8</span></div>
+                    <div class="soft-card-static"><span class="card-label">Digital8</span></div>
+                    <div class="soft-card-static"><span class="card-label">MiniDV</span></div>
+                </div>
             </div>
         </div>
     </section>
@@ -327,7 +339,7 @@
             <div class="max-w-4xl mx-auto glass-block p-8 md:p-16">
                 <div class="text-center mb-16">
                     <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4">Калькулятор</h2>
-                    <p class="text-[13px] uppercase tracking-widest font-bold shimmer-text">Выберите количество кассет</p>
+                    <p class="text-[13px] uppercase tracking-widest font-bold shimmer-text">Введите количество кассет</p>
                 </div>
 
                 <div class="space-y-12 mb-16">
@@ -358,7 +370,7 @@
 
                 <div class="text-center">
                     <span class="block text-[13px] uppercase tracking-widest text-slate-400 mb-6 font-bold">Максимально возможная стоимость</span>
-                    <div class="text-6xl md:text-7xl font-bold text-black flex items-baseline justify-center mb-12">
+                    <div class="text-6xl md:text-7xl font-bold tg-text-color flex items-baseline justify-center mb-12">
                         <span id="totalPrice">0</span><span class="text-2xl ml-4 text-slate-300">₽</span>
                     </div>
                     
@@ -403,10 +415,10 @@
                 </form>
             </div>
             <div id="successMessage" class="hidden text-center py-10">
-                <i class="fas fa-check-circle text-5xl mb-6"></i>
+                <i class="fas fa-check-circle text-5xl mb-6 tg-text-color"></i>
                 <h3 class="text-2xl font-bold uppercase mb-4">Готово!</h3>
                 <p class="text-slate-500 uppercase text-[13px] font-bold">Я свяжусь с вами скоро.</p>
-                <button onclick="toggleModal('orderModal', false)" class="mt-10 underline font-bold uppercase text-[12px]">Закрыть</button>
+                <button onclick="toggleModal('orderModal', false)" class="mt-10 underline font-bold uppercase text-[12px] tg-text-color">Закрыть</button>
             </div>
         </div>
     </div>
