@@ -2,13 +2,13 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Оцифровка кассет — Ринат</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/imask"></script>
     <style>
         body {
@@ -16,30 +16,62 @@
             scroll-behavior: smooth;
             font-weight: 400;
             letter-spacing: 0.01em;
-            font-size: 16px; /* Базовый размер для десктопа */
+            font-size: 16px; 
             overflow-x: hidden;
             background-color: #ffffff;
             line-height: 1.6;
+            color: #1a1a1a; 
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Адаптация шрифтов для мобильных устройств */
         @media (max-width: 768px) {
             body {
-                font-size: 17px; /* Чуть крупнее для мобильных */
+                font-size: 18px; 
+                line-height: 1.7; 
+            }
+            
+            h1 {
+                font-size: 2.25rem !important; 
+                line-height: 1.2 !important;
+                font-weight: 700 !important;
+            }
+
+            h2 {
+                font-size: 1.75rem !important; 
+                font-weight: 700 !important;
+            }
+
+            .glass-block {
+                padding-top: 3.5rem !important;
+                padding-bottom: 3.5rem !important;
+                border-radius: 32px !important;
+            }
+
+            .soft-card-static {
+                min-height: 90px !important;
+                padding: 15px 10px !important;
+            }
+
+            .card-label {
+                font-size: 15px !important; 
+            }
+
+            .elegant-btn {
+                font-size: 16px !important; 
+                padding: 24px 30px !important;
             }
         }
         
         h1, h2, h3, .font-bold {
-            font-weight: 500 !important;
-            letter-spacing: 0.05em;
+            font-weight: 600 !important;
+            letter-spacing: 0.02em;
         }
 
         .thin-header {
-            font-weight: 300 !important;
+            font-weight: 500 !important; 
             text-transform: uppercase;
         }
 
-        /* Background Layer */
         .vhs-background {
             position: fixed;
             inset: 0;
@@ -48,7 +80,6 @@
             background: #ffffff;
         }
 
-        /* Pattern with icons */
         .vhs-pattern {
             position: absolute;
             inset: 0;
@@ -57,105 +88,124 @@
             background-size: 120px 80px;
         }
 
-        /* Main Block Style */
         .glass-block {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
-            border: 2px solid #e2e8f0; 
-            border-radius: 40px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+            border: 2px solid #f1f5f9; 
+            border-radius: 48px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
             position: relative;
             overflow: hidden;
         }
 
-        @media (max-width: 640px) {
-            .glass-block {
-                border-radius: 24px;
-                padding-left: 1.5rem !important;
-                padding-right: 1.5rem !important;
-            }
-        }
-
         .icon-backdrop {
-            width: 60px;
-            height: 60px;
-            background: #ffffff;
-            border: 2px solid #f1f5f9; 
+            width: 72px;
+            height: 72px;
+            background: #f8fafc;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 1.5rem;
-            color: #1e293b;
-            font-size: 24px;
+            color: #000000;
+            font-size: 28px;
         }
 
         .soft-card-static {
             background: #ffffff;
             border: 2px solid #f1f5f9; 
-            border-radius: 16px;
-            padding: 25px 15px;
+            border-radius: 20px;
+            padding: 20px;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 110px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
-            cursor: default;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
         }
 
         .counter-btn {
-            width: 56px; /* Увеличен размер для тача */
-            height: 56px;
+            width: 64px; 
+            height: 64px;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 2px solid #e2e8f0; 
             border-radius: 50%;
-            transition: all 0.2s;
-            color: #1e293b;
-            cursor: pointer;
+            color: #000000;
             background: #ffffff;
-        }
-
-        .counter-btn:hover {
-            background-color: #000000;
-            color: #ffffff;
-            border-color: #000000;
+            font-size: 20px;
         }
 
         .card-label {
             font-size: 14px;
             text-transform: uppercase;
-            letter-spacing: 0.15em; 
-            font-weight: 600;
+            letter-spacing: 0.1em; 
+            font-weight: 700;
             color: #000000;
-            text-align: center;
         }
 
-        /* Elegant Button */
         .elegant-btn {
-            position: relative;
-            padding: 20px 48px;
             background: #000000;
             color: #ffffff;
             border-radius: 100px;
-            font-size: 13px; /* Крупнее для читаемости */
+            font-size: 15px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.25em;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            border: 1px solid rgba(0,0,0,0.1);
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
-            width: 100%; /* На мобильных на всю ширину */
-            max-width: 400px;
+            letter-spacing: 0.15em;
+            padding: 22px 40px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
         }
 
-        .elegant-btn:hover {
+        .elegant-btn:active { transform: scale(0.98); }
+
+        .elegant-btn-pulse {
+            animation: button-attention 1.5s ease-in-out infinite;
+        }
+
+        @keyframes button-attention {
+            0% { transform: scale(1); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); }
+            50% { transform: scale(1.05); box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3); background-color: #1a1a1a; }
+            100% { transform: scale(1); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2); }
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 20px;
+            border: 2px solid #e2e8f0; 
+            background: #f8fafc;
+            border-radius: 18px;
+            font-size: 18px;
+            outline: none;
+            color: #000000;
+        }
+
+        /* Обновленная плашка Telegram в фирменных цветах */
+        .tg-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 50;
+            background: linear-gradient(135deg, #24A1DE 0%, #0088CC 100%);
+            color: #ffffff;
+            padding: 16px 28px;
+            border-radius: 100px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(36, 161, 222, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .tg-float:hover {
             transform: translateY(-3px);
-            box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.4);
-            background: #1a1a1a;
+            box-shadow: 0 12px 30px rgba(36, 161, 222, 0.5);
+        }
+
+        .tg-float:active {
+            transform: scale(0.95);
         }
 
         .modal-overlay {
@@ -167,321 +217,213 @@
             backdrop-filter: blur(15px);
             align-items: center;
             justify-content: center;
-            padding: 15px;
+            padding: 16px;
         }
-
         .modal-overlay.active { display: flex; }
 
         .modal-content {
             background: #ffffff;
             width: 100%;
             max-width: 500px;
-            border-radius: 30px;
-            padding: 40px 24px;
-            border: 2px solid #e2e8f0; 
-            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.1);
+            border-radius: 40px;
+            padding: 48px 24px;
+            border: 2px solid #f1f5f9;
+            box-shadow: 0 40px 80px rgba(0,0,0,0.1);
             position: relative;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 18px; /* Выше для мобильных */
-            border: 2px solid #e2e8f0; 
-            background: #fcfdfe;
-            border-radius: 14px;
-            font-size: 16px;
-            margin-top: 8px;
-            outline: none;
-            transition: all 0.3s;
-            appearance: none; /* Убираем стандартные тени iOS */
-        }
-
-        .form-input:focus {
-            border-color: #000000;
-            background: #ffffff;
         }
 
         .shimmer-text {
-            animation: pulse-opacity-active 2s ease-in-out infinite;
+            animation: attention-blink 1.5s ease-in-out infinite;
         }
 
-        @keyframes pulse-opacity-active {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
-
-        .tg-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 40;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: #ffffff;
-            padding: 10px 18px;
-            border-radius: 80px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            border: 2px solid #e2e8f0; 
-            text-decoration: none;
-        }
-
-        @media (max-width: 640px) {
-            .tg-float span {
-                display: none; /* Оставляем только иконку на очень маленьких экранах или сокращаем */
-            }
-            .tg-float {
-                padding: 12px;
-            }
-            .tg-icon-text {
-                display: block !important;
-            }
+        @keyframes attention-blink {
+            0% { opacity: 0.3; color: #64748b; transform: scale(1); }
+            50% { opacity: 1; color: #000000; transform: scale(1.02); }
+            100% { opacity: 0.3; color: #64748b; transform: scale(1); }
         }
     </style>
 </head>
-<body class="text-slate-900">
+<body>
 
     <div class="vhs-background">
         <div class="vhs-pattern"></div>
     </div>
 
-    <!-- Telegram Button -->
-    <a href="https://t.me/RinatZakiroff" target="_blank" class="tg-float group">
-        <div class="tg-icon">
-            <i class="fab fa-telegram-plane"></i>
-        </div>
-        <div class="flex flex-col tg-icon-text">
-            <span class="text-[10px] uppercase tracking-widest text-slate-400 font-bold leading-none mb-1">Написать мне</span>
-            <span class="text-[12px] uppercase tracking-[0.1em] text-slate-900 font-semibold">Telegram</span>
-        </div>
+    <!-- Telegram Button (Branded) -->
+    <a href="https://t.me/RinatZakiroff" target="_blank" class="tg-float">
+        <i class="fab fa-telegram-plane text-2xl"></i>
+        <span class="text-[13px] uppercase tracking-widest font-bold">Написать в Telegram</span>
     </a>
 
     <!-- Header -->
-    <header class="fixed w-full z-50 bg-white/95 backdrop-blur-md border-b-2 border-slate-200">
-        <div class="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
+    <header class="fixed w-full z-40 bg-white/90 backdrop-blur-md border-b border-slate-100">
+        <div class="container mx-auto px-5 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-8 h-8 border-2 border-black flex items-center justify-center">
-                    <i class="fas fa-film text-black text-xs"></i>
+                <div class="w-10 h-10 bg-black flex items-center justify-center rounded-lg">
+                    <i class="fas fa-film text-white text-sm"></i>
                 </div>
-                <span class="text-base md:text-lg thin-header tracking-[0.2em] md:tracking-[0.3em] text-black font-medium">DigiMemo</span>
+                <span class="text-lg thin-header tracking-widest text-black font-bold">DigiMemo</span>
             </div>
-            <nav class="hidden lg:flex gap-8 text-[11px] uppercase tracking-[0.2em] font-semibold text-slate-400">
-                <a href="#types" class="hover:text-black transition">Типы кассет</a>
-                <a href="#delivery" class="hover:text-black transition">Условия</a>
-                <a href="#calc" class="hover:text-black transition">Расчет</a>
-            </nav>
-            <button onclick="toggleModal('orderModal', true)" class="text-[10px] uppercase tracking-[0.2em] border-2 border-black px-5 py-2 rounded-full font-bold text-black hover:bg-black hover:text-white transition duration-300">
+            <button onclick="toggleModal('orderModal', true)" class="text-[12px] uppercase tracking-widest border-2 border-black px-5 py-2.5 rounded-full font-bold text-black active:bg-black active:text-white">
                 Заказать
             </button>
         </div>
     </header>
 
-    <!-- Modal Window -->
-    <div id="orderModal" class="modal-overlay">
-        <div class="modal-content">
-            <button onclick="toggleModal('orderModal', false)" class="absolute top-4 right-4 text-slate-400 hover:text-slate-900 p-2 z-10">
-                <i class="fas fa-times text-xl"></i>
-            </button>
-            <div id="formContainer">
-                <div class="text-center mb-8">
-                    <h3 class="thin-header text-xl md:text-2xl tracking-[0.2em] text-black mb-3">Оформить заказ</h3>
-                    <p class="text-[11px] text-slate-400 uppercase tracking-widest font-bold">Данные для выезда курьера</p>
-                </div>
-                <form id="orderForm" action="https://formspree.io/f/xkowabkp" method="POST" class="space-y-5">
-                    <input type="hidden" name="_subject" value="Новый заказ на оцифровку (DigiMemo)">
-                    <div>
-                        <label class="text-[11px] uppercase tracking-widest font-bold text-slate-400 ml-2">Телефон</label>
-                        <input type="tel" id="phoneInput" name="phone" required placeholder="+7 (___) ___-__-__" class="form-input">
-                    </div>
-                    <div>
-                        <label class="text-[11px] uppercase tracking-widest font-bold text-slate-400 ml-2">Адрес (МКАД)</label>
-                        <textarea name="address" required rows="2" placeholder="Улица, дом, квартира" class="form-input"></textarea>
-                    </div>
-                    <input type="hidden" name="qty_camera_tapes" id="hiddenCamQty" value="0">
-                    <input type="hidden" name="qty_vhs_tapes" id="hiddenVhsQty" value="0">
-                    <input type="hidden" name="calculated_total" id="hiddenTotalPrice" value="0">
-                    <button type="submit" id="submitBtn" class="elegant-btn w-full mt-2">
-                        Отправить заявку
-                    </button>
-                </form>
-            </div>
-            <div id="successMessage" class="hidden text-center py-10">
-                <i class="fas fa-check-circle text-4xl text-black mb-6"></i>
-                <h3 class="thin-header text-lg tracking-[0.2em] text-black mb-4">Заявка принята</h3>
-                <p class="text-[11px] text-slate-400 uppercase tracking-widest">Я свяжусь с Вами в ближайшее время</p>
-                <button onclick="toggleModal('orderModal', false)" class="mt-8 text-[11px] uppercase tracking-widest font-bold text-slate-600 underline">Закрыть</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Main Section -->
-    <section class="relative pt-28 md:pt-32 pb-6">
-        <div class="container mx-auto px-4 md:px-6 text-center">
-            <div class="glass-block inline-block py-16 md:py-20 px-6 md:px-12 w-full max-w-4xl mx-auto border-slate-200">
-                <div class="inline-block text-[10px] md:text-[11px] tracking-[0.3em] md:tracking-[0.4em] uppercase text-slate-400 mb-8 md:mb-10 font-bold">
-                    Premium Digital Service
-                </div>
-                <h1 class="text-3xl md:text-5xl thin-header leading-tight text-black mb-10 md:mb-12">
-                    Оцифровка <br class="hidden md:block"> видеокассет
-                </h1>
-                <p class="text-base md:text-lg text-slate-500 max-w-2xl mx-auto font-normal leading-relaxed mb-10">
-                    Профессиональный перевод аналоговых архивов в цифровое качество. Качественное оборудование и бережное отношение к записям.
+    <!-- Main Hero -->
+    <section class="relative pt-32 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="glass-block py-16 px-6 text-center max-w-4xl mx-auto">
+                <div class="text-[12px] tracking-[0.4em] uppercase text-slate-400 mb-8 font-bold">Premium Digital</div>
+                <h1 class="text-4xl md:text-6xl text-black mb-10 leading-tight uppercase font-bold">Оцифровка <br> видеокассет</h1>
+                <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-10">
+                    Переведем ваши теплые воспоминания в современный цифровой формат.
                 </p>
-                <p class="shimmer-text text-[14px] md:text-[18px] uppercase tracking-[0.3em] md:tracking-[0.4em] font-bold text-black border-t-2 border-slate-100 pt-10 inline-block">
-                    готово будет уже завтра
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Cassette Types -->
-    <section id="types" class="py-6 md:py-10">
-        <div class="container mx-auto px-4 md:px-6 text-center">
-            <div class="glass-block py-16 md:py-20 px-4 md:px-10 max-w-6xl mx-auto">
-                <h2 class="thin-header text-xl md:text-2xl tracking-[0.3em] md:tracking-[0.4em] mb-6 text-black">Форматы кассет</h2>
-                <p class="text-[11px] uppercase tracking-widest text-slate-400 font-bold mb-12 md:mb-16">Все стандарты бытовых видеокассет</p>
-                <div class="flex flex-wrap justify-center gap-3 md:gap-4">
-                    <div class="soft-card-static w-28 md:w-36 border-slate-200">
-                        <span class="card-label text-xs md:text-sm">VHS</span>
-                    </div>
-                    <div class="soft-card-static w-28 md:w-36 border-slate-200">
-                        <span class="card-label text-xs md:text-sm">VHS-C</span>
-                    </div>
-                    <div class="soft-card-static w-28 md:w-36 border-slate-200">
-                        <span class="card-label text-xs md:text-sm">8mm</span>
-                    </div>
-                    <div class="soft-card-static w-28 md:w-36 border-slate-200">
-                        <span class="card-label text-xs md:text-sm">Hi8</span>
-                    </div>
-                    <div class="soft-card-static w-28 md:w-36 border-slate-200">
-                        <span class="card-label text-xs md:text-sm">Digital8</span>
-                    </div>
-                    <div class="soft-card-static w-28 md:w-36 border-slate-200">
-                        <span class="card-label text-xs md:text-sm">MiniDV</span>
-                    </div>
-                    <div class="soft-card-static w-28 md:w-36 border-slate-200">
-                        <span class="card-label text-xs md:text-sm">Audio</span>
-                    </div>
+                <div class="shimmer-text py-6 border-t border-slate-100">
+                    <span class="text-[15px] md:text-lg uppercase tracking-[0.3em] font-bold text-black">Сделаем всё уже завтра</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Conditions -->
-    <section id="delivery" class="py-6 md:py-10">
-        <div class="container mx-auto px-4 md:px-6">
-            <div class="glass-block py-16 md:py-20 px-6 md:px-12 max-w-6xl mx-auto">
-                <div class="grid lg:grid-cols-3 gap-12 md:gap-10">
-                    <div class="flex flex-col items-center text-center">
-                        <div class="icon-backdrop border-slate-100">
-                            <i class="fas fa-truck-fast"></i>
-                        </div>
-                        <h5 class="text-[13px] md:text-[14px] uppercase tracking-[0.2em] font-bold text-black mb-3">Бесплатная доставка</h5>
-                        <p class="text-[13px] md:text-[14px] text-slate-400 leading-relaxed uppercase max-w-[280px]">Заберу и привезу заказ по любому адресу в пределах МКАД.</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center">
-                        <div class="icon-backdrop border-slate-100">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <h5 class="text-[13px] md:text-[14px] uppercase tracking-[0.2em] font-bold text-black mb-3">Срок от 1 дня</h5>
-                        <p class="text-[13px] md:text-[14px] text-slate-400 leading-relaxed uppercase max-w-[280px]">До 5 кассет сделаю за 24 часа. Отправлю ссылку на скачивание.</p>
-                    </div>
-                    <div class="flex flex-col items-center text-center">
-                        <div class="icon-backdrop border-slate-100">
-                            <i class="fas fa-wallet"></i>
-                        </div>
-                        <h5 class="text-[13px] md:text-[14px] uppercase tracking-[0.2em] font-bold text-black mb-3">Честная оплата</h5>
-                        <div class="text-[13px] md:text-[14px] text-slate-400 leading-relaxed uppercase max-w-[280px]">
-                            <p class="mb-2">20 рублей за минуту. делаю только личные записи остальное бесплатно вырежу.</p>
-                            <p class="font-bold text-black border-t border-slate-100 pt-2">Минимальный заказ 1800 рублей.</p>
-                        </div>
-                    </div>
+    <!-- Formats -->
+    <section class="py-6">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="soft-card-static"><span class="card-label">VHS / VHS-C</span></div>
+                <div class="soft-card-static"><span class="card-label">8mm / Hi8</span></div>
+                <div class="soft-card-static"><span class="card-label">Digital8</span></div>
+                <div class="soft-card-static"><span class="card-label">MiniDV</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages -->
+    <section class="py-10">
+        <div class="container mx-auto px-4">
+            <div class="glass-block py-16 px-8 max-w-5xl mx-auto grid md:grid-cols-3 gap-12">
+                <div class="text-center flex flex-col items-center">
+                    <div class="icon-backdrop"><i class="fas fa-truck"></i></div>
+                    <h3 class="text-[16px] uppercase tracking-wider font-bold mb-4">Заберу сам</h3>
+                    <p class="text-slate-500 uppercase text-[13px] font-medium leading-relaxed">Бесплатная доставка курьером в пределах МКАД.</p>
+                </div>
+                <div class="text-center flex flex-col items-center">
+                    <div class="icon-backdrop"><i class="fas fa-clock"></i></div>
+                    <h3 class="text-[16px] uppercase tracking-wider font-bold mb-4">За 24 часа</h3>
+                    <p class="text-slate-500 uppercase text-[13px] font-medium leading-relaxed">Срок выполнения до 5 кассет — всего одни сутки.</p>
+                </div>
+                <div class="text-center flex flex-col items-center">
+                    <div class="icon-backdrop"><i class="fas fa-ruble-sign"></i></div>
+                    <h3 class="text-[16px] uppercase tracking-wider font-bold mb-4">20 ₽ / мин</h3>
+                    <p class="text-slate-500 uppercase text-[13px] font-medium leading-relaxed">Прозрачный расчет. Минимальный заказ — 1800 ₽.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Calculator -->
-    <section id="calc" class="py-6 md:py-12">
-        <div class="container mx-auto px-4 md:px-6">
-            <div class="max-w-4xl mx-auto glass-block p-8 md:p-12">
-                <div class="text-center mb-12 md:min-h-[100px]">
-                    <h2 class="thin-header text-xl md:text-2xl tracking-[0.3em] mb-4 text-black">Калькулятор</h2>
-                    <p class="text-[11px] uppercase tracking-[0.2em] text-slate-400 font-bold">введите количество кассет</p>
+    <!-- Calc -->
+    <section id="calc" class="py-10 pb-24">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto glass-block p-8 md:p-16">
+                <div class="text-center mb-16">
+                    <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4">Калькулятор</h2>
+                    <p class="text-[13px] uppercase tracking-widest font-bold shimmer-text">Выберите количество кассет</p>
                 </div>
 
-                <div class="space-y-8 mb-12">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-10 border-b-2 border-slate-100">
+                <div class="space-y-12 mb-16">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-8 pb-10 border-b border-slate-100">
                         <div class="text-center md:text-left">
-                            <h4 class="text-[14px] md:text-[15px] uppercase tracking-widest font-bold text-black">Видеокамеры</h4>
-                            <p class="text-[11px] text-slate-400 uppercase tracking-tight font-bold mt-1">MINIDV, HI8, 8MM, VHS-C</p>
+                            <h4 class="text-lg uppercase font-bold">Видеокамеры</h4>
+                            <p class="text-[11px] text-slate-400 font-bold uppercase tracking-widest mt-1">MiniDV, Hi8, 8mm, VHS-C</p>
                         </div>
-                        <div class="flex items-center justify-center gap-8">
-                            <button onclick="changeQty('cam', -1)" class="counter-btn"><i class="fas fa-minus text-lg"></i></button>
-                            <span id="camQty" class="text-3xl md:text-4xl font-light w-12 text-center text-black">0</span>
-                            <button onclick="changeQty('cam', 1)" class="counter-btn"><i class="fas fa-plus text-lg"></i></button>
+                        <div class="flex items-center gap-10">
+                            <button onclick="changeQty('cam', -1)" class="counter-btn"><i class="fas fa-minus"></i></button>
+                            <span id="camQty" class="text-4xl font-medium w-12 text-center">0</span>
+                            <button onclick="changeQty('cam', 1)" class="counter-btn"><i class="fas fa-plus"></i></button>
                         </div>
                     </div>
 
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-10 border-b-2 border-slate-100">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-8 pb-10 border-b border-slate-100">
                         <div class="text-center md:text-left">
-                            <h4 class="text-[14px] md:text-[15px] uppercase tracking-widest font-bold text-black">VHS кассеты</h4>
-                            <p class="text-[11px] text-slate-400 uppercase tracking-tight font-bold mt-1">Обычный видеомагнитофон</p>
+                            <h4 class="text-lg uppercase font-bold">VHS кассеты</h4>
+                            <p class="text-[11px] text-slate-400 font-bold uppercase tracking-widest mt-1">Обычные большие кассеты</p>
                         </div>
-                        <div class="flex items-center justify-center gap-8">
-                            <button onclick="changeQty('vhs', -1)" class="counter-btn"><i class="fas fa-minus text-lg"></i></button>
-                            <span id="vhsQty" class="text-3xl md:text-4xl font-light w-12 text-center text-black">0</span>
-                            <button onclick="changeQty('vhs', 1)" class="counter-btn"><i class="fas fa-plus text-lg"></i></button>
+                        <div class="flex items-center gap-10">
+                            <button onclick="changeQty('vhs', -1)" class="counter-btn"><i class="fas fa-minus"></i></button>
+                            <span id="vhsQty" class="text-4xl font-medium w-12 text-center">0</span>
+                            <button onclick="changeQty('vhs', 1)" class="counter-btn"><i class="fas fa-plus"></i></button>
                         </div>
                     </div>
                 </div>
 
                 <div class="text-center">
-                    <span class="block text-[11px] uppercase tracking-widest text-slate-400 mb-6 font-bold">Оценочная стоимость</span>
-                    <div class="text-5xl md:text-6xl font-light text-black flex items-baseline justify-center mb-10">
-                        <span id="totalPrice">0</span><span class="text-xl md:text-2xl ml-4">₽</span>
+                    <span class="block text-[13px] uppercase tracking-widest text-slate-400 mb-6 font-bold">Максимально возможная стоимость</span>
+                    <div class="text-6xl md:text-7xl font-bold text-black flex items-baseline justify-center mb-12">
+                        <span id="totalPrice">0</span><span class="text-2xl ml-4 text-slate-300">₽</span>
                     </div>
                     
-                    <div id="priceInfoHint" class="opacity-0 scale-95 h-0 overflow-hidden mb-12">
-                         <p class="text-[12px] md:text-[13px] uppercase tracking-[0.15em] text-black font-bold shimmer-text leading-relaxed max-w-md mx-auto">
-                            Оцифровываются только личные записи. Итоговая сумма будет ниже.
+                    <div id="hint" class="hidden mb-10 px-4">
+                        <p class="text-[14px] uppercase tracking-wider text-black font-bold shimmer-text leading-relaxed mx-auto max-w-lg">
+                            Окончательная стоимость как правило значительно ниже так как кассеты редко записаны полностью.
                         </p>
                     </div>
 
-                    <div class="flex flex-col items-center">
-                        <button onclick="toggleModal('orderModal', true)" class="elegant-btn">
-                            Сделать заказ
-                        </button>
-                        <p class="mt-8 text-[11px] uppercase tracking-widest text-slate-400 font-bold">Минимальный заказ 1800 ₽</p>
-                    </div>
+                    <button onclick="toggleModal('orderModal', true)" class="elegant-btn elegant-btn-pulse">
+                        Оформить заказ
+                    </button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-16 text-center border-t-2 border-slate-200 px-4">
-        <p class="text-[10px] uppercase tracking-[0.3em] md:tracking-[0.4em] text-slate-300 font-bold mb-4">© 2024 Ринат — Digital Preservation</p>
-        <p class="text-[9px] uppercase tracking-widest text-slate-300">г. Москва, в пределах МКАД</p>
-    </footer>
+    <!-- Modal -->
+    <div id="orderModal" class="modal-overlay">
+        <div class="modal-content">
+            <button onclick="toggleModal('orderModal', false)" class="absolute top-6 right-6 text-slate-400 p-2">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+            <div id="formContainer">
+                <div class="text-center mb-10">
+                    <h3 class="text-2xl font-bold uppercase tracking-wider mb-2">Ваши данные</h3>
+                    <p class="text-[12px] text-slate-400 uppercase font-bold tracking-widest">Для выезда курьера</p>
+                </div>
+                <form id="orderForm" action="https://formspree.io/f/xkowabkp" method="POST" class="space-y-6">
+                    <div>
+                        <label class="text-[12px] uppercase font-bold text-slate-400 ml-2">Телефон</label>
+                        <input type="tel" id="phoneInput" name="phone" required placeholder="+7 (___) ___-__-__" class="form-input">
+                    </div>
+                    <div>
+                        <label class="text-[12px] uppercase font-bold text-slate-400 ml-2">Адрес (МКАД)</label>
+                        <textarea name="address" required rows="2" placeholder="Улица, дом, квартира" class="form-input"></textarea>
+                    </div>
+                    <input type="hidden" name="cam_qty" id="h_cam" value="0">
+                    <input type="hidden" name="vhs_qty" id="h_vhs" value="0">
+                    <input type="hidden" name="total" id="h_total" value="0">
+                    <button type="submit" id="submitBtn" class="elegant-btn mt-4">Отправить</button>
+                </form>
+            </div>
+            <div id="successMessage" class="hidden text-center py-10">
+                <i class="fas fa-check-circle text-5xl mb-6"></i>
+                <h3 class="text-2xl font-bold uppercase mb-4">Готово!</h3>
+                <p class="text-slate-500 uppercase text-[13px] font-bold">Я свяжусь с вами скоро.</p>
+                <button onclick="toggleModal('orderModal', false)" class="mt-10 underline font-bold uppercase text-[12px]">Закрыть</button>
+            </div>
+        </div>
+    </div>
 
     <script>
         let quantities = { cam: 0, vhs: 0 };
         const phoneInputEl = document.getElementById('phoneInput');
-        const phoneMask = IMask(phoneInputEl, { mask: '+{7} (000) 000-00-00' });
+        IMask(phoneInputEl, { mask: '+{7} (000) 000-00-00' });
 
         function toggleModal(id, show) {
             const modal = document.getElementById(id);
             if (show) {
                 modal.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Запрет скролла при модалке
-                if (id === 'orderModal') {
-                    document.getElementById('hiddenCamQty').value = quantities.cam;
-                    document.getElementById('hiddenVhsQty').value = quantities.vhs;
-                    document.getElementById('hiddenTotalPrice').value = document.getElementById('totalPrice').innerText + ' руб.';
-                }
+                document.body.style.overflow = 'hidden';
+                document.getElementById('h_cam').value = quantities.cam;
+                document.getElementById('h_vhs').value = quantities.vhs;
+                document.getElementById('h_total').value = document.getElementById('totalPrice').innerText;
             } else {
                 modal.classList.remove('active');
                 document.body.style.overflow = 'auto';
@@ -500,20 +442,14 @@
             const finalPrice = totalMin > 0 ? Math.max(price, 1800) : 0;
             document.getElementById('totalPrice').innerText = finalPrice;
             
-            const hint = document.getElementById('priceInfoHint');
-            if (finalPrice > 0) {
-                hint.classList.remove('opacity-0', 'scale-95', 'h-0');
-                hint.classList.add('opacity-100', 'scale-100', 'h-auto', 'mt-6');
-            } else {
-                hint.classList.add('opacity-0', 'scale-95', 'h-0');
-                hint.classList.remove('opacity-100', 'scale-100', 'h-auto', 'mt-6');
-            }
+            const hint = document.getElementById('hint');
+            if (finalPrice > 0) hint.classList.remove('hidden');
+            else hint.classList.add('hidden');
         }
 
         document.getElementById('orderForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
-            const originalText = btn.innerText;
             btn.innerText = 'ОТПРАВКА...';
             btn.disabled = true;
             try {
@@ -527,16 +463,12 @@
                     document.getElementById('successMessage').classList.remove('hidden');
                 }
             } finally {
-                btn.innerText = originalText;
+                btn.innerText = 'ОТПРАВИТЬ';
                 btn.disabled = false;
             }
         });
 
-        window.onclick = function(event) { 
-            if (event.target.classList.contains('modal-overlay')) {
-                toggleModal(event.target.id, false);
-            }
-        }
+        window.onclick = (e) => { if (e.target.classList.contains('modal-overlay')) toggleModal(e.target.id, false); }
     </script>
 </body>
 </html>
