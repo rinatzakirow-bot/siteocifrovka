@@ -56,11 +56,13 @@
                 padding-top: 3.5rem !important;
                 padding-bottom: 3.5rem !important;
                 border-radius: 32px !important;
+                border-width: 3px !important;
             }
 
             .soft-card-static {
                 min-height: 90px !important;
                 padding: 15px 10px !important;
+                border-width: 3px !important;
             }
 
             .card-label {
@@ -102,9 +104,10 @@
         .glass-block {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
-            border: 2px solid #f1f5f9; 
+            border: 3px solid #e2e8f0; 
             border-radius: 48px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+            /* Усиленная тень */
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04);
             position: relative;
             overflow: hidden;
         }
@@ -118,19 +121,20 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 1.5rem;
-            color: #24A1DE; /* Цвет Telegram */
+            color: #24A1DE; 
             font-size: 28px;
         }
 
         .soft-card-static {
             background: #ffffff;
-            border: 2px solid #f1f5f9; 
+            border: 3px solid #e2e8f0; 
             border-radius: 20px;
             padding: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+            /* Добавлена тень */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
         }
 
         .counter-btn {
@@ -139,7 +143,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid #e2e8f0; 
+            border: 3px solid #cbd5e1; 
             border-radius: 50%;
             color: #000000;
             background: #ffffff;
@@ -155,7 +159,7 @@
         }
 
         .elegant-btn {
-            background: #24A1DE; /* Цвет Telegram */
+            background: #24A1DE; 
             color: #ffffff;
             border-radius: 100px;
             font-size: 15px;
@@ -184,7 +188,7 @@
         .form-input {
             width: 100%;
             padding: 20px;
-            border: 2px solid #e2e8f0; 
+            border: 3px solid #cbd5e1; 
             background: #f8fafc;
             border-radius: 18px;
             font-size: 18px;
@@ -192,7 +196,10 @@
             color: #000000;
         }
 
-        /* Обновленная плашка Telegram в фирменных цветах */
+        .form-input:focus {
+            border-color: #24A1DE;
+        }
+
         .tg-float {
             position: fixed;
             bottom: 24px;
@@ -238,8 +245,9 @@
             max-width: 500px;
             border-radius: 40px;
             padding: 48px 24px;
-            border: 2px solid #f1f5f9;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.1);
+            border: 3px solid #e2e8f0; 
+            /* Усиленная тень для модалки */
+            box-shadow: 0 40px 100px rgba(0,0,0,0.12), 0 10px 30px rgba(0,0,0,0.05);
             position: relative;
         }
 
@@ -305,7 +313,6 @@
     <section class="py-6">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto">
-                <!-- Added Label above formats -->
                 <div class="text-center mb-8">
                     <p class="text-[11px] md:text-[13px] uppercase tracking-[0.25em] font-bold text-slate-400 mobile-larger-text">
                         Работаю со всеми типами бытовых видеокассет
