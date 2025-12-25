@@ -27,87 +27,38 @@
         @media (max-width: 768px) {
             body {
                 font-size: 18px; 
-                line-height: 1.4; 
+                line-height: 1.7; 
             }
             
             h1 {
-                /* Используем динамический размер шрифта в зависимости от ширины экрана (vw) */
-                /* Чтобы заголовок не разбивался и не переносился, подгоняем его под экран */
-                font-size: 8.5vw !important; 
+                font-size: 2.25rem !important; 
                 line-height: 1.2 !important;
-                font-weight: 800 !important;
-                white-space: nowrap; /* Запрещаем перенос на новую строку */
-                display: inline-block;
-                width: 100%;
+                font-weight: 700 !important;
             }
 
             h2 {
-                font-size: 7vw !important;
+                font-size: 1.75rem !important; 
                 font-weight: 700 !important;
-                white-space: nowrap;
-            }
-
-            h3 {
-                font-size: 1.4rem !important;
-            }
-
-            p.text-lg, p.text-xl {
-                font-size: 1.1rem !important;
             }
 
             .glass-block {
-                padding-top: 2.5rem !important;
-                padding-bottom: 2.5rem !important;
-                padding-left: 1rem !important;
-                padding-right: 1rem !important;
-                border-radius: 28px !important;
+                padding-top: 3.5rem !important;
+                padding-bottom: 3.5rem !important;
+                border-radius: 32px !important;
             }
 
             .soft-card-static {
-                min-height: 80px !important;
-                padding: 10px 5px !important;
+                min-height: 90px !important;
+                padding: 15px 10px !important;
             }
 
             .card-label {
-                font-size: 14px !important;
+                font-size: 15px !important; 
             }
 
             .elegant-btn {
-                font-size: 16px !important;
-                padding: 20px 24px !important;
-            }
-
-            .counter-btn {
-                width: 60px !important;
-                height: 60px !important;
-                font-size: 20px !important;
-            }
-
-            #camQty, #vhsQty {
-                font-size: 2.5rem !important;
-                width: 50px !important;
-            }
-
-            #totalPrice {
-                font-size: 3.5rem !important;
-            }
-
-            .form-input {
-                font-size: 18px !important;
-                padding: 16px !important;
-            }
-
-            label {
-                font-size: 14px !important;
-            }
-
-            .tg-float {
-                padding: 14px 20px !important;
-                bottom: 15px !important;
-                right: 10px !important;
-            }
-            .tg-float span {
-                font-size: 12px !important;
+                font-size: 16px !important; 
+                padding: 24px 30px !important;
             }
         }
         
@@ -328,7 +279,7 @@
         <div class="container mx-auto px-4">
             <div class="glass-block py-16 px-6 text-center max-w-4xl mx-auto">
                 <div class="text-[12px] tracking-[0.4em] uppercase text-slate-400 mb-8 font-bold">Premium Digital</div>
-                <h1 class="tg-text-color mb-10 leading-tight uppercase font-bold text-center">Оцифровка <br> видеокассет</h1>
+                <h1 class="text-4xl md:text-6xl tg-text-color mb-10 leading-tight uppercase font-bold">Оцифровка <br> видеокассет</h1>
                 <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-10">
                     Переведу ваши теплые воспоминания в современный цифровой формат.
                 </p>
@@ -343,6 +294,7 @@
     <section class="py-6">
         <div class="container mx-auto px-4">
             <div class="max-w-4xl mx-auto">
+                <!-- Added Label above formats -->
                 <div class="text-center mb-8">
                     <p class="text-[11px] md:text-[13px] uppercase tracking-[0.25em] font-bold text-slate-400">
                         Работаю со всеми типами бытовых видеокассет
@@ -375,7 +327,7 @@
                 <div class="text-center flex flex-col items-center">
                     <div class="icon-backdrop"><i class="fas fa-ruble-sign"></i></div>
                     <h3 class="text-[16px] uppercase tracking-wider font-bold mb-4">20 ₽ / мин</h3>
-                    <p class="text-slate-500 uppercase text-[13px] font-bold leading-relaxed">Прозрачный расчет. Минимальный заказ — 1800 ₽.</p>
+                    <p class="text-slate-500 uppercase text-[13px] font-medium leading-relaxed">Прозрачный расчет. Минимальный заказ — 1800 ₽.</p>
                 </div>
             </div>
         </div>
