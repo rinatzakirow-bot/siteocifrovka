@@ -26,39 +26,80 @@
 
         @media (max-width: 768px) {
             body {
-                font-size: 18px; 
-                line-height: 1.7; 
+                font-size: 24px; /* Увеличено с 18px для основного текста */
+                line-height: 1.6; 
             }
             
             h1 {
-                font-size: 2.25rem !important; 
-                line-height: 1.2 !important;
-                font-weight: 700 !important;
+                font-size: 3.5rem !important; /* Значительно увеличено для заголовка */
+                line-height: 1.1 !important;
+                font-weight: 800 !important;
             }
 
             h2 {
-                font-size: 1.75rem !important; 
+                font-size: 2.5rem !important; /* Увеличено для подзаголовков */
                 font-weight: 700 !important;
             }
 
+            h3 {
+                font-size: 1.8rem !important;
+            }
+
+            p.text-lg, p.text-xl {
+                font-size: 1.5rem !important; /* Текст в Hero блоке */
+            }
+
             .glass-block {
-                padding-top: 3.5rem !important;
-                padding-bottom: 3.5rem !important;
-                border-radius: 32px !important;
+                padding-top: 4rem !important;
+                padding-bottom: 4rem !important;
+                border-radius: 40px !important;
             }
 
             .soft-card-static {
-                min-height: 90px !important;
-                padding: 15px 10px !important;
+                min-height: 120px !important; /* Крупнее карточки форматов */
+                padding: 20px 15px !important;
             }
 
             .card-label {
-                font-size: 15px !important; 
+                font-size: 20px !important; /* Текст внутри карточек форматов */
             }
 
             .elegant-btn {
-                font-size: 16px !important; 
-                padding: 24px 30px !important;
+                font-size: 22px !important; /* Кнопки стали гораздо крупнее */
+                padding: 30px 40px !important;
+            }
+
+            .counter-btn {
+                width: 80px !important; /* Кнопки +/- в калькуляторе */
+                height: 80px !important;
+                font-size: 28px !important;
+            }
+
+            #camQty, #vhsQty {
+                font-size: 3.5rem !important; /* Цифры счетчика */
+                width: 80px !important;
+            }
+
+            #totalPrice {
+                font-size: 5rem !important; /* Итоговая цена */
+            }
+
+            .form-input {
+                font-size: 24px !important; /* Поля ввода в форме */
+                padding: 25px !important;
+            }
+
+            label {
+                font-size: 18px !important;
+            }
+
+            .tg-float {
+                padding: 20px 35px !important;
+                bottom: 30px !important;
+                right: 20px !important;
+            }
+            .tg-float span {
+                font-size: 16px !important;
             }
         }
         
