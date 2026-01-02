@@ -270,7 +270,7 @@
         <div class="vhs-pattern"></div>
     </div>
 
-    <!-- Telegram Button (Branded) with Fail-safe JS -->
+    <!-- Кнопка Telegram -->
     <button onclick="openTelegram()" class="tg-float">
         <i class="fab fa-telegram-plane text-2xl"></i>
         <span class="text-[13px] uppercase tracking-widest font-bold">Написать в Telegram</span>
@@ -342,8 +342,8 @@
                 </div>
                 <div class="text-center flex flex-col items-center">
                     <div class="icon-backdrop"><i class="fas fa-ruble-sign"></i></div>
-                    <h3 class="text-[16px] uppercase tracking-wider font-bold mb-4">20 ₽ / мин</h3>
-                    <p class="text-slate-500 uppercase text-[13px] font-medium leading-relaxed mobile-larger-text">Прозрачный расчет. Минимальный заказ — 1800 ₽.</p>
+                    <h3 class="text-[16px] uppercase tracking-wider font-bold mb-4">23 ₽ / мин</h3>
+                    <p class="text-slate-500 uppercase text-[13px] font-medium leading-relaxed mobile-larger-text">Прозрачный расчет. Минимальный заказ — 2070 ₽.</p>
                 </div>
             </div>
         </div>
@@ -440,31 +440,20 @@
     </div>
 
     <script>
-        /**
-         * Обновленный метод открытия Telegram для Рината.
-         * Использует комбинацию прямого протокола и защищенного веб-редиректа.
-         */
         function openTelegram() {
             const username = 'RinatZakiroff';
             const appUrl = `tg://resolve?domain=${username}`;
-            // Используем t.me/share/url - это самый стабильный способ "пропихнуть" открытие приложения
             const webUrl = `https://t.me/share/url?url=https://t.me/${username}`; 
-            
-            // Если мы на мобильном устройстве
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
             if (isMobile) {
-                // На мобилках пробуем сначала прямую ссылку
                 window.location.href = appUrl;
-                
-                // Если не сработало за полсекунды - отправляем на веб-редирект
                 setTimeout(() => {
                     if (!document.hidden) {
                         window.location.href = webUrl;
                     }
                 }, 500);
             } else {
-                // На десктопе просто открываем веб-ссылку (браузер сам предложит открыть приложение)
                 window.open(`https://t.me/${username}`, '_blank');
             }
         }
@@ -494,14 +483,24 @@
         }
 
         function calculate() {
+            const minOrderMinutes = 90;
+            const pricePerMinute = 23;
+            const minOrderPrice = minOrderMinutes * pricePerMinute; // 2070 руб
+
+            // Предполагаем, что маленькая кассета в среднем 90 мин, большая 180 мин для оценки максимума
             const totalMin = (quantities.cam * 90) + (quantities.vhs * 180);
-            const price = totalMin * 20;
-            const finalPrice = totalMin > 0 ? Math.max(price, 1800) : 0;
+            const calculatedPrice = totalMin * pricePerMinute;
+            
+            const finalPrice = totalMin > 0 ? Math.max(calculatedPrice, minOrderPrice) : 0;
             document.getElementById('totalPrice').innerText = finalPrice;
             
             const hint = document.getElementById('hint');
-            if (finalPrice > 0) hint.classList.remove('hidden');
-            else hint.classList.add('hidden');
+            // Условие Рината: показывать подсказку только если расчетная сумма за минуты выше минималки
+            if (totalMin > 0 && calculatedPrice > minOrderPrice) {
+                hint.classList.remove('hidden');
+            } else {
+                hint.classList.add('hidden');
+            }
         }
 
         document.getElementById('orderForm').addEventListener('submit', async (e) => {
