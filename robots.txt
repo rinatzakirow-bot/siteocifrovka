@@ -1,4 +1,3 @@
-User-agent:*
-Allow:/
-
+User-agent: *
+Allow: /
 Sitemap: https://rinatzakirow-bot.github.io/ocifrovka/sitemap.xml
