@@ -1,1 +1,4 @@
-https://www.google.com/url?sa=E&source=gmail&q=https://rinatzakirow-bot.github.io/ocifrovka/sitemap.xml
+User-agent: *
+Allow: /
+
+Sitemap: https://rinatzakirow-bot.github.io/ocifrovka/sitemap.xml
