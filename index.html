@@ -301,7 +301,7 @@
                     Переведу ваши теплые воспоминания в современный цифровой формат.
                 </p>
                 <div class="shimmer-text py-6 border-t border-slate-100">
-                    <span class="text-[15px] md:text-lg uppercase tracking-[0.3em] font-bold text-[#24A1DE] mobile-larger-text">Сделаю всё уже завтра</span>
+                    <span class="text-[15px] md:text-lg uppercase tracking-[0.3em] font-bold text-[#24A1DE] mobile-larger-text">Готово будет уже завтра</span>
                 </div>
             </div>
         </div>
@@ -487,7 +487,6 @@
             const pricePerMinute = 23;
             const minOrderPrice = minOrderMinutes * pricePerMinute; // 2070 руб
 
-            // Предполагаем, что маленькая кассета в среднем 90 мин, большая 180 мин для оценки максимума
             const totalMin = (quantities.cam * 90) + (quantities.vhs * 180);
             const calculatedPrice = totalMin * pricePerMinute;
             
@@ -495,7 +494,6 @@
             document.getElementById('totalPrice').innerText = finalPrice;
             
             const hint = document.getElementById('hint');
-            // Условие Рината: показывать подсказку только если расчетная сумма за минуты выше минималки
             if (totalMin > 0 && calculatedPrice > minOrderPrice) {
                 hint.classList.remove('hidden');
             } else {
