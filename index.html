@@ -146,6 +146,13 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .soft-card-static:hover {
+            border-color: #24A1DE;
+            transform: translateY(-2px);
         }
 
         .counter-btn {
@@ -286,6 +293,23 @@
             object-fit: contain;
             border-radius: 6px;
         }
+
+        /* Стиль для всплывающего окна изображения */
+        .image-preview-modal {
+            max-width: 90%;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .image-preview-modal img {
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -305,7 +329,6 @@
         <div class="container mx-auto px-5 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 flex items-center justify-center rounded-lg overflow-hidden">
-                    <!-- Заменил иконку FontAwesome на тег img для вашего логотипа -->
                     <img src="logo.jpg" alt="Логотип Rinat Ocifrovka" class="header-logo" onerror="this.parentElement.innerHTML='<i class=\'fas fa-film text-[#24A1DE] text-sm\'></i>'">
                 </div>
                 <span class="text-lg thin-header tracking-widest text-black font-bold">Rinat Ocifrovka</span>
@@ -342,11 +365,13 @@
                             Работаю со всеми типами бытовых видеокассет
                         </p>
                     </div>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                        <div class="soft-card-static"><span class="card-label">VHS / VHS-C</span></div>
-                        <div class="soft-card-static"><span class="card-label">8mm / Hi8</span></div>
-                        <div class="soft-card-static"><span class="card-label">Digital8</span></div>
-                        <div class="soft-card-static"><span class="card-label">MiniDV</span></div>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                        <div class="soft-card-static" onclick="openImageModal('vhs')"><span class="card-label">VHS</span></div>
+                        <div class="soft-card-static" onclick="openImageModal('vhs-c')"><span class="card-label">VHS-C</span></div>
+                        <div class="soft-card-static" onclick="openImageModal('8mm')"><span class="card-label">8mm</span></div>
+                        <div class="soft-card-static" onclick="openImageModal('hi8')"><span class="card-label">Hi8</span></div>
+                        <div class="soft-card-static" onclick="openImageModal('digital8')"><span class="card-label">Digital8</span></div>
+                        <div class="soft-card-static" onclick="openImageModal('minidv')"><span class="card-label">MiniDV</span></div>
                     </div>
                 </div>
             </div>
@@ -431,7 +456,7 @@
         </section>
     </main>
 
-    <!-- Модальное окно -->
+    <!-- Модальное окно заказа -->
     <div id="orderModal" class="modal-overlay">
         <div class="modal-content">
             <button onclick="toggleModal('orderModal', false)" class="absolute top-6 right-6 text-slate-400 p-2 border-none bg-transparent cursor-pointer">
@@ -466,8 +491,16 @@
         </div>
     </div>
 
+    <!-- Всплывающее окно для изображения -->
+    <div id="imageModal" class="modal-overlay">
+        <div class="modal-content image-preview-modal">
+            <h3 id="imageTitle" class="text-2xl font-bold uppercase tracking-wider mb-6">VHS</h3>
+            <img id="previewImage" src="" alt="Формат кассеты">
+            <button onclick="toggleModal('imageModal', false)" class="elegant-btn">Вернуться в меню</button>
+        </div>
+    </div>
+
     <script>
-        // Функция для связи через Telegram
         function openTelegram() {
             const username = 'RinatZakiroff';
             const appUrl = `tg://resolve?domain=${username}`;
@@ -490,35 +523,50 @@
         const phoneInputEl = document.getElementById('phoneInput');
         IMask(phoneInputEl, { mask: '+{7} (000) 000-00-00' });
 
-        // Управление модальным окном
         function toggleModal(id, show) {
             const modal = document.getElementById(id);
             if (show) {
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
-                document.getElementById('h_cam').value = quantities.cam;
-                document.getElementById('h_vhs').value = quantities.vhs;
-                document.getElementById('h_total').value = document.getElementById('totalPrice').innerText;
+                if (id === 'orderModal') {
+                    document.getElementById('h_cam').value = quantities.cam;
+                    document.getElementById('h_vhs').value = quantities.vhs;
+                    document.getElementById('h_total').value = document.getElementById('totalPrice').innerText;
+                }
             } else {
                 modal.classList.remove('active');
                 document.body.style.overflow = 'auto';
             }
         }
 
-        // Изменение количества кассет
+        function openImageModal(format) {
+            const modal = document.getElementById('imageModal');
+            const img = document.getElementById('previewImage');
+            const title = document.getElementById('imageTitle');
+            
+            // Названия файлов соответствуют типам кассет
+            let fileName = format;
+            if (format === 'vhs-c') fileName = 'vhc c';
+            if (format === '8mm') fileName = '8mm'; // Привязка к файлу 8mm.png
+            if (format === 'minidv') fileName = 'mini dv';
+            
+            title.innerText = format.toUpperCase();
+            img.src = `${fileName}.png`;
+            
+            toggleModal('imageModal', true);
+        }
+
         function changeQty(type, delta) {
             quantities[type] = Math.max(0, quantities[type] + delta);
             document.getElementById(type + 'Qty').innerText = quantities[type];
             calculate();
         }
 
-        // Расчет стоимости
         function calculate() {
             const minOrderMinutes = 90;
             const pricePerMinute = 23;
-            const minOrderPrice = minOrderMinutes * pricePerMinute; // 2070 руб
+            const minOrderPrice = minOrderMinutes * pricePerMinute;
 
-            // Предполагаем среднюю длительность 90 мин для камерных и 180 для VHS
             const totalMin = (quantities.cam * 90) + (quantities.vhs * 180);
             const calculatedPrice = totalMin * pricePerMinute;
             
@@ -533,7 +581,6 @@
             }
         }
 
-        // Обработка формы
         document.getElementById('orderForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
@@ -555,8 +602,11 @@
             }
         });
 
-        // Закрытие при клике по фону
-        window.onclick = (e) => { if (e.target.classList.contains('modal-overlay')) toggleModal(e.target.id, false); }
+        window.onclick = (e) => { 
+            if (e.target.classList.contains('modal-overlay')) {
+                toggleModal(e.target.id, false);
+            }
+        }
     </script>
 </body>
 </html>
