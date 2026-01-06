@@ -14,9 +14,6 @@
     <meta name="google-site-verification" content="JyFFBJMj_TwStz7_DLytP1GHHnSyWDaan2frp0JtuYI" />
     <meta name="google-site-verification" content="google95be795dc3a59691" />
     
-    <!-- Каноническая ссылка (замените на ваш домен, когда он будет активен) -->
-    <!-- <link rel="canonical" href="https://ваш-домен.ru/" /> -->
-    
     <title>Оцифровка видеокассет в Москве — Быстро и качественно | Ринат</title>
     <meta name="description" content="Профессиональная оцифровка видеокассет VHS, MiniDV, Hi8. Срок от 24 часов, бесплатный курьер по Москве. Цена 23 руб/мин.">
     
@@ -281,6 +278,14 @@
         .tg-text-color {
             color: #24A1DE;
         }
+        
+        /* Стили для логотипа */
+        .header-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 6px;
+        }
     </style>
 </head>
 <body>
@@ -299,10 +304,11 @@
     <header class="fixed w-full z-40 bg-white/90 backdrop-blur-md border-b border-slate-100">
         <div class="container mx-auto px-5 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-[#24A1DE] flex items-center justify-center rounded-lg">
-                    <i class="fas fa-film text-white text-sm"></i>
+                <div class="w-10 h-10 flex items-center justify-center rounded-lg overflow-hidden">
+                    <!-- Заменил иконку FontAwesome на тег img для вашего логотипа -->
+                    <img src="logo.jpg" alt="Логотип Rinat Ocifrovka" class="header-logo" onerror="this.parentElement.innerHTML='<i class=\'fas fa-film text-[#24A1DE] text-sm\'></i>'">
                 </div>
-                <span class="text-lg thin-header tracking-widest text-black font-bold">DigiMemo</span>
+                <span class="text-lg thin-header tracking-widest text-black font-bold">Rinat Ocifrovka</span>
             </div>
             <button onclick="toggleModal('orderModal', true)" class="text-[12px] uppercase tracking-widest border-2 border-[#24A1DE] px-5 py-2.5 rounded-full font-bold text-[#24A1DE] active:bg-[#24A1DE] active:text-white">
                 Заказать
