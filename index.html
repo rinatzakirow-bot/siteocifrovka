@@ -65,6 +65,29 @@
             overflow: hidden;
         }
 
+        /* Анимация луча для надписи Premium Digital Service */
+        .shimmer-text {
+            background: linear-gradient(
+                to right,
+                #94a3b8 0%,
+                #94a3b8 40%,
+                #1a1a1a 50%,
+                #94a3b8 60%,
+                #94a3b8 100%
+            );
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
         .icon-backdrop {
             width: 72px; height: 72px; background: #f8fafc; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
@@ -299,7 +322,7 @@
         <section class="relative pt-32 pb-8">
             <div class="container mx-auto px-4">
                 <div class="glass-block py-16 px-6 text-center max-w-4xl mx-auto">
-                    <div class="text-[12px] tracking-[0.4em] uppercase text-slate-400 mb-8 font-bold mobile-larger-text">Premium Digital Service</div>
+                    <div class="text-[12px] tracking-[0.4em] uppercase mb-8 font-bold mobile-larger-text shimmer-text">Premium Digital Service</div>
                     <h1 class="text-4xl md:text-6xl tg-text-color mb-10 leading-tight uppercase font-bold">Оцифровка <br> видеокассет</h1>
                     <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-14 mobile-description">
                         Перенесите ваши теплые воспоминания в современный цифровой формат. Максимум что возможно получить с кассет гарантирую.
