@@ -101,7 +101,36 @@
             100% { transform: scale(1); box-shadow: 0 15px 35px rgba(36, 161, 222, 0.3); }
         }
 
-        /* Outline variation for TG in form */
+        .notice-entry-shake {
+            animation: shake-triple 1.2s cubic-bezier(.36,.07,.19,.97) both;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+            perspective: 1000px;
+        }
+
+        @keyframes shake-triple {
+            3%, 10%, 17%, 24% { transform: translate3d(-3px, 0, 0); }
+            6%, 13%, 20% { transform: translate3d(3px, 0, 0); }
+            28%, 35% { transform: translate3d(0, 0, 0); }
+            38%, 45%, 52%, 59% { transform: translate3d(-3px, 0, 0); }
+            41%, 48%, 55% { transform: translate3d(3px, 0, 0); }
+            63%, 70% { transform: translate3d(0, 0, 0); }
+            73%, 80%, 87%, 94% { transform: translate3d(-3px, 0, 0); }
+            76%, 83%, 90% { transform: translate3d(3px, 0, 0); }
+            100% { transform: translate3d(0, 0, 0); }
+        }
+
+        .pulse-text {
+            animation: text-pulse 2.5s infinite ease-in-out;
+            color: #64748b;
+        }
+
+        @keyframes text-pulse {
+            0% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.01); }
+            100% { opacity: 0.5; transform: scale(1); }
+        }
+
         .btn-outline-tg {
             background: transparent;
             color: #24A1DE;
@@ -117,11 +146,31 @@
         .form-input:focus { border-color: #24A1DE; }
 
         .tg-float {
-            position: fixed; bottom: 24px; right: 24px; z-index: 50;
+            position: fixed; 
+            bottom: 24px; 
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 50;
             background: linear-gradient(135deg, #24A1DE 0%, #0088CC 100%);
-            color: #ffffff; padding: 16px 28px; border-radius: 100px;
-            display: flex; align-items: center; gap: 12px; text-decoration: none;
-            box-shadow: 0 8px 25px rgba(36, 161, 222, 0.4); transition: all 0.3s ease; cursor: pointer; border: none;
+            color: #ffffff; 
+            padding: 16px 28px; 
+            border-radius: 100px;
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(36, 161, 222, 0.4); 
+            transition: all 0.3s ease; 
+            cursor: pointer; 
+            border: none;
+            white-space: nowrap;
+        }
+        .tg-float:hover {
+            box-shadow: 0 10px 30px rgba(36, 161, 222, 0.5);
+            transform: translateX(-50%) translateY(-2px);
+        }
+        .tg-float:active {
+            transform: translateX(-50%) scale(0.96);
         }
 
         .modal-overlay {
@@ -157,7 +206,6 @@
         .tg-text-color { color: #24A1DE; }
         .header-logo { width: 100%; height: 100%; object-fit: contain; border-radius: 6px; }
 
-        /* Gallery Layout */
         .gallery-container {
             display: flex;
             align-items: center;
@@ -220,10 +268,10 @@
         <div class="vhs-pattern"></div>
     </div>
 
-    <!-- Кнопка Telegram (Плавающая) -->
+    <!-- Кнопка Telegram (Плавающая по центру) -->
     <button onclick="openTelegram()" class="tg-float">
         <i class="fab fa-telegram-plane text-2xl"></i>
-        <span class="text-[13px] uppercase tracking-widest font-bold">Написать в Telegram</span>
+        <span class="text-[13px] uppercase tracking-widest font-bold">Задать вопрос в Telegram</span>
     </button>
 
     <!-- Header -->
@@ -231,7 +279,7 @@
         <div class="container mx-auto px-5 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 flex items-center justify-center rounded-lg overflow-hidden">
-                    <img src="logo.jpg" alt="Логотип Rinat Ocifrovka" class="header-logo" onerror="this.parentElement.innerHTML='<i class=\'fas fa-film text-[#24A1DE] text-sm\'></i>'">
+                    <img src="logo.jpg" alt="Логотип Рината" class="header-logo" onerror="this.parentElement.innerHTML='<i class=\'fas fa-film text-[#24A1DE] text-sm\'></i>'">
                 </div>
                 <span class="text-lg thin-header tracking-widest text-black font-bold">Rinat Ocifrovka</span>
             </div>
@@ -313,7 +361,7 @@
             <div class="container mx-auto px-4">
                 <div class="max-w-4xl mx-auto glass-block p-8 md:p-16">
                     <div class="text-center mb-16">
-                        <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4">Расчёт максимально возможной стоимости</h2>
+                        <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4">Расчёт стоимости</h2>
                         <p class="text-[13px] uppercase tracking-widest font-bold mobile-larger-text">Выберите количество ваших кассет</p>
                     </div>
 
@@ -344,11 +392,16 @@
                     </div>
 
                     <div class="text-center">
-                        <span class="block text-[13px] uppercase tracking-widest text-slate-400 mb-6 font-bold mobile-larger-text">Максимально возможная стоимость</span>
-                        <div class="text-6xl md:text-7xl font-bold tg-text-color flex items-baseline justify-center mb-12">
+                        <div class="text-6xl md:text-7xl font-bold tg-text-color flex items-baseline justify-center mb-6">
                             <span id="totalPrice">0</span><span class="text-2xl ml-4 text-slate-300">₽</span>
                         </div>
-                        <button onclick="toggleModal('orderModal', true)" class="elegant-btn elegant-btn-pulse">Сделать заказ</button>
+                        <button onclick="toggleModal('orderModal', true)" class="elegant-btn elegant-btn-pulse mx-auto">Сделать заказ</button>
+                        
+                        <div id="finalPriceNotice" class="hidden mt-8 max-w-sm mx-auto px-4">
+                            <p class="text-[12px] md:text-[13px] uppercase tracking-widest font-bold pulse-text leading-relaxed mobile-larger-text">
+                                Окончательная стоимость обычно значительно ниже, так как кассеты крайне редко записаны полностью
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -388,7 +441,7 @@
                             <span class="bg-white px-4 text-[11px] uppercase text-slate-400 font-bold tracking-[0.2em]">или</span>
                         </div>
                         <button type="button" onclick="openTelegram()" class="elegant-btn btn-outline-tg !max-w-full">
-                            <i class="fab fa-telegram-plane"></i> Напишите мне в Telegram
+                            <i class="fab fa-telegram-plane"></i> Задать вопрос в Telegram
                         </button>
                     </div>
                 </form>
@@ -499,14 +552,35 @@
             calculate();
         }
 
+        let noticeWasShown = false;
+
         function calculate() {
             const pricePerMinute = 23;
+            const minOrder = 2070;
             const totalMin = (quantities.cam * 90) + (quantities.vhs * 180);
-            const finalPrice = totalMin > 0 ? Math.max(totalMin * pricePerMinute, 2070) : 0;
+            const calculatedPrice = totalMin * pricePerMinute;
+            const finalPrice = totalMin > 0 ? Math.max(calculatedPrice, minOrder) : 0;
+            
             document.getElementById('totalPrice').innerText = finalPrice;
             document.getElementById('h_cam').value = quantities.cam;
             document.getElementById('h_vhs').value = quantities.vhs;
             document.getElementById('h_total').value = finalPrice;
+
+            const notice = document.getElementById('finalPriceNotice');
+            
+            if (calculatedPrice > minOrder) {
+                if (!noticeWasShown) {
+                    notice.classList.remove('hidden');
+                    notice.classList.add('notice-entry-shake');
+                    setTimeout(() => { notice.classList.remove('notice-entry-shake'); }, 1200);
+                    noticeWasShown = true;
+                } else {
+                    notice.classList.remove('hidden');
+                }
+            } else {
+                notice.classList.add('hidden');
+                noticeWasShown = false;
+            }
         }
 
         document.getElementById('orderForm').addEventListener('submit', async (e) => {
