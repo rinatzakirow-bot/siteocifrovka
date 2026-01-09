@@ -44,6 +44,7 @@
             .card-label { font-size: 16px !important; }
             .elegant-btn { font-size: 16px !important; padding: 24px 30px !important; }
             .premium-label-header { font-size: 8px !important; }
+            .magnify-wrapper { font-size: 20px !important; } 
         }
         
         h1, h2, h3, .font-bold { font-weight: 600 !important; letter-spacing: 0.02em; }
@@ -66,12 +67,12 @@
             overflow: hidden;
         }
 
-        /* Эффект лупы (увеличение букв по цепочке) */
         .magnify-wrapper {
             display: inline-flex;
             justify-content: center;
             gap: 0;
             color: #24A1DE;
+            font-size: 24px; 
         }
 
         .magnify-wrapper span {
@@ -89,7 +90,6 @@
             }
         }
 
-        /* Заголовок с ГЛУБОКОЙ ТЕНЬЮ синий */
         .header-static-blue {
             color: #24A1DE;
             text-shadow: 
@@ -98,7 +98,20 @@
                 6px 6px 20px rgba(0, 0, 0, 0.05);
         }
 
-        /* Эффект яркого луча (бегущий свет) */
+        /* ЧИСТЫЙ ВИД СУММЫ БЕЗ ЭФФЕКТОВ */
+        .price-glass-reflection {
+            color: #24A1DE;
+            position: relative;
+            display: inline-block;
+            line-height: 1;
+            padding-bottom: 2px;
+            text-shadow: none; /* Убрана тень */
+        }
+        
+        .price-glass-reflection::after {
+            display: none; /* Убрано отражение */
+        }
+
         .light-beam-effect {
             position: relative;
             display: inline-block;
@@ -142,7 +155,6 @@
 
         .card-label { font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; color: #000000; }
 
-        /* Кнопка заказа КРАСНАЯ */
         .elegant-btn {
             background: #dc2626; color: #ffffff; border-radius: 100px;
             font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;
@@ -179,7 +191,6 @@
             100% { transform: translate3d(0, 0, 0); }
         }
 
-        /* Активное подрагивание для привлечения внимания */
         .attention-shake {
             animation: vigorous-shake 3s ease-in-out infinite;
             display: inline-block;
@@ -265,7 +276,6 @@
             position: relative;
         }
 
-        /* Контейнер без эффекта волн */
         .simple-badge-container { position: relative; display: inline-block; padding: 15px 35px; z-index: 1; }
 
         .tg-text-color { color: #24A1DE; }
@@ -333,13 +343,11 @@
         <div class="vhs-pattern"></div>
     </div>
 
-    <!-- Кнопка Telegram -->
     <button id="floatingTgBtn" onclick="openTelegram()" class="tg-float">
         <i class="fab fa-telegram-plane text-2xl"></i>
         <span class="text-[13px] uppercase tracking-widest font-bold">Задать вопрос в Telegram</span>
     </button>
 
-    <!-- Header -->
     <header class="fixed w-full z-40 bg-white/90 backdrop-blur-md border-b border-slate-100">
         <div class="container mx-auto px-5 h-20 flex items-center justify-between">
             <div class="flex items-center gap-4">
@@ -349,7 +357,6 @@
                     </div>
                     <div class="flex flex-col leading-tight">
                         <span class="text-lg thin-header tracking-widest text-black font-bold">Rinat Ocifrovka</span>
-                        <!-- Premium Digital Service теперь под именем и красного цвета -->
                         <span class="text-[9px] tracking-[0.15em] uppercase font-bold text-red-600 premium-label-header">
                             Premium Digital Service
                         </span>
@@ -363,19 +370,16 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
         <section class="relative pt-32 pb-8">
             <div class="container mx-auto px-4">
                 <div class="glass-block py-16 px-6 text-center max-w-4xl mx-auto">
                     <h1 class="text-4xl md:text-6xl mb-10 leading-tight uppercase font-bold header-static-blue">Оцифровка <br> видеокассет</h1>
-                    <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-14 mobile-description">
-                        Перенесите ваши теплые воспоминания в современный цифровой формат. Максимум что возможно получить с кассет гарантирую.
-                    </p>
-                    
-                    <div class="border-t border-slate-100 pt-4 pb-4 overflow-visible">
-                        <div class="simple-badge-container">
-                            <div class="magnify-wrapper text-[16px] md:text-xl uppercase tracking-[0.3em] font-extrabold mobile-larger-text" id="magnifyText">
-                                <!-- Буквы генерируются скриптом для точного эффекта лупы -->
+                    <div class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-14 mobile-description">
+                        <p>Перенесите ваши теплые воспоминания в современный цифровой формат. Максимум что возможно получить с кассет гарантирую.</p>
+                        <div class="border-t border-slate-100 mt-8 pt-8 overflow-visible">
+                            <div class="simple-badge-container">
+                                <div class="magnify-wrapper uppercase tracking-[0.3em] font-extrabold mobile-larger-text" id="magnifyText">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -383,7 +387,6 @@
             </div>
         </section>
 
-        <!-- Типы кассет -->
         <section class="py-6">
             <div class="container mx-auto px-4">
                 <div class="max-w-4xl mx-auto text-center mb-8">
@@ -402,7 +405,6 @@
             </div>
         </section>
 
-        <!-- Преимущества -->
         <section class="py-10">
             <div class="container mx-auto px-4">
                 <div class="glass-block py-16 px-8 max-w-5xl mx-auto grid md:grid-cols-3 gap-12">
@@ -425,12 +427,11 @@
             </div>
         </section>
 
-        <!-- Калькулятор -->
         <section id="calc" class="py-10 pb-24">
             <div class="container mx-auto px-4">
                 <div class="max-w-4xl mx-auto glass-block p-8 md:p-16">
                     <div class="text-center mb-16">
-                        <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4 light-beam-effect">Расчёт максимально возможной стоимости</h2>
+                        <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4 light-beam-effect">Рассчитайте максимально возможную стоимость</h2>
                         <p class="text-[13px] uppercase tracking-widest font-bold mobile-larger-text attention-shake">Выберите количество ваших кассет</p>
                     </div>
 
@@ -461,8 +462,8 @@
                     </div>
 
                     <div class="text-center">
-                        <div class="text-6xl md:text-7xl font-bold flex items-baseline justify-center mb-6">
-                            <span id="totalPrice" class="header-static-blue">0</span><span class="text-2xl ml-4 text-slate-300">₽</span>
+                        <div class="text-6xl md:text-7xl font-bold flex items-baseline justify-center mb-12">
+                            <span id="totalPrice" class="price-glass-reflection">0</span><span class="text-2xl ml-4 text-slate-300">₽</span>
                         </div>
                         <button onclick="toggleModal('orderModal', true)" class="elegant-btn elegant-btn-pulse mx-auto">Сделать заказ</button>
                         
@@ -477,7 +478,6 @@
         </section>
     </main>
 
-    <!-- Модальное окно заказа -->
     <div id="orderModal" class="modal-overlay">
         <div class="modal-content">
             <button onclick="toggleModal('orderModal', false)" class="absolute top-6 right-6 text-slate-400 p-2 border-none bg-transparent cursor-pointer">
@@ -524,7 +524,6 @@
         </div>
     </div>
 
-    <!-- Модальное окно Галереи -->
     <div id="imageModal" class="modal-overlay">
         <div class="modal-content text-center">
             <button onclick="toggleModal('imageModal', false)" class="absolute top-6 right-6 text-slate-400 p-2 border-none bg-transparent cursor-pointer z-20">
@@ -553,7 +552,6 @@
     </div>
 
     <script>
-        // Инициализация эффекта лупы для верхней надписи
         const textToMagnify = "Готово будет уже завтра";
         const container = document.getElementById('magnifyText');
         
@@ -596,14 +594,6 @@
             price.innerText = format.price;
         }
 
-        document.addEventListener('keydown', (e) => {
-            if (document.getElementById('imageModal').classList.contains('active')) {
-                if (e.key === 'ArrowRight') navGallery(1);
-                if (e.key === 'ArrowLeft') navGallery(-1);
-                if (e.key === 'Escape') toggleModal('imageModal', false);
-            }
-        });
-
         function openTelegram() {
             const username = 'RinatZakiroff';
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -644,7 +634,9 @@
             const calculatedPrice = totalMin * pricePerMinute;
             const finalPrice = totalMin > 0 ? Math.max(calculatedPrice, minOrder) : 0;
             
-            document.getElementById('totalPrice').innerText = finalPrice;
+            const priceEl = document.getElementById('totalPrice');
+            priceEl.innerText = finalPrice;
+            
             document.getElementById('h_cam').value = quantities.cam;
             document.getElementById('h_vhs').value = quantities.vhs;
             document.getElementById('h_total').value = finalPrice;
