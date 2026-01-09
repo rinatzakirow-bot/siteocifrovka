@@ -81,12 +81,13 @@
             animation: shine 4s linear infinite;
         }
 
-        .header-shimmer {
+        /* Эффект яркого луча */
+        .header-beam-effect {
             background: linear-gradient(
                 to right, 
                 #24A1DE 0%, 
                 #24A1DE 40%, 
-                #7dd3fc 50%, 
+                #ffffff 50%, 
                 #24A1DE 60%, 
                 #24A1DE 100%
             );
@@ -94,7 +95,17 @@
             color: transparent;
             -webkit-background-clip: text;
             background-clip: text;
-            animation: shine 5s ease-in-out infinite;
+            animation: beam-swipe 3s ease-in-out infinite;
+        }
+
+        @keyframes beam-swipe {
+            0% { background-position: 150% 0; }
+            100% { background-position: -50% 0; }
+        }
+
+        /* Заголовок теперь СТАТИЧНЫЙ синий */
+        .header-static-blue {
+            color: #24A1DE;
         }
 
         @keyframes shine {
@@ -122,20 +133,22 @@
 
         .card-label { font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; color: #000000; }
 
+        /* Кнопка заказа КРАСНАЯ */
         .elegant-btn {
-            background: #24A1DE; color: #ffffff; border-radius: 100px;
+            background: #dc2626; color: #ffffff; border-radius: 100px;
             font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;
             padding: 22px 40px; width: 100%; max-width: 440px;
-            box-shadow: 0 15px 35px rgba(36, 161, 222, 0.3); transition: transform 0.2s; cursor: pointer; border: none;
+            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.3); transition: all 0.2s ease; cursor: pointer; border: none;
             display: flex; align-items: center; justify-content: center; gap: 10px;
         }
+        .elegant-btn:hover { background: #ef4444; box-shadow: 0 15px 40px rgba(220, 38, 38, 0.4); }
         .elegant-btn:active { transform: scale(0.98); }
         .elegant-btn-pulse { animation: button-attention 1.5s ease-in-out infinite; }
 
         @keyframes button-attention {
-            0% { transform: scale(1); box-shadow: 0 15px 35px rgba(36, 161, 222, 0.3); }
-            50% { transform: scale(1.03); box-shadow: 0 18px 40px rgba(36, 161, 222, 0.35); background-color: #29b1f5; }
-            100% { transform: scale(1); box-shadow: 0 15px 35px rgba(36, 161, 222, 0.3); }
+            0% { transform: scale(1); box-shadow: 0 15px 35px rgba(220, 38, 38, 0.3); }
+            50% { transform: scale(1.03); box-shadow: 0 18px 40px rgba(220, 38, 38, 0.45); background-color: #f87171; }
+            100% { transform: scale(1); box-shadow: 0 15px 35px rgba(220, 38, 38, 0.3); }
         }
 
         .notice-entry-shake {
@@ -177,6 +190,8 @@
         }
         .btn-outline-tg:hover {
             background: rgba(36, 161, 222, 0.05);
+            color: #0088CC;
+            border-color: #0088CC;
         }
 
         .form-input { width: 100%; padding: 20px; border: 3px solid #cbd5e1; background: #f8fafc; border-radius: 18px; font-size: 18px; outline: none; color: #000000; }
@@ -202,7 +217,6 @@
             border: none;
             white-space: nowrap;
         }
-        /* Класс для плавного исчезновения */
         .tg-float.hidden-btn {
             opacity: 0;
             pointer-events: none;
@@ -230,21 +244,8 @@
             position: relative;
         }
 
-        .ripple-container { position: relative; display: inline-block; padding: 15px 35px; z-index: 1; }
-        .ripple-circle {
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            width: 100%; height: 100%; border: 1.5px solid rgba(36, 161, 222, 0.5); 
-            box-shadow: 0 0 10px rgba(36, 161, 222, 0.15); border-radius: 100px;
-            pointer-events: none; opacity: 0; z-index: -1; animation: ripple-effect 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
-        }
-        .ripple-circle:nth-child(2) { animation-delay: 1.2s; }
-        .ripple-circle:nth-child(3) { animation-delay: 2.4s; }
-
-        @keyframes ripple-effect {
-            0% { width: 95%; height: 90%; opacity: 0.8; transform: translate(-50%, -50%) scale(0.95); }
-            70% { opacity: 0.3; }
-            100% { width: 140%; height: 240%; opacity: 0; transform: translate(-50%, -50%) scale(1.1); }
-        }
+        /* Контейнер без эффекта волн */
+        .simple-badge-container { position: relative; display: inline-block; padding: 15px 35px; z-index: 1; }
 
         .tg-text-color { color: #24A1DE; }
         .header-logo { width: 100%; height: 100%; object-fit: contain; border-radius: 6px; }
@@ -311,7 +312,7 @@
         <div class="vhs-pattern"></div>
     </div>
 
-    <!-- Кнопка Telegram (Плавающая по центру) -->
+    <!-- Кнопка Telegram -->
     <button id="floatingTgBtn" onclick="openTelegram()" class="tg-float">
         <i class="fab fa-telegram-plane text-2xl"></i>
         <span class="text-[13px] uppercase tracking-widest font-bold">Задать вопрос в Telegram</span>
@@ -326,7 +327,7 @@
                 </div>
                 <span class="text-lg thin-header tracking-widest text-black font-bold">Rinat Ocifrovka</span>
             </div>
-            <button onclick="toggleModal('orderModal', true)" class="text-[12px] uppercase tracking-widest border-2 border-[#24A1DE] px-5 py-2.5 rounded-full font-bold text-[#24A1DE] active:bg-[#24A1DE] active:text-white">
+            <button onclick="toggleModal('orderModal', true)" class="text-[12px] uppercase tracking-widest border-2 border-red-600 px-5 py-2.5 rounded-full font-bold text-red-600 active:bg-red-600 active:text-white transition-colors">
                 Заказать
             </button>
         </div>
@@ -338,17 +339,14 @@
             <div class="container mx-auto px-4">
                 <div class="glass-block py-16 px-6 text-center max-w-4xl mx-auto">
                     <div class="text-[12px] tracking-[0.4em] uppercase mb-8 font-bold mobile-larger-text shimmer-text">Premium Digital Service</div>
-                    <h1 class="text-4xl md:text-6xl mb-10 leading-tight uppercase font-bold header-shimmer">Оцифровка <br> видеокассет</h1>
+                    <h1 class="text-4xl md:text-6xl mb-10 leading-tight uppercase font-bold header-static-blue">Оцифровка <br> видеокассет</h1>
                     <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-14 mobile-description">
                         Перенесите ваши теплые воспоминания в современный цифровой формат. Максимум что возможно получить с кассет гарантирую.
                     </p>
                     
                     <div class="border-t border-slate-100 pt-12 pb-4 overflow-visible">
-                        <div class="ripple-container">
-                            <div class="ripple-circle"></div>
-                            <div class="ripple-circle"></div>
-                            <div class="ripple-circle"></div>
-                            <span class="text-[16px] md:text-xl uppercase tracking-[0.3em] font-extrabold text-[#24A1DE] mobile-larger-text">
+                        <div class="simple-badge-container">
+                            <span class="text-[16px] md:text-xl uppercase tracking-[0.3em] font-extrabold mobile-larger-text header-beam-effect">
                                 Готово будет уже завтра
                             </span>
                         </div>
@@ -404,7 +402,7 @@
             <div class="container mx-auto px-4">
                 <div class="max-w-4xl mx-auto glass-block p-8 md:p-16">
                     <div class="text-center mb-16">
-                        <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4 header-shimmer">Расчёт максимально возможной стоимости</h2>
+                        <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4 header-beam-effect">Расчёт максимально возможной стоимости</h2>
                         <p class="text-[13px] uppercase tracking-widest font-bold mobile-larger-text">Выберите количество ваших кассет</p>
                     </div>
 
@@ -490,10 +488,10 @@
                 </form>
             </div>
             <div id="successMessage" class="hidden text-center py-10">
-                <i class="fas fa-check-circle text-5xl mb-6 tg-text-color"></i>
+                <i class="fas fa-check-circle text-5xl mb-6 text-green-500"></i>
                 <h3 class="text-2xl font-bold uppercase mb-4">Заявка принята!</h3>
                 <p class="text-slate-500 uppercase text-[13px] font-bold mobile-larger-text">Я свяжусь с вами в ближайшее время.</p>
-                <button onclick="toggleModal('orderModal', false)" class="mt-10 underline font-bold uppercase text-[12px] tg-text-color bg-transparent border-none cursor-pointer">Закрыть окно</button>
+                <button onclick="toggleModal('orderModal', false)" class="mt-10 underline font-bold uppercase text-[12px] text-[#24A1DE] bg-transparent border-none cursor-pointer">Закрыть окно</button>
             </div>
         </div>
     </div>
@@ -627,18 +625,13 @@
                 notice.classList.add('hidden');
                 noticeWasShown = false;
             }
-            // Вызываем проверку перекрытия после обновления UI
             checkOverlap();
         }
 
-        /**
-         * Функция проверки перекрытия плавающей кнопки Telegram и предупреждения
-         */
         function checkOverlap() {
             const btn = document.getElementById('floatingTgBtn');
             const notice = document.getElementById('finalPriceNotice');
             
-            // Если кнопка не найдена или предупреждение скрыто — показываем кнопку
             if (!btn || !notice || notice.classList.contains('hidden')) {
                 btn.classList.remove('hidden-btn');
                 return;
@@ -647,7 +640,6 @@
             const btnRect = btn.getBoundingClientRect();
             const noticeRect = notice.getBoundingClientRect();
 
-            // Проверка на пересечение прямоугольников
             const isOverlapping = !(
                 btnRect.right < noticeRect.left || 
                 btnRect.left > noticeRect.right || 
@@ -661,31 +653,8 @@
                 btn.classList.remove('hidden-btn');
             }
         }
-
-        // Слушаем скролл и изменение размера окна для пересчета пересечения
+        
         window.addEventListener('scroll', checkOverlap);
-        window.addEventListener('resize', checkOverlap);
-
-        document.getElementById('orderForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            btn.innerText = 'ОТПРАВКА...'; btn.disabled = true;
-            try {
-                const response = await fetch(e.target.action, {
-                    method: 'POST',
-                    body: new FormData(e.target),
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (response.ok) {
-                    document.getElementById('formContainer').classList.add('hidden');
-                    document.getElementById('successMessage').classList.remove('hidden');
-                }
-            } finally {
-                btn.innerText = 'ОТПРАВИТЬ ЗАЯВКУ'; btn.disabled = false;
-            }
-        });
-
-        window.onclick = (e) => { if (e.target.classList.contains('modal-overlay')) toggleModal(e.target.id, false); }
     </script>
 </body>
 </html>
