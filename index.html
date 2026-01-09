@@ -150,7 +150,7 @@
             bottom: 24px; 
             left: 50%;
             transform: translateX(-50%);
-            z-index: 50;
+            z-index: 60;
             background: linear-gradient(135deg, #24A1DE 0%, #0088CC 100%);
             color: #ffffff; 
             padding: 16px 28px; 
@@ -160,17 +160,22 @@
             gap: 12px; 
             text-decoration: none;
             box-shadow: 0 8px 25px rgba(36, 161, 222, 0.4); 
-            transition: all 0.3s ease; 
+            transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; 
             cursor: pointer; 
             border: none;
             white-space: nowrap;
+        }
+        .tg-float.hidden-btn {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(-50%) translateY(20px);
         }
         .tg-float:hover {
             box-shadow: 0 10px 30px rgba(36, 161, 222, 0.5);
             transform: translateX(-50%) translateY(-2px);
         }
         .tg-float:active {
-            transform: translateX(-50%) scale(0.96);
+            transform: translateX(-50) scale(0.96);
         }
 
         .modal-overlay {
@@ -269,7 +274,7 @@
     </div>
 
     <!-- Кнопка Telegram (Плавающая по центру) -->
-    <button onclick="openTelegram()" class="tg-float">
+    <button id="floatingTgBtn" onclick="openTelegram()" class="tg-float">
         <i class="fab fa-telegram-plane text-2xl"></i>
         <span class="text-[13px] uppercase tracking-widest font-bold">Задать вопрос в Telegram</span>
     </button>
@@ -340,7 +345,7 @@
                     <div class="text-center flex flex-col items-center">
                         <div class="icon-backdrop"><i class="fas fa-car-side"></i></div>
                         <h3 class="text-[16px] uppercase tracking-wider font-bold mb-4">Приеду сам</h3>
-                        <p class="text-slate-500 uppercase text-[13px] font-medium leading-relaxed mobile-larger-text">Бесплатно заеду по любому адресу в пределах МКАД.</p>
+                        <p class="text-slate-500 uppercase text-[13px] font-medium leading-relaxed mobile-larger-text">Бесплатно заеду за кассетами по любому адресу в пределах МКАД.</p>
                     </div>
                     <div class="text-center flex flex-col items-center">
                         <div class="icon-backdrop"><i class="fas fa-clock"></i></div>
@@ -368,7 +373,7 @@
                     <div class="space-y-12 mb-16">
                         <div class="flex flex-col md:flex-row items-center justify-between gap-8 pb-10 border-b border-slate-100">
                             <div class="text-center md:text-left">
-                                <h4 class="text-lg uppercase font-bold">Видеокамеры</h4>
+                                <h4 class="text-lg uppercase font-bold">От камеры</h4>
                                 <p class="text-[11px] text-slate-400 font-bold uppercase tracking-widest mt-1 mobile-larger-text">MiniDV, Hi8, 8mm, VHS-C</p>
                             </div>
                             <div class="flex items-center gap-10">
@@ -581,7 +586,37 @@
                 notice.classList.add('hidden');
                 noticeWasShown = false;
             }
+            checkOverlap();
         }
+
+        function checkOverlap() {
+            const btn = document.getElementById('floatingTgBtn');
+            const notice = document.getElementById('finalPriceNotice');
+            
+            if (!btn || !notice || notice.classList.contains('hidden')) {
+                btn.classList.remove('hidden-btn');
+                return;
+            }
+
+            const btnRect = btn.getBoundingClientRect();
+            const noticeRect = notice.getBoundingClientRect();
+
+            const isOverlapping = !(
+                btnRect.right < noticeRect.left || 
+                btnRect.left > noticeRect.right || 
+                btnRect.bottom < noticeRect.top || 
+                btnRect.top > noticeRect.bottom
+            );
+
+            if (isOverlapping) {
+                btn.classList.add('hidden-btn');
+            } else {
+                btn.classList.remove('hidden-btn');
+            }
+        }
+
+        window.addEventListener('scroll', checkOverlap);
+        window.addEventListener('resize', checkOverlap);
 
         document.getElementById('orderForm').addEventListener('submit', async (e) => {
             e.preventDefault();
