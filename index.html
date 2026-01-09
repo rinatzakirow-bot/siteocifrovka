@@ -98,18 +98,13 @@
                 6px 6px 20px rgba(0, 0, 0, 0.05);
         }
 
-        /* ЧИСТЫЙ ВИД СУММЫ БЕЗ ЭФФЕКТОВ */
         .price-glass-reflection {
             color: #24A1DE;
             position: relative;
             display: inline-block;
             line-height: 1;
             padding-bottom: 2px;
-            text-shadow: none; /* Убрана тень */
-        }
-        
-        .price-glass-reflection::after {
-            display: none; /* Убрано отражение */
+            text-shadow: none; 
         }
 
         .light-beam-effect {
@@ -331,9 +326,47 @@
 
         .side-nav-btn:active { transform: scale(0.9); }
 
+        /* --- НОВЫЙ ДИЗАЙН КАЛЬКУЛЯТОРА --- */
+        .calc-tabs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: #f1f5f9;
+            padding: 6px;
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            border: 2px solid #e2e8f0;
+        }
+        .calc-tab-btn {
+            padding: 14px;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            color: #64748b;
+        }
+        .calc-tab-btn.active {
+            background: #ffffff;
+            color: #24A1DE;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        }
+        .calc-control-panel {
+            background: #f8fafc;
+            border-radius: 32px;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 2px solid #e2e8f0;
+        }
+
         @media (max-width: 480px) {
             .side-nav-btn { width: 36px; height: 36px; font-size: 14px; }
             .gallery-container { gap: 5px; }
+            .calc-control-panel { padding: 30px 15px; }
         }
     </style>
 </head>
@@ -427,37 +460,31 @@
             </div>
         </section>
 
+        <!-- --- НОВЫЙ ВАРИАНТ КАЛЬКУЛЯТОРА --- -->
         <section id="calc" class="py-10 pb-24">
             <div class="container mx-auto px-4">
-                <div class="max-w-4xl mx-auto glass-block p-8 md:p-16">
-                    <div class="text-center mb-16">
+                <div class="max-w-2xl mx-auto glass-block p-8 md:p-14">
+                    <div class="text-center mb-10">
                         <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4 light-beam-effect">Рассчитайте максимально возможную стоимость</h2>
-                        <p class="text-[13px] uppercase tracking-widest font-bold mobile-larger-text attention-shake">Выберите количество ваших кассет</p>
+                        <p class="text-[12px] uppercase tracking-widest font-bold text-slate-400 mobile-larger-text attention-shake">Выберите количество ваших кассет</p>
                     </div>
 
-                    <div class="space-y-12 mb-16">
-                        <div class="flex flex-col md:flex-row items-center justify-between gap-8 pb-10 border-b border-slate-100">
-                            <div class="text-center md:text-left">
-                                <h4 class="text-lg uppercase font-bold">От камеры</h4>
-                                <p class="text-[11px] text-slate-400 font-bold uppercase tracking-widest mt-1 mobile-larger-text">MiniDV, Hi8, 8mm, VHS-C</p>
-                            </div>
-                            <div class="flex items-center gap-10">
-                                <button onclick="changeQty('cam', -1)" class="counter-btn"><i class="fas fa-minus"></i></button>
-                                <span id="camQty" class="text-4xl font-medium w-12 text-center">0</span>
-                                <button onclick="changeQty('cam', 1)" class="counter-btn"><i class="fas fa-plus"></i></button>
-                            </div>
-                        </div>
+                    <div class="calc-tabs">
+                        <div id="tab-cam" class="calc-tab-btn active" onclick="switchCalcType('cam')">От камеры</div>
+                        <div id="tab-vhs" class="calc-tab-btn" onclick="switchCalcType('vhs')">VHS кассеты</div>
+                    </div>
 
-                        <div class="flex flex-col md:flex-row items-center justify-between gap-8 pb-10 border-b border-slate-100">
-                            <div class="text-center md:text-left">
-                                <h4 class="text-lg uppercase font-bold">VHS кассеты</h4>
-                                <p class="text-[11px] text-slate-400 font-bold uppercase tracking-widest mt-1 mobile-larger-text">Классические большие кассеты</p>
+                    <div class="calc-control-panel mb-12">
+                        <div class="flex items-center gap-8 md:gap-14">
+                            <button onclick="updateQty(activeCalcType, -1)" class="counter-btn shadow-sm active:scale-95"><i class="fas fa-minus"></i></button>
+                            <div class="flex flex-col items-center min-w-[80px]">
+                                <span id="displayQty" class="text-7xl font-bold">0</span>
+                                <span class="text-[11px] uppercase font-bold text-slate-400 tracking-[0.2em] mt-2">кассет</span>
                             </div>
-                            <div class="flex items-center gap-10">
-                                <button onclick="changeQty('vhs', -1)" class="counter-btn"><i class="fas fa-minus"></i></button>
-                                <span id="vhsQty" class="text-4xl font-medium w-12 text-center">0</span>
-                                <button onclick="changeQty('vhs', 1)" class="counter-btn"><i class="fas fa-plus"></i></button>
-                            </div>
+                            <button onclick="updateQty(activeCalcType, 1)" class="counter-btn shadow-sm active:scale-95"><i class="fas fa-plus"></i></button>
+                        </div>
+                        <div class="mt-8 pt-6 border-t border-slate-200 w-full text-center">
+                            <p id="calcTypeDesc" class="text-[11px] uppercase font-bold text-slate-400 tracking-[0.15em]">MiniDV, Hi8, 8mm, VHS-C</p>
                         </div>
                     </div>
 
@@ -467,7 +494,7 @@
                         </div>
                         <button onclick="toggleModal('orderModal', true)" class="elegant-btn elegant-btn-pulse mx-auto">Сделать заказ</button>
                         
-                        <div id="finalPriceNotice" class="hidden mt-8 max-w-sm mx-auto px-4">
+                        <div id="finalPriceNotice" class="hidden mt-10 max-w-md mx-auto px-4">
                             <p class="text-[12px] md:text-[13px] uppercase tracking-widest font-bold pulse-text leading-relaxed mobile-larger-text">
                                 Окончательная стоимость обычно значительно ниже, так как кассеты крайне редко записаны полностью
                             </p>
@@ -606,6 +633,8 @@
         }
 
         let quantities = { cam: 0, vhs: 0 };
+        let activeCalcType = 'cam';
+
         IMask(document.getElementById('phoneInput'), { mask: '+{7} (000) 000-00-00' });
 
         function toggleModal(id, show) {
@@ -619,9 +648,20 @@
             }
         }
 
-        function changeQty(type, delta) {
+        function switchCalcType(type) {
+            activeCalcType = type;
+            document.querySelectorAll('.calc-tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('tab-' + type).classList.add('active');
+            
+            document.getElementById('displayQty').innerText = quantities[type];
+            document.getElementById('calcTypeDesc').innerText = type === 'cam' ? 'MiniDV, Hi8, 8mm, VHS-C' : 'Классические большие кассеты';
+        }
+
+        function updateQty(type, delta) {
             quantities[type] = Math.max(0, quantities[type] + delta);
-            document.getElementById(type + 'Qty').innerText = quantities[type];
+            if (type === activeCalcType) {
+                document.getElementById('displayQty').innerText = quantities[type];
+            }
             calculate();
         }
 
