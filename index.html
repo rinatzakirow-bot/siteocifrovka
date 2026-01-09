@@ -201,7 +201,7 @@
 
         @keyframes button-attention {
             0% { transform: scale(1); box-shadow: 0 15px 35px rgba(36, 161, 222, 0.3); }
-            50% { transform: scale(1.05); box-shadow: 0 20px 45px rgba(36, 161, 222, 0.4); background-color: #29b1f5; }
+            50% { transform: scale(1.03); box-shadow: 0 18px 40px rgba(36, 161, 222, 0.35); background-color: #29b1f5; }
             100% { transform: scale(1); box-shadow: 0 15px 35px rgba(36, 161, 222, 0.3); }
         }
 
@@ -272,21 +272,61 @@
             position: relative;
         }
 
-        .shimmer-text {
-            animation: attention-blink 1.5s ease-in-out infinite;
+        /* Заметная, но элегантная анимация расходящихся кругов */
+        .ripple-container {
+            position: relative;
+            display: inline-block;
+            padding: 15px 35px;
+            z-index: 1;
         }
 
-        @keyframes attention-blink {
-            0% { opacity: 0.3; color: #64748b; transform: scale(1); }
-            50% { opacity: 1; color: #24A1DE; transform: scale(1.02); }
-            100% { opacity: 0.3; color: #64748b; transform: scale(1); }
+        .ripple-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            /* Сделали чуть заметнее: добавили box-shadow и увеличили непрозрачность границ */
+            border: 1.5px solid rgba(36, 161, 222, 0.5); 
+            box-shadow: 0 0 10px rgba(36, 161, 222, 0.15);
+            border-radius: 100px;
+            pointer-events: none;
+            opacity: 0;
+            z-index: -1;
+            animation: ripple-effect 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+        }
+
+        .ripple-circle:nth-child(2) {
+            animation-delay: 1.2s;
+        }
+
+        .ripple-circle:nth-child(3) {
+            animation-delay: 2.4s;
+        }
+
+        @keyframes ripple-effect {
+            0% {
+                width: 95%;
+                height: 90%;
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(0.95);
+            }
+            70% {
+                opacity: 0.3;
+            }
+            100% {
+                width: 140%;
+                height: 240%;
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
         }
 
         .tg-text-color {
             color: #24A1DE;
         }
         
-        /* Стили для логотипа */
         .header-logo {
             width: 100%;
             height: 100%;
@@ -294,7 +334,6 @@
             border-radius: 6px;
         }
 
-        /* Стиль для всплывающего окна изображения */
         .image-preview-modal {
             max-width: 90%;
             max-height: 90vh;
@@ -309,6 +348,40 @@
             object-fit: contain;
             border-radius: 20px;
             margin-bottom: 20px;
+        }
+
+        /* Навигация в галерее */
+        .gallery-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .gallery-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #64748b;
+        }
+
+        .gallery-btn:hover {
+            border-color: #24A1DE;
+            color: #24A1DE;
+            background: white;
+        }
+
+        .gallery-btn:active {
+            transform: scale(0.9);
         }
     </style>
 </head>
@@ -346,11 +419,20 @@
                 <div class="glass-block py-16 px-6 text-center max-w-4xl mx-auto">
                     <div class="text-[12px] tracking-[0.4em] uppercase text-slate-400 mb-8 font-bold mobile-larger-text">Premium Digital Service</div>
                     <h1 class="text-4xl md:text-6xl tg-text-color mb-10 leading-tight uppercase font-bold">Оцифровка <br> видеокассет</h1>
-                    <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-10 mobile-description">
+                    <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-14 mobile-description">
                         Перенесите ваши теплые воспоминания в современный цифровой формат в высоком качестве.
                     </p>
-                    <div class="shimmer-text py-6 border-t border-slate-100">
-                        <span class="text-[15px] md:text-lg uppercase tracking-[0.3em] font-bold text-[#24A1DE] mobile-larger-text">Готово будет уже завтра</span>
+                    
+                    <!-- Блок с заметными кругами -->
+                    <div class="border-t border-slate-100 pt-12 pb-4 overflow-visible">
+                        <div class="ripple-container">
+                            <div class="ripple-circle"></div>
+                            <div class="ripple-circle"></div>
+                            <div class="ripple-circle"></div>
+                            <span class="text-[16px] md:text-xl uppercase tracking-[0.3em] font-extrabold text-[#24A1DE] mobile-larger-text">
+                                Готово будет уже завтра
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -366,12 +448,12 @@
                         </p>
                     </div>
                     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-                        <div class="soft-card-static" onclick="openImageModal('vhs')"><span class="card-label">VHS</span></div>
-                        <div class="soft-card-static" onclick="openImageModal('vhs-c')"><span class="card-label">VHS-C</span></div>
-                        <div class="soft-card-static" onclick="openImageModal('8mm')"><span class="card-label">8mm</span></div>
-                        <div class="soft-card-static" onclick="openImageModal('hi8')"><span class="card-label">Hi8</span></div>
-                        <div class="soft-card-static" onclick="openImageModal('digital8')"><span class="card-label">Digital8</span></div>
-                        <div class="soft-card-static" onclick="openImageModal('minidv')"><span class="card-label">MiniDV</span></div>
+                        <div class="soft-card-static" onclick="openGallery('vhs')"><span class="card-label">VHS</span></div>
+                        <div class="soft-card-static" onclick="openGallery('vhs-c')"><span class="card-label">VHS-C</span></div>
+                        <div class="soft-card-static" onclick="openGallery('8mm')"><span class="card-label">8mm</span></div>
+                        <div class="soft-card-static" onclick="openGallery('hi8')"><span class="card-label">Hi8</span></div>
+                        <div class="soft-card-static" onclick="openGallery('digital8')"><span class="card-label">Digital8</span></div>
+                        <div class="soft-card-static" onclick="openGallery('minidv')"><span class="card-label">MiniDV</span></div>
                     </div>
                 </div>
             </div>
@@ -394,7 +476,7 @@
                     <div class="text-center flex flex-col items-center">
                         <div class="icon-backdrop"><i class="fas fa-ruble-sign"></i></div>
                         <h3 class="text-[16px] uppercase tracking-wider font-bold mb-4">23 ₽ / мин</h3>
-                        <p class="text-slate-500 uppercase text-[13px] font-bold leading-relaxed mobile-larger-text">Прозрачный расчет. Минимальный заказ — всего 2070 ₽.</p>
+                        <p class="text-slate-500 uppercase text-[13px] font-bold leading-relaxed mobile-larger-text">Прозрачный расчёт. Минимальный заказ — всего 2070 ₽.</p>
                     </div>
                 </div>
             </div>
@@ -405,8 +487,8 @@
             <div class="container mx-auto px-4">
                 <div class="max-w-4xl mx-auto glass-block p-8 md:p-16">
                     <div class="text-center mb-16">
-                        <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4">Расчет максимально возможной стоимости</h2>
-                        <p class="text-[13px] uppercase tracking-widest font-bold shimmer-text mobile-larger-text">Выберите количество ваших кассет</p>
+                        <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4">Расчёт максимально возможной стоимости</h2>
+                        <p class="text-[13px] uppercase tracking-widest font-bold mobile-larger-text">Выберите количество ваших кассет</p>
                     </div>
 
                     <div class="space-y-12 mb-16">
@@ -442,7 +524,7 @@
                         </div>
                         
                         <div id="hint" class="hidden mb-10 px-4">
-                            <p class="text-[14px] uppercase tracking-wider text-black font-bold shimmer-text leading-relaxed mx-auto max-w-lg mobile-larger-text">
+                            <p class="text-[14px] uppercase tracking-wider text-black font-bold leading-relaxed mx-auto max-w-lg mobile-larger-text">
                                 Окончательная стоимость как правило ниже, так как кассеты редко записаны полностью. Оплата по факту готовности.
                             </p>
                         </div>
@@ -491,16 +573,68 @@
         </div>
     </div>
 
-    <!-- Всплывающее окно для изображения -->
+    <!-- Всплывающее окно для изображения (Галерея) -->
     <div id="imageModal" class="modal-overlay">
         <div class="modal-content image-preview-modal">
-            <h3 id="imageTitle" class="text-2xl font-bold uppercase tracking-wider mb-6">VHS</h3>
+            <button onclick="toggleModal('imageModal', false)" class="absolute top-6 right-6 text-slate-400 p-2 border-none bg-transparent cursor-pointer z-10">
+                <i class="fas fa-times text-2xl"></i>
+            </button>
+
+            <div class="gallery-nav">
+                <button onclick="navGallery(-1)" class="gallery-btn"><i class="fas fa-chevron-left"></i></button>
+                <h3 id="imageTitle" class="text-xl md:text-2xl font-bold uppercase tracking-wider text-center min-w-[150px]">VHS</h3>
+                <button onclick="navGallery(1)" class="gallery-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+
             <img id="previewImage" src="" alt="Формат кассеты">
-            <button onclick="toggleModal('imageModal', false)" class="elegant-btn">Вернуться в меню</button>
+            
+            <button onclick="toggleModal('imageModal', false)" class="elegant-btn mt-4">Вернуться в меню</button>
         </div>
     </div>
 
     <script>
+        // Массив форматов для галереи
+        const galleryFormats = [
+            { id: 'vhs', label: 'VHS', file: 'vhs.png' },
+            { id: 'vhs-c', label: 'VHS-C', file: 'vhc c.png' },
+            { id: '8mm', label: '8mm', file: '8mm.png' },
+            { id: 'hi8', label: 'Hi8', file: 'hi8.png' },
+            { id: 'digital8', label: 'Digital8', file: 'digital8.png' },
+            { id: 'minidv', label: 'MiniDV', file: 'mini dv.png' }
+        ];
+        
+        let currentGalleryIndex = 0;
+
+        function openGallery(formatId) {
+            currentGalleryIndex = galleryFormats.findIndex(f => f.id === formatId);
+            updateGalleryUI();
+            toggleModal('imageModal', true);
+        }
+
+        function navGallery(step) {
+            currentGalleryIndex = (currentGalleryIndex + step + galleryFormats.length) % galleryFormats.length;
+            updateGalleryUI();
+        }
+
+        function updateGalleryUI() {
+            const format = galleryFormats[currentGalleryIndex];
+            const img = document.getElementById('previewImage');
+            const title = document.getElementById('imageTitle');
+            
+            title.innerText = format.label;
+            img.src = format.file;
+        }
+
+        // Слушатель клавиатуры для галереи
+        document.addEventListener('keydown', (e) => {
+            const modal = document.getElementById('imageModal');
+            if (modal.classList.contains('active')) {
+                if (e.key === 'ArrowRight') navGallery(1);
+                if (e.key === 'ArrowLeft') navGallery(-1);
+                if (e.key === 'Escape') toggleModal('imageModal', false);
+            }
+        });
+
         function openTelegram() {
             const username = 'RinatZakiroff';
             const appUrl = `tg://resolve?domain=${username}`;
@@ -537,23 +671,6 @@
                 modal.classList.remove('active');
                 document.body.style.overflow = 'auto';
             }
-        }
-
-        function openImageModal(format) {
-            const modal = document.getElementById('imageModal');
-            const img = document.getElementById('previewImage');
-            const title = document.getElementById('imageTitle');
-            
-            // Названия файлов соответствуют типам кассет
-            let fileName = format;
-            if (format === 'vhs-c') fileName = 'vhc c';
-            if (format === '8mm') fileName = '8mm'; // Привязка к файлу 8mm.png
-            if (format === 'minidv') fileName = 'mini dv';
-            
-            title.innerText = format.toUpperCase();
-            img.src = `${fileName}.png`;
-            
-            toggleModal('imageModal', true);
         }
 
         function changeQty(type, delta) {
