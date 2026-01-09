@@ -83,8 +83,42 @@
             filter: drop-shadow(0 1px 1px rgba(0,0,0,0.1));
         }
 
-        /* Эффект яркого луча */
-        .header-beam-effect {
+        /* Эффект лупы (увеличение букв по цепочке) */
+        .magnify-wrapper {
+            display: inline-flex;
+            justify-content: center;
+            gap: 0;
+            color: #24A1DE;
+        }
+
+        .magnify-wrapper span {
+            display: inline-block;
+            transition: transform 0.3s ease;
+            animation: magnify-letter 4s ease-in-out infinite;
+        }
+
+        @keyframes magnify-letter {
+            0%, 10%, 30%, 100% { transform: scale(1); opacity: 0.8; }
+            20% { 
+                transform: scale(1.4); 
+                opacity: 1; 
+                filter: brightness(1.2); 
+            }
+        }
+
+        /* Заголовок с ГЛУБОКОЙ ТЕНЬЮ синий */
+        .header-static-blue {
+            color: #24A1DE;
+            text-shadow: 
+                2px 2px 4px rgba(0, 0, 0, 0.1),
+                4px 4px 10px rgba(36, 161, 222, 0.2),
+                6px 6px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Эффект яркого луча (бегущий свет) */
+        .light-beam-effect {
+            position: relative;
+            display: inline-block;
             background: linear-gradient(
                 to right, 
                 #24A1DE 0%, 
@@ -97,21 +131,12 @@
             color: transparent;
             -webkit-background-clip: text;
             background-clip: text;
-            animation: beam-swipe 3s ease-in-out infinite;
+            animation: beam-swipe 3s linear infinite;
         }
 
         @keyframes beam-swipe {
-            0% { background-position: 150% 0; }
-            100% { background-position: -50% 0; }
-        }
-
-        /* Заголовок с ГЛУБОКОЙ ТЕНЬЮ синий */
-        .header-static-blue {
-            color: #24A1DE;
-            text-shadow: 
-                2px 2px 4px rgba(0, 0, 0, 0.1),
-                4px 4px 10px rgba(36, 161, 222, 0.2),
-                6px 6px 20px rgba(0, 0, 0, 0.05);
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
 
         @keyframes shine {
@@ -364,9 +389,9 @@
                     
                     <div class="border-t border-slate-100 pt-12 pb-4 overflow-visible">
                         <div class="simple-badge-container">
-                            <span class="text-[16px] md:text-xl uppercase tracking-[0.3em] font-extrabold mobile-larger-text header-beam-effect">
-                                Готово будет уже завтра
-                            </span>
+                            <div class="magnify-wrapper text-[16px] md:text-xl uppercase tracking-[0.3em] font-extrabold mobile-larger-text" id="magnifyText">
+                                <!-- Буквы генерируются скриптом для точного эффекта лупы -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -420,7 +445,7 @@
             <div class="container mx-auto px-4">
                 <div class="max-w-4xl mx-auto glass-block p-8 md:p-16">
                     <div class="text-center mb-16">
-                        <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4 header-beam-effect">Расчёт максимально возможной стоимости</h2>
+                        <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4 light-beam-effect">Расчёт максимально возможной стоимости</h2>
                         <p class="text-[13px] uppercase tracking-widest font-bold mobile-larger-text attention-shake">Выберите количество ваших кассет</p>
                     </div>
 
@@ -452,7 +477,7 @@
 
                     <div class="text-center">
                         <div class="text-6xl md:text-7xl font-bold flex items-baseline justify-center mb-6">
-                            <span id="totalPrice" class="header-beam-effect">0</span><span class="text-2xl ml-4 text-slate-300">₽</span>
+                            <span id="totalPrice" class="header-static-blue">0</span><span class="text-2xl ml-4 text-slate-300">₽</span>
                         </div>
                         <button onclick="toggleModal('orderModal', true)" class="elegant-btn elegant-btn-pulse mx-auto">Сделать заказ</button>
                         
@@ -543,6 +568,17 @@
     </div>
 
     <script>
+        // Инициализация эффекта лупы для верхней надписи
+        const textToMagnify = "Готово будет уже завтра";
+        const container = document.getElementById('magnifyText');
+        
+        textToMagnify.split('').forEach((char, index) => {
+            const span = document.createElement('span');
+            span.textContent = char === ' ' ? '\u00A0' : char; 
+            span.style.animationDelay = `${index * 0.1}s`;
+            container.appendChild(span);
+        });
+
         const galleryFormats = [
             { id: 'vhs', label: 'VHS', file: 'vhs.png', price: 'до 4140 руб. за каждую' },
             { id: 'vhs-c', label: 'VHS-C', file: 'vhc c.png', price: 'до 1380 руб. за каждую' },
