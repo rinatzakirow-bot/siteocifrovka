@@ -483,18 +483,19 @@
                 </button>
             </div>
             
-            <p class="text-[12px] text-slate-400 uppercase font-bold tracking-widest mt-4">Формат носителя</p>
+            <p id="imagePrice" class="text-[14px] md:text-[16px] text-[#24A1DE] uppercase font-bold tracking-widest mt-2 mb-2">Цена</p>
+            <p class="text-[12px] text-slate-400 uppercase font-bold tracking-widest">Кассету этого типа</p>
         </div>
     </div>
 
     <script>
         const galleryFormats = [
-            { id: 'vhs', label: 'VHS', file: 'vhs.png' },
-            { id: 'vhs-c', label: 'VHS-C', file: 'vhc c.png' },
-            { id: '8mm', label: '8mm', file: '8mm.png' },
-            { id: 'hi8', label: 'Hi8', file: 'hi8.png' },
-            { id: 'digital8', label: 'Digital8', file: 'digital8.png' },
-            { id: 'minidv', label: 'MiniDV', file: 'mini dv.png' }
+            { id: 'vhs', label: 'VHS', file: 'vhs.png', price: 'до 4140 руб. за каждую' },
+            { id: 'vhs-c', label: 'VHS-C', file: 'vhc c.png', price: 'до 1380 руб. за каждую' },
+            { id: '8mm', label: '8mm', file: '8mm.png', price: 'до 2070 руб. за каждую' },
+            { id: 'hi8', label: 'Hi8', file: 'hi8.png', price: 'до 2070 руб. за каждую' },
+            { id: 'digital8', label: 'Digital8', file: 'digital8.png', price: 'до 2070 руб. за каждую' },
+            { id: 'minidv', label: 'MiniDV', file: 'mini dv.png', price: 'до 1380 руб. за каждую' }
         ];
         
         let currentGalleryIndex = 0;
@@ -514,8 +515,10 @@
             const format = galleryFormats[currentGalleryIndex];
             const img = document.getElementById('previewImage');
             const title = document.getElementById('imageTitle');
+            const price = document.getElementById('imagePrice');
             title.innerText = format.label;
             img.src = format.file;
+            price.innerText = format.price;
         }
 
         document.addEventListener('keydown', (e) => {
