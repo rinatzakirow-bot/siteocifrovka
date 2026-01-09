@@ -45,6 +45,13 @@
             .elegant-btn { font-size: 16px !important; padding: 24px 30px !important; }
             .premium-label-header { font-size: 8px !important; }
             .magnify-wrapper { font-size: 20px !important; } 
+            
+            /* УМЕНЬШЕНИЕ ОТСТУПОВ В КАЛЬКУЛЯТОРЕ ДЛЯ МОБИЛОК */
+            .calc-container { padding: 1.5rem !important; }
+            .calc-header { margin-bottom: 1.5rem !important; }
+            .calc-row-gap { gap: 1rem !important; padding-bottom: 1.5rem !important; }
+            .calc-section-gap { margin-bottom: 1.5rem !important; gap: 1.5rem !important; }
+            .counter-btn { width: 52px !important; height: 52px !important; }
         }
         
         h1, h2, h3, .font-bold { font-weight: 600 !important; letter-spacing: 0.02em; }
@@ -98,18 +105,17 @@
                 6px 6px 20px rgba(0, 0, 0, 0.05);
         }
 
-        /* ЧИСТЫЙ ВИД СУММЫ БЕЗ ЭФФЕКТОВ */
         .price-glass-reflection {
             color: #24A1DE;
             position: relative;
             display: inline-block;
             line-height: 1;
             padding-bottom: 2px;
-            text-shadow: none; /* Убрана тень */
+            text-shadow: none; 
         }
         
         .price-glass-reflection::after {
-            display: none; /* Убрано отражение */
+            display: none; 
         }
 
         .light-beam-effect {
@@ -429,14 +435,14 @@
 
         <section id="calc" class="py-10 pb-24">
             <div class="container mx-auto px-4">
-                <div class="max-w-4xl mx-auto glass-block p-8 md:p-16">
-                    <div class="text-center mb-16">
+                <div class="max-w-4xl mx-auto glass-block p-8 md:p-16 calc-container">
+                    <div class="text-center mb-16 calc-header">
                         <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4 light-beam-effect">Рассчитайте максимально возможную стоимость</h2>
                         <p class="text-[13px] uppercase tracking-widest font-bold mobile-larger-text attention-shake">Выберите количество ваших кассет</p>
                     </div>
 
-                    <div class="space-y-12 mb-16">
-                        <div class="flex flex-col md:flex-row items-center justify-between gap-8 pb-10 border-b border-slate-100">
+                    <div class="space-y-12 mb-16 calc-section-gap">
+                        <div class="flex flex-col md:flex-row items-center justify-between gap-8 pb-10 border-b border-slate-100 calc-row-gap">
                             <div class="text-center md:text-left">
                                 <h4 class="text-lg uppercase font-bold">От камеры</h4>
                                 <p class="text-[11px] text-slate-400 font-bold uppercase tracking-widest mt-1 mobile-larger-text">MiniDV, Hi8, 8mm, VHS-C</p>
@@ -448,7 +454,7 @@
                             </div>
                         </div>
 
-                        <div class="flex flex-col md:flex-row items-center justify-between gap-8 pb-10 border-b border-slate-100">
+                        <div class="flex flex-col md:flex-row items-center justify-between gap-8 pb-10 border-b border-slate-100 calc-row-gap">
                             <div class="text-center md:text-left">
                                 <h4 class="text-lg uppercase font-bold">VHS кассеты</h4>
                                 <p class="text-[11px] text-slate-400 font-bold uppercase tracking-widest mt-1 mobile-larger-text">Классические большие кассеты</p>
