@@ -37,7 +37,6 @@
             body { font-size: 18px; line-height: 1.7; }
             h1 { font-size: 2.25rem !important; line-height: 1.2 !important; font-weight: 700 !important; }
             h2 { font-size: 1.75rem !important; font-weight: 700 !important; }
-            /* Увеличен мелкий текст для мобильных */
             .mobile-larger-text { font-size: 16px !important; letter-spacing: 0.1em !important; line-height: 1.6 !important; }
             .mobile-description { font-size: 20px !important; }
             .glass-block { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; border-radius: 32px !important; border-width: 3px !important; }
@@ -66,7 +65,6 @@
             overflow: hidden;
         }
 
-        /* Анимация луча для верхнего слогана */
         .shimmer-text {
             background: linear-gradient(
                 to right, 
@@ -83,7 +81,6 @@
             animation: shine 4s linear infinite;
         }
 
-        /* Ненавязчивый перелив для главного заголовка */
         .header-shimmer {
             background: linear-gradient(
                 to right, 
@@ -205,6 +202,7 @@
             border: none;
             white-space: nowrap;
         }
+        /* Класс для плавного исчезновения */
         .tg-float.hidden-btn {
             opacity: 0;
             pointer-events: none;
@@ -406,7 +404,7 @@
             <div class="container mx-auto px-4">
                 <div class="max-w-4xl mx-auto glass-block p-8 md:p-16">
                     <div class="text-center mb-16">
-                        <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4">Расчёт максимально возможной стоимости</h2>
+                        <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4 header-shimmer">Расчёт максимально возможной стоимости</h2>
                         <p class="text-[13px] uppercase tracking-widest font-bold mobile-larger-text">Выберите количество ваших кассет</p>
                     </div>
 
@@ -629,13 +627,18 @@
                 notice.classList.add('hidden');
                 noticeWasShown = false;
             }
+            // Вызываем проверку перекрытия после обновления UI
             checkOverlap();
         }
 
+        /**
+         * Функция проверки перекрытия плавающей кнопки Telegram и предупреждения
+         */
         function checkOverlap() {
             const btn = document.getElementById('floatingTgBtn');
             const notice = document.getElementById('finalPriceNotice');
             
+            // Если кнопка не найдена или предупреждение скрыто — показываем кнопку
             if (!btn || !notice || notice.classList.contains('hidden')) {
                 btn.classList.remove('hidden-btn');
                 return;
@@ -644,6 +647,7 @@
             const btnRect = btn.getBoundingClientRect();
             const noticeRect = notice.getBoundingClientRect();
 
+            // Проверка на пересечение прямоугольников
             const isOverlapping = !(
                 btnRect.right < noticeRect.left || 
                 btnRect.left > noticeRect.right || 
@@ -658,6 +662,7 @@
             }
         }
 
+        // Слушаем скролл и изменение размера окна для пересчета пересечения
         window.addEventListener('scroll', checkOverlap);
         window.addEventListener('resize', checkOverlap);
 
