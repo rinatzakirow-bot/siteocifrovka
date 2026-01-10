@@ -39,8 +39,6 @@
             line-height: 1.6;
             color: #1a1a1a; 
             -webkit-font-smoothing: antialiased;
-            /* Для 3D эффекта гироскопа */
-            perspective: 1000px;
         }
 
         h1 {
@@ -51,7 +49,7 @@
             text-align: center;
         }
 
-        /* ЭФФЕКТ ПЛАВНОГО ПЕРЕЛИВА ДЛЯ ЗАГОЛОВКА */
+        /* ЭФФЕКТ ПЛАВНОГО ПЕРЕЛИВА ДЛЯ ЗАГОЛОВКА (БЕЗ ТЕНИ) */
         .title-flow-effect {
             background: linear-gradient(
                 to right,
@@ -74,13 +72,6 @@
         @keyframes flow-shimmer {
             0% { background-position: 100% 50%; }
             100% { background-position: -300% 50%; }
-        }
-
-        /* КЛАСС ДЛЯ ГИРОСКОПА (добавляется через JS) */
-        .gyro-element {
-            transition: transform 0.15s ease-out;
-            will-change: transform;
-            transform-style: preserve-3d;
         }
 
         @media (max-width: 768px) {
@@ -334,9 +325,11 @@
             pointer-events: none;
         }
 
+        .simple-badge-container { position: relative; display: inline-block; padding: 15px 35px; z-index: 1; }
+
         .tg-text-color { color: #24A1DE; }
         
-        /* КОНТЕЙНЕР ЛОГОТИПА С ОКАНТОВКОЙ */
+        /* ОБНОВЛЕННЫЙ СТИЛЬ ЛОГОТИПА С ОКАНТОВКОЙ */
         .header-logo-wrapper {
             width: 42px; 
             height: 42px; 
@@ -347,7 +340,7 @@
             overflow: hidden; 
             flex-shrink: 0; 
             background: rgba(255, 255, 255, 0.2);
-            border: 2px solid #ffffff; 
+            border: 2px solid #ffffff; /* Белая окантовка */
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         .header-logo { width: 100%; height: 100%; object-fit: contain; }
@@ -506,6 +499,7 @@
         <div class="container mx-auto px-5 h-20 flex items-center justify-between">
             <div class="flex items-center gap-4">
                 <div class="flex items-center gap-3">
+                    <!-- ОБНОВЛЕННЫЙ КОНТЕЙНЕР ЛОГОТИПА -->
                     <div class="header-logo-wrapper">
                         <img src="logo.jpg" alt="Логотип Рината" class="header-logo" onerror="this.parentElement.innerHTML='<i class=\'fas fa-film text-white text-sm\'></i>'">
                     </div>
@@ -526,7 +520,7 @@
     <main>
         <section class="relative pt-32 pb-8">
             <div class="container mx-auto px-4">
-                <div class="glass-block gyro-element py-6 px-6 text-center max-w-4xl mx-auto">
+                <div class="glass-block py-6 px-6 text-center max-w-4xl mx-auto">
                     <h1 class="mb-6 uppercase font-bold header-static-blue">
                         <span class="title-flow-effect">Оцифровка <br> видеокассет</span>
                     </h1>
@@ -549,12 +543,12 @@
                     </p>
                 </div>
                 <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="soft-card-static gyro-element" onclick="openGallery('vhs')"><span class="card-label">VHS <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
-                    <div class="soft-card-static gyro-element" onclick="openGallery('vhs-c')"><span class="card-label">VHS-C <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
-                    <div class="soft-card-static gyro-element" onclick="openGallery('8mm')"><span class="card-label">8mm <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
-                    <div class="soft-card-static gyro-element" onclick="openGallery('hi8')"><span class="card-label">Hi8 <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
-                    <div class="soft-card-static gyro-element" onclick="openGallery('digital8')"><span class="card-label">Digital8 <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
-                    <div class="soft-card-static gyro-element" onclick="openGallery('minidv')"><span class="card-label">MiniDV <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
+                    <div class="soft-card-static" onclick="openGallery('vhs')"><span class="card-label">VHS <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
+                    <div class="soft-card-static" onclick="openGallery('vhs-c')"><span class="card-label">VHS-C <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
+                    <div class="soft-card-static" onclick="openGallery('8mm')"><span class="card-label">8mm <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
+                    <div class="soft-card-static" onclick="openGallery('hi8')"><span class="card-label">Hi8 <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
+                    <div class="soft-card-static" onclick="openGallery('digital8')"><span class="card-label">Digital8 <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
+                    <div class="soft-card-static" onclick="openGallery('minidv')"><span class="card-label">MiniDV <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
                 </div>
             </div>
         </section>
@@ -562,7 +556,7 @@
         <!-- Преимущества -->
         <section class="py-10">
             <div class="container mx-auto px-4">
-                <div class="glass-block gyro-element py-16 px-8 max-w-5xl mx-auto grid md:grid-cols-3 gap-12">
+                <div class="glass-block py-16 px-8 max-w-5xl mx-auto grid md:grid-cols-3 gap-12">
                     <div class="text-center flex flex-col items-center">
                         <div class="icon-backdrop"><i class="fas fa-car-side"></i></div>
                         <h3 class="text-[16px] uppercase tracking-wider font-bold mb-4">Приеду сам</h3>
@@ -585,7 +579,7 @@
         <!-- Калькулятор -->
         <section id="calc" class="py-10 pb-24">
             <div class="container mx-auto px-4">
-                <div class="max-w-2xl mx-auto glass-block gyro-element p-8 md:p-14">
+                <div class="max-w-2xl mx-auto glass-block p-8 md:p-14">
                     <div class="text-center mb-10">
                         <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4 light-beam-effect">Рассчитайте максимально возможную стоимость</h2>
                         <p class="text-[12px] uppercase tracking-widest font-bold text-slate-400 mobile-larger-text attention-shake">Укажите количество ваших кассет</p>
@@ -625,6 +619,12 @@
                             </div>
                         </div>
                         <button onclick="toggleModal('orderModal', true)" class="elegant-btn elegant-btn-pulse mx-auto">Сделать заказ</button>
+                        
+                        <div id="finalPriceNotice" class="hidden mt-10 max-w-md mx-auto px-4">
+                            <p class="text-[12px] md:text-[13px] uppercase tracking-widest font-bold pulse-text leading-relaxed mobile-larger-text">
+                                Окончательная стоимость обычно значительно ниже, так как кассеты крайне редко записаны полностью
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -633,7 +633,7 @@
 
     <!-- Модальное окно заказа -->
     <div id="orderModal" class="modal-overlay">
-        <div class="modal-content gyro-element">
+        <div class="modal-content">
             <button onclick="toggleModal('orderModal', false)" class="absolute top-6 right-6 text-slate-400 p-2 border-none bg-transparent cursor-pointer">
                 <i class="fas fa-times text-2xl"></i>
             </button>
@@ -647,77 +647,69 @@
                         <label class="text-[12px] uppercase font-bold text-slate-400 ml-2 mobile-larger-text">Телефон</label>
                         <input type="tel" id="phoneInput" name="phone" required placeholder="+7 (___) ___-__-__" class="form-input">
                     </div>
+                    
                     <div>
                         <label class="text-[12px] uppercase font-bold text-slate-400 ml-2 mobile-larger-text">Адрес в Москве</label>
                         <textarea name="address" required rows="2" placeholder="Улица, дом, квартира" class="form-input"></textarea>
                     </div>
+
+                    <input type="hidden" name="cam_qty" id="h_cam" value="0">
+                    <input type="hidden" name="vhs_qty" id="h_vhs" value="0">
+                    <input type="hidden" name="total" id="h_total" value="0">
+                    
                     <button type="submit" id="submitBtn" class="elegant-btn mt-4">Отправить заявку</button>
+                    
+                    <div class="flex flex-col items-center">
+                        <div class="w-full h-[1px] bg-slate-100 my-6 flex items-center justify-center">
+                            <span class="bg-white px-4 text-[11px] uppercase text-slate-400 font-bold tracking-[0.2em]">или</span>
+                        </div>
+                        <button type="button" onclick="openTelegram()" class="elegant-btn btn-outline-tg !max-w-full">
+                            <i class="fab fa-telegram-plane"></i> Задать вопрос в Telegram
+                        </button>
+                    </div>
                 </form>
+            </div>
+            <div id="successMessage" class="hidden text-center py-10">
+                <i class="fas fa-check-circle text-5xl mb-6 text-green-500"></i>
+                <h3 class="text-2xl font-bold uppercase mb-4">Заявка принята!</h3>
+                <p class="text-slate-500 uppercase text-[13px] font-bold mobile-larger-text">Я свяжусь с вами в ближайшее время.</p>
+                <button onclick="toggleModal('orderModal', false)" class="mt-10 underline font-bold uppercase text-[12px] text-[#24A1DE] bg-transparent border-none cursor-pointer">Закрыть окно</button>
             </div>
         </div>
     </div>
 
     <!-- Модальное окно галереи -->
     <div id="imageModal" class="modal-overlay">
-        <div class="modal-content gyro-element text-center">
+        <div class="modal-content text-center">
             <button onclick="toggleModal('imageModal', false)" class="absolute top-6 right-6 text-slate-400 p-2 border-none bg-transparent cursor-pointer z-20">
                 <i class="fas fa-times text-2xl"></i>
             </button>
+
             <h3 id="imageTitle" class="text-xl font-bold uppercase tracking-widest mb-6">VHS</h3>
+
             <div class="gallery-container">
-                <button onclick="navGallery(-1)" class="side-nav-btn"><i class="fas fa-chevron-left"></i></button>
-                <div class="gallery-image-wrapper"><img id="previewImage" src="" alt="Формат кассеты"></div>
-                <button onclick="navGallery(1)" class="side-nav-btn"><i class="fas fa-chevron-right"></i></button>
+                <button onclick="navGallery(-1)" class="side-nav-btn" aria-label="Назад">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="gallery-image-wrapper">
+                    <img id="previewImage" src="" alt="Формат кассеты">
+                </div>
+
+                <button onclick="navGallery(1)" class="side-nav-btn" aria-label="Вперед">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
+            
             <p id="imagePrice" class="text-[14px] md:text-[16px] text-[#24A1DE] uppercase font-bold tracking-widest mt-2 mb-2">Цена</p>
+            <p class="text-[12px] text-slate-400 uppercase font-bold tracking-widest">Кассету этого типа</p>
         </div>
     </div>
 
     <script>
-        // --- ЛОГИКА ГИРОСКОПА ---
-        let hasGyroAccess = false;
-
-        function initGyro() {
-            if (hasGyroAccess) return;
-            
-            // Запрос разрешения для iOS
-            if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-                DeviceOrientationEvent.requestPermission()
-                    .then(permissionState => {
-                        if (permissionState === 'granted') {
-                            window.addEventListener('deviceorientation', handleOrientation);
-                            hasGyroAccess = true;
-                        }
-                    })
-                    .catch(console.error);
-            } else {
-                window.addEventListener('deviceorientation', handleOrientation);
-                hasGyroAccess = true;
-            }
-        }
-
-        function handleOrientation(event) {
-            const beta = event.beta;  // Наклон вперед-назад [-180, 180]
-            const gamma = event.gamma; // Наклон влево-вправо [-90, 90]
-
-            if (beta === null || gamma === null) return;
-
-            // Ограничиваем углы наклона для мягкого эффекта (макс 10 градусов)
-            const rotateX = Math.max(-10, Math.min(10, (beta - 45) * 0.2)); 
-            const rotateY = Math.max(-10, Math.min(10, gamma * 0.2));
-
-            const elements = document.querySelectorAll('.gyro-element');
-            elements.forEach(el => {
-                el.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
-            });
-        }
-
-        // Активация гироскопа при первом клике пользователя
-        document.body.addEventListener('click', initGyro, { once: true });
-
-        // --- ОСТАЛЬНАЯ ЛОГИКА САЙТА ---
         const textToMagnify = "Готово уже завтра";
         const container = document.getElementById('magnifyText');
+        
         textToMagnify.split('').forEach((char, index) => {
             const span = document.createElement('span');
             span.textContent = char === ' ' ? '\u00A0' : char; 
@@ -762,26 +754,31 @@
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
             if (isMobile) {
                 window.location.href = `tg://resolve?domain=${username}`;
+                setTimeout(() => { if (!document.hidden) window.location.href = `https://t.me/${username}`; }, 500);
             } else {
                 window.open(`https://t.me/${username}`, '_blank');
             }
         }
 
         let quantities = { cam: 0, vhs: 0 };
+
         IMask(document.getElementById('phoneInput'), { mask: '+{7} (000) 000-00-00' });
 
         function toggleModal(id, show) {
             const modal = document.getElementById(id);
             const content = modal.querySelector('.modal-content');
+            
             if (show) {
                 modal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
                 requestAnimationFrame(() => {
                     modal.classList.add('active');
+                    content.classList.remove('fade-out');
                 });
             } else {
                 content.classList.add('fade-out');
                 modal.style.opacity = '0';
+                
                 setTimeout(() => {
                     modal.classList.remove('active');
                     modal.style.display = 'none';
@@ -798,19 +795,66 @@
             calculate();
         }
 
+        let noticeWasShown = false;
+
         function calculate() {
             const pricePerMinute = 23;
             const minOrder = 2070;
             const totalMin = (quantities.cam * 90) + (quantities.vhs * 180);
             const calculatedPrice = totalMin * pricePerMinute;
             const finalPrice = totalMin > 0 ? Math.max(calculatedPrice, minOrder) : 0;
-            document.getElementById('totalPrice').innerText = finalPrice;
+            
+            const priceEl = document.getElementById('totalPrice');
+            priceEl.innerText = finalPrice;
+            
+            document.getElementById('h_cam').value = quantities.cam;
+            document.getElementById('h_vhs').value = quantities.vhs;
+            document.getElementById('h_total').value = finalPrice;
+
+            const notice = document.getElementById('finalPriceNotice');
+            
+            if (calculatedPrice > minOrder) {
+                if (!noticeWasShown) {
+                    notice.classList.remove('hidden');
+                    notice.classList.add('notice-entry-shake');
+                    setTimeout(() => { notice.classList.remove('notice-entry-shake'); }, 1200);
+                    noticeWasShown = true;
+                } else {
+                    notice.classList.remove('hidden');
+                }
+            } else {
+                notice.classList.add('hidden');
+                noticeWasShown = false;
+            }
+            checkOverlap();
         }
 
         function checkOverlap() {
             const btn = document.getElementById('floatingTgBtn');
-            if (btn) btn.classList.remove('hidden-btn');
+            const notice = document.getElementById('finalPriceNotice');
+            
+            if (!btn || !notice || notice.classList.contains('hidden')) {
+                btn.classList.remove('hidden-btn');
+                return;
+            }
+
+            const btnRect = btn.getBoundingClientRect();
+            const noticeRect = notice.getBoundingClientRect();
+
+            const isOverlapping = !(
+                btnRect.right < noticeRect.left || 
+                btnRect.left > noticeRect.right || 
+                btnRect.bottom < noticeRect.top || 
+                btnRect.top > noticeRect.bottom
+            );
+
+            if (isOverlapping) {
+                btn.classList.add('hidden-btn');
+            } else {
+                btn.classList.remove('hidden-btn');
+            }
         }
+        
         window.addEventListener('scroll', checkOverlap);
     </script>
 </body>
@@ -855,8 +899,6 @@
             line-height: 1.6;
             color: #1a1a1a; 
             -webkit-font-smoothing: antialiased;
-            /* Для 3D эффекта гироскопа */
-            perspective: 1000px;
         }
 
         h1 {
@@ -867,7 +909,7 @@
             text-align: center;
         }
 
-        /* ЭФФЕКТ ПЛАВНОГО ПЕРЕЛИВА ДЛЯ ЗАГОЛОВКА */
+        /* ЭФФЕКТ ПЛАВНОГО ПЕРЕЛИВА ДЛЯ ЗАГОЛОВКА (БЕЗ ТЕНИ) */
         .title-flow-effect {
             background: linear-gradient(
                 to right,
@@ -890,13 +932,6 @@
         @keyframes flow-shimmer {
             0% { background-position: 100% 50%; }
             100% { background-position: -300% 50%; }
-        }
-
-        /* КЛАСС ДЛЯ ГИРОСКОПА (добавляется через JS) */
-        .gyro-element {
-            transition: transform 0.15s ease-out;
-            will-change: transform;
-            transform-style: preserve-3d;
         }
 
         @media (max-width: 768px) {
@@ -1150,9 +1185,11 @@
             pointer-events: none;
         }
 
+        .simple-badge-container { position: relative; display: inline-block; padding: 15px 35px; z-index: 1; }
+
         .tg-text-color { color: #24A1DE; }
         
-        /* КОНТЕЙНЕР ЛОГОТИПА С ОКАНТОВКОЙ */
+        /* ОБНОВЛЕННЫЙ СТИЛЬ ЛОГОТИПА С ОКАНТОВКОЙ */
         .header-logo-wrapper {
             width: 42px; 
             height: 42px; 
@@ -1163,7 +1200,7 @@
             overflow: hidden; 
             flex-shrink: 0; 
             background: rgba(255, 255, 255, 0.2);
-            border: 2px solid #ffffff; 
+            border: 2px solid #ffffff; /* Белая окантовка */
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         .header-logo { width: 100%; height: 100%; object-fit: contain; }
@@ -1322,6 +1359,7 @@
         <div class="container mx-auto px-5 h-20 flex items-center justify-between">
             <div class="flex items-center gap-4">
                 <div class="flex items-center gap-3">
+                    <!-- ОБНОВЛЕННЫЙ КОНТЕЙНЕР ЛОГОТИПА -->
                     <div class="header-logo-wrapper">
                         <img src="logo.jpg" alt="Логотип Рината" class="header-logo" onerror="this.parentElement.innerHTML='<i class=\'fas fa-film text-white text-sm\'></i>'">
                     </div>
@@ -1342,7 +1380,7 @@
     <main>
         <section class="relative pt-32 pb-8">
             <div class="container mx-auto px-4">
-                <div class="glass-block gyro-element py-6 px-6 text-center max-w-4xl mx-auto">
+                <div class="glass-block py-6 px-6 text-center max-w-4xl mx-auto">
                     <h1 class="mb-6 uppercase font-bold header-static-blue">
                         <span class="title-flow-effect">Оцифровка <br> видеокассет</span>
                     </h1>
@@ -1365,12 +1403,12 @@
                     </p>
                 </div>
                 <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="soft-card-static gyro-element" onclick="openGallery('vhs')"><span class="card-label">VHS <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
-                    <div class="soft-card-static gyro-element" onclick="openGallery('vhs-c')"><span class="card-label">VHS-C <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
-                    <div class="soft-card-static gyro-element" onclick="openGallery('8mm')"><span class="card-label">8mm <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
-                    <div class="soft-card-static gyro-element" onclick="openGallery('hi8')"><span class="card-label">Hi8 <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
-                    <div class="soft-card-static gyro-element" onclick="openGallery('digital8')"><span class="card-label">Digital8 <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
-                    <div class="soft-card-static gyro-element" onclick="openGallery('minidv')"><span class="card-label">MiniDV <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
+                    <div class="soft-card-static" onclick="openGallery('vhs')"><span class="card-label">VHS <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
+                    <div class="soft-card-static" onclick="openGallery('vhs-c')"><span class="card-label">VHS-C <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
+                    <div class="soft-card-static" onclick="openGallery('8mm')"><span class="card-label">8mm <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
+                    <div class="soft-card-static" onclick="openGallery('hi8')"><span class="card-label">Hi8 <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
+                    <div class="soft-card-static" onclick="openGallery('digital8')"><span class="card-label">Digital8 <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
+                    <div class="soft-card-static" onclick="openGallery('minidv')"><span class="card-label">MiniDV <i class="far fa-eye text-[#24A1DE] text-[10px]"></i></span></div>
                 </div>
             </div>
         </section>
@@ -1378,7 +1416,7 @@
         <!-- Преимущества -->
         <section class="py-10">
             <div class="container mx-auto px-4">
-                <div class="glass-block gyro-element py-16 px-8 max-w-5xl mx-auto grid md:grid-cols-3 gap-12">
+                <div class="glass-block py-16 px-8 max-w-5xl mx-auto grid md:grid-cols-3 gap-12">
                     <div class="text-center flex flex-col items-center">
                         <div class="icon-backdrop"><i class="fas fa-car-side"></i></div>
                         <h3 class="text-[16px] uppercase tracking-wider font-bold mb-4">Приеду сам</h3>
@@ -1401,7 +1439,7 @@
         <!-- Калькулятор -->
         <section id="calc" class="py-10 pb-24">
             <div class="container mx-auto px-4">
-                <div class="max-w-2xl mx-auto glass-block gyro-element p-8 md:p-14">
+                <div class="max-w-2xl mx-auto glass-block p-8 md:p-14">
                     <div class="text-center mb-10">
                         <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4 light-beam-effect">Рассчитайте максимально возможную стоимость</h2>
                         <p class="text-[12px] uppercase tracking-widest font-bold text-slate-400 mobile-larger-text attention-shake">Укажите количество ваших кассет</p>
@@ -1441,6 +1479,12 @@
                             </div>
                         </div>
                         <button onclick="toggleModal('orderModal', true)" class="elegant-btn elegant-btn-pulse mx-auto">Сделать заказ</button>
+                        
+                        <div id="finalPriceNotice" class="hidden mt-10 max-w-md mx-auto px-4">
+                            <p class="text-[12px] md:text-[13px] uppercase tracking-widest font-bold pulse-text leading-relaxed mobile-larger-text">
+                                Окончательная стоимость обычно значительно ниже, так как кассеты крайне редко записаны полностью
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1449,7 +1493,7 @@
 
     <!-- Модальное окно заказа -->
     <div id="orderModal" class="modal-overlay">
-        <div class="modal-content gyro-element">
+        <div class="modal-content">
             <button onclick="toggleModal('orderModal', false)" class="absolute top-6 right-6 text-slate-400 p-2 border-none bg-transparent cursor-pointer">
                 <i class="fas fa-times text-2xl"></i>
             </button>
@@ -1463,77 +1507,69 @@
                         <label class="text-[12px] uppercase font-bold text-slate-400 ml-2 mobile-larger-text">Телефон</label>
                         <input type="tel" id="phoneInput" name="phone" required placeholder="+7 (___) ___-__-__" class="form-input">
                     </div>
+                    
                     <div>
                         <label class="text-[12px] uppercase font-bold text-slate-400 ml-2 mobile-larger-text">Адрес в Москве</label>
                         <textarea name="address" required rows="2" placeholder="Улица, дом, квартира" class="form-input"></textarea>
                     </div>
+
+                    <input type="hidden" name="cam_qty" id="h_cam" value="0">
+                    <input type="hidden" name="vhs_qty" id="h_vhs" value="0">
+                    <input type="hidden" name="total" id="h_total" value="0">
+                    
                     <button type="submit" id="submitBtn" class="elegant-btn mt-4">Отправить заявку</button>
+                    
+                    <div class="flex flex-col items-center">
+                        <div class="w-full h-[1px] bg-slate-100 my-6 flex items-center justify-center">
+                            <span class="bg-white px-4 text-[11px] uppercase text-slate-400 font-bold tracking-[0.2em]">или</span>
+                        </div>
+                        <button type="button" onclick="openTelegram()" class="elegant-btn btn-outline-tg !max-w-full">
+                            <i class="fab fa-telegram-plane"></i> Задать вопрос в Telegram
+                        </button>
+                    </div>
                 </form>
+            </div>
+            <div id="successMessage" class="hidden text-center py-10">
+                <i class="fas fa-check-circle text-5xl mb-6 text-green-500"></i>
+                <h3 class="text-2xl font-bold uppercase mb-4">Заявка принята!</h3>
+                <p class="text-slate-500 uppercase text-[13px] font-bold mobile-larger-text">Я свяжусь с вами в ближайшее время.</p>
+                <button onclick="toggleModal('orderModal', false)" class="mt-10 underline font-bold uppercase text-[12px] text-[#24A1DE] bg-transparent border-none cursor-pointer">Закрыть окно</button>
             </div>
         </div>
     </div>
 
     <!-- Модальное окно галереи -->
     <div id="imageModal" class="modal-overlay">
-        <div class="modal-content gyro-element text-center">
+        <div class="modal-content text-center">
             <button onclick="toggleModal('imageModal', false)" class="absolute top-6 right-6 text-slate-400 p-2 border-none bg-transparent cursor-pointer z-20">
                 <i class="fas fa-times text-2xl"></i>
             </button>
+
             <h3 id="imageTitle" class="text-xl font-bold uppercase tracking-widest mb-6">VHS</h3>
+
             <div class="gallery-container">
-                <button onclick="navGallery(-1)" class="side-nav-btn"><i class="fas fa-chevron-left"></i></button>
-                <div class="gallery-image-wrapper"><img id="previewImage" src="" alt="Формат кассеты"></div>
-                <button onclick="navGallery(1)" class="side-nav-btn"><i class="fas fa-chevron-right"></i></button>
+                <button onclick="navGallery(-1)" class="side-nav-btn" aria-label="Назад">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                
+                <div class="gallery-image-wrapper">
+                    <img id="previewImage" src="" alt="Формат кассеты">
+                </div>
+
+                <button onclick="navGallery(1)" class="side-nav-btn" aria-label="Вперед">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
+            
             <p id="imagePrice" class="text-[14px] md:text-[16px] text-[#24A1DE] uppercase font-bold tracking-widest mt-2 mb-2">Цена</p>
+            <p class="text-[12px] text-slate-400 uppercase font-bold tracking-widest">Кассету этого типа</p>
         </div>
     </div>
 
     <script>
-        // --- ЛОГИКА ГИРОСКОПА ---
-        let hasGyroAccess = false;
-
-        function initGyro() {
-            if (hasGyroAccess) return;
-            
-            // Запрос разрешения для iOS
-            if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-                DeviceOrientationEvent.requestPermission()
-                    .then(permissionState => {
-                        if (permissionState === 'granted') {
-                            window.addEventListener('deviceorientation', handleOrientation);
-                            hasGyroAccess = true;
-                        }
-                    })
-                    .catch(console.error);
-            } else {
-                window.addEventListener('deviceorientation', handleOrientation);
-                hasGyroAccess = true;
-            }
-        }
-
-        function handleOrientation(event) {
-            const beta = event.beta;  // Наклон вперед-назад [-180, 180]
-            const gamma = event.gamma; // Наклон влево-вправо [-90, 90]
-
-            if (beta === null || gamma === null) return;
-
-            // Ограничиваем углы наклона для мягкого эффекта (макс 10 градусов)
-            const rotateX = Math.max(-10, Math.min(10, (beta - 45) * 0.2)); 
-            const rotateY = Math.max(-10, Math.min(10, gamma * 0.2));
-
-            const elements = document.querySelectorAll('.gyro-element');
-            elements.forEach(el => {
-                el.style.transform = `rotateX(${-rotateX}deg) rotateY(${rotateY}deg)`;
-            });
-        }
-
-        // Активация гироскопа при первом клике пользователя
-        document.body.addEventListener('click', initGyro, { once: true });
-
-        // --- ОСТАЛЬНАЯ ЛОГИКА САЙТА ---
         const textToMagnify = "Готово уже завтра";
         const container = document.getElementById('magnifyText');
+        
         textToMagnify.split('').forEach((char, index) => {
             const span = document.createElement('span');
             span.textContent = char === ' ' ? '\u00A0' : char; 
@@ -1578,26 +1614,31 @@
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
             if (isMobile) {
                 window.location.href = `tg://resolve?domain=${username}`;
+                setTimeout(() => { if (!document.hidden) window.location.href = `https://t.me/${username}`; }, 500);
             } else {
                 window.open(`https://t.me/${username}`, '_blank');
             }
         }
 
         let quantities = { cam: 0, vhs: 0 };
+
         IMask(document.getElementById('phoneInput'), { mask: '+{7} (000) 000-00-00' });
 
         function toggleModal(id, show) {
             const modal = document.getElementById(id);
             const content = modal.querySelector('.modal-content');
+            
             if (show) {
                 modal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
                 requestAnimationFrame(() => {
                     modal.classList.add('active');
+                    content.classList.remove('fade-out');
                 });
             } else {
                 content.classList.add('fade-out');
                 modal.style.opacity = '0';
+                
                 setTimeout(() => {
                     modal.classList.remove('active');
                     modal.style.display = 'none';
@@ -1614,19 +1655,66 @@
             calculate();
         }
 
+        let noticeWasShown = false;
+
         function calculate() {
             const pricePerMinute = 23;
             const minOrder = 2070;
             const totalMin = (quantities.cam * 90) + (quantities.vhs * 180);
             const calculatedPrice = totalMin * pricePerMinute;
             const finalPrice = totalMin > 0 ? Math.max(calculatedPrice, minOrder) : 0;
-            document.getElementById('totalPrice').innerText = finalPrice;
+            
+            const priceEl = document.getElementById('totalPrice');
+            priceEl.innerText = finalPrice;
+            
+            document.getElementById('h_cam').value = quantities.cam;
+            document.getElementById('h_vhs').value = quantities.vhs;
+            document.getElementById('h_total').value = finalPrice;
+
+            const notice = document.getElementById('finalPriceNotice');
+            
+            if (calculatedPrice > minOrder) {
+                if (!noticeWasShown) {
+                    notice.classList.remove('hidden');
+                    notice.classList.add('notice-entry-shake');
+                    setTimeout(() => { notice.classList.remove('notice-entry-shake'); }, 1200);
+                    noticeWasShown = true;
+                } else {
+                    notice.classList.remove('hidden');
+                }
+            } else {
+                notice.classList.add('hidden');
+                noticeWasShown = false;
+            }
+            checkOverlap();
         }
 
         function checkOverlap() {
             const btn = document.getElementById('floatingTgBtn');
-            if (btn) btn.classList.remove('hidden-btn');
+            const notice = document.getElementById('finalPriceNotice');
+            
+            if (!btn || !notice || notice.classList.contains('hidden')) {
+                btn.classList.remove('hidden-btn');
+                return;
+            }
+
+            const btnRect = btn.getBoundingClientRect();
+            const noticeRect = notice.getBoundingClientRect();
+
+            const isOverlapping = !(
+                btnRect.right < noticeRect.left || 
+                btnRect.left > noticeRect.right || 
+                btnRect.bottom < noticeRect.top || 
+                btnRect.top > noticeRect.bottom
+            );
+
+            if (isOverlapping) {
+                btn.classList.add('hidden-btn');
+            } else {
+                btn.classList.remove('hidden-btn');
+            }
         }
+        
         window.addEventListener('scroll', checkOverlap);
     </script>
 </body>
