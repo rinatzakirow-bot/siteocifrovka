@@ -34,12 +34,16 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Исправление адаптивности заголовка и текста для мобильных */
+        /* Исправление: запрет разрыва слов и адаптивный перенос */
         h1 {
-            font-size: clamp(1.75rem, 8vw, 3.75rem) !important;
-            line-height: 1.1 !important;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
+            font-size: clamp(1.8rem, 8vw, 3.75rem) !important;
+            line-height: 1.2 !important;
+            word-wrap: normal !important;
+            overflow-wrap: normal !important;
+            word-break: keep-all !important; /* Запрещает разрыв слова */
+            hyphens: none !important;        /* Отключает автоматические переносы */
+            display: block;
+            width: 100%;
         }
 
         @media (max-width: 768px) {
@@ -288,14 +292,12 @@
         }
         .modal-overlay.active .modal-content { transform: scale(1); }
 
-        /* Состояние для анимации "рассыпания" */
         .modal-content.dust {
             opacity: 0 !important;
             pointer-events: none;
             transition: opacity 0.1s;
         }
 
-        /* Канвас для частиц */
         .dust-particle {
             position: fixed;
             pointer-events: none;
@@ -437,6 +439,7 @@
         <section class="relative pt-32 pb-8">
             <div class="container mx-auto px-4">
                 <div class="glass-block py-6 px-6 text-center max-w-4xl mx-auto">
+                    <!-- Заголовок адаптирован для Chrome: перенос без разрывов слов -->
                     <h1 class="mb-6 uppercase font-bold header-static-blue">Оцифровка <br> видеокассет</h1>
                     <div class="text-lg text-slate-600 max-w-2xl mx-auto mb-8 mobile-description">
                         <p>Перенесите ваши теплые воспоминания в современный цифровой формат. Максимум что возможно получить с кассет гарантирую.</p>
@@ -704,7 +707,7 @@
                 layerCanvases.forEach((c, i) => {
                     c.className = "dust-particle";
                     c.style.left = rect.left + "px";
-                    c.style.top = (rect.top + window.scrollY) + "px"; // Исправление позиции частиц
+                    c.style.top = (rect.top + window.scrollY) + "px"; 
                     c.style.width = rect.width + "px";
                     c.style.height = rect.height + "px";
                     c.style.transition = `all 1s ease-out ${i / layers}s`;
