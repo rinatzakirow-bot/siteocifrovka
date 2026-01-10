@@ -252,7 +252,7 @@
             background: transparent;
             color: #24A1DE;
             border: 2px solid #24A1DE;
-            margin-top: 1.5rem;
+            margin-top: 1rem;
             box-shadow: none;
         }
         .btn-outline-tg:hover {
@@ -261,7 +261,7 @@
             border-color: #0088CC;
         }
 
-        .form-input { width: 100%; padding: 20px; border: 3px solid #cbd5e1; background: #f8fafc; border-radius: 18px; font-size: 18px; outline: none; color: #000000; }
+        .form-input { width: 100%; padding: 14px 20px; border: 3px solid #cbd5e1; background: #f8fafc; border-radius: 18px; font-size: 16px; outline: none; color: #000000; }
         .form-input:focus { border-color: #24A1DE; }
 
         .tg-float {
@@ -309,13 +309,16 @@
         }
         .modal-overlay.active { display: flex; opacity: 1; }
         
+        /* КОРРЕКТИРОВКА ВЕРТИКАЛЬНОГО РАЗМЕРА ОКНА ЗАКАЗА */
         .modal-content {
-            background: #ffffff; width: 100%; max-width: 500px; border-radius: 40px;
-            padding: 48px 24px; border: 3px solid #e2e8f0; 
+            background: #ffffff; width: 100%; max-width: 480px; border-radius: 40px;
+            padding: 36px 24px; border: 3px solid #e2e8f0; 
             box-shadow: 0 40px 100px rgba(0,0,0,0.12), 0 10px 30px rgba(0,0,0,0.05);
             position: relative;
             transform: scale(0.8);
             transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+            max-height: 95vh;
+            overflow-y: auto;
         }
         .modal-overlay.active .modal-content { transform: scale(1); opacity: 1; }
 
@@ -340,7 +343,7 @@
             overflow: hidden; 
             flex-shrink: 0; 
             background: rgba(255, 255, 255, 0.2);
-            border: 2px solid #ffffff; /* Белая окантовка */
+            border: 2px solid #ffffff; 
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         .header-logo { width: 100%; height: 100%; object-fit: contain; }
@@ -366,7 +369,7 @@
         .gallery-image-wrapper img {
             max-width: 100%;
             height: auto;
-            max-height: 45vh;
+            max-height: 40vh;
             border-radius: 16px;
             object-fit: contain;
         }
@@ -464,6 +467,8 @@
             .gallery-container { gap: 5px; }
             .calc-val { font-size: 2.8rem; }
             .counter-btn { width: 56px; height: 56px; }
+            .modal-content { padding: 32px 20px; }
+            .elegant-btn { padding: 18px 24px !important; font-size: 14px !important; }
         }
 
         /* КРАСНАЯ ШАПКА */
@@ -482,6 +487,9 @@
             background-color: #ffffff !important;
             color: #dc2626 !important;
         }
+
+        /* УМЕНЬШЕНИЕ ОТСТУПОВ ВНУТРИ ФОРМЫ */
+        .form-row { margin-bottom: 1rem; }
     </style>
 </head>
 <body>
@@ -499,7 +507,6 @@
         <div class="container mx-auto px-5 h-20 flex items-center justify-between">
             <div class="flex items-center gap-4">
                 <div class="flex items-center gap-3">
-                    <!-- ОБНОВЛЕННЫЙ КОНТЕЙНЕР ЛОГОТИПА -->
                     <div class="header-logo-wrapper">
                         <img src="logo.jpg" alt="Логотип Рината" class="header-logo" onerror="this.parentElement.innerHTML='<i class=\'fas fa-film text-white text-sm\'></i>'">
                     </div>
@@ -634,22 +641,22 @@
     <!-- Модальное окно заказа -->
     <div id="orderModal" class="modal-overlay">
         <div class="modal-content">
-            <button onclick="toggleModal('orderModal', false)" class="absolute top-6 right-6 text-slate-400 p-2 border-none bg-transparent cursor-pointer">
-                <i class="fas fa-times text-2xl"></i>
+            <button onclick="toggleModal('orderModal', false)" class="absolute top-5 right-5 text-slate-300 p-2 border-none bg-transparent cursor-pointer hover:text-slate-500 transition-colors">
+                <i class="fas fa-times text-xl"></i>
             </button>
             <div id="formContainer">
-                <div class="text-center mb-8">
-                    <h3 class="text-2xl font-bold uppercase tracking-wider mb-2">Оформить заявку</h3>
-                    <p class="text-[12px] text-slate-400 uppercase font-bold tracking-widest mobile-larger-text">Бесплатно приеду за кассетами и привезу обратно</p>
+                <div class="text-center mb-6">
+                    <h3 class="text-xl font-bold uppercase tracking-wider mb-1">Оформить заявку</h3>
+                    <p class="text-[10px] text-slate-400 uppercase font-bold tracking-widest mobile-larger-text">Бесплатно приеду за кассетами и привезу обратно</p>
                 </div>
-                <form id="orderForm" action="https://formspree.io/f/xkowabkp" method="POST" class="space-y-5">
-                    <div>
-                        <label class="text-[12px] uppercase font-bold text-slate-400 ml-2 mobile-larger-text">Телефон</label>
+                <form id="orderForm" action="https://formspree.io/f/xkowabkp" method="POST" class="space-y-4">
+                    <div class="form-row">
+                        <label class="text-[10px] uppercase font-bold text-slate-400 ml-2 mb-1 block mobile-larger-text">Телефон</label>
                         <input type="tel" id="phoneInput" name="phone" required placeholder="+7 (___) ___-__-__" class="form-input">
                     </div>
                     
-                    <div>
-                        <label class="text-[12px] uppercase font-bold text-slate-400 ml-2 mobile-larger-text">Адрес в Москве</label>
+                    <div class="form-row">
+                        <label class="text-[10px] uppercase font-bold text-slate-400 ml-2 mb-1 block mobile-larger-text">Адрес в Москве</label>
                         <textarea name="address" required rows="2" placeholder="Улица, дом, квартира" class="form-input"></textarea>
                     </div>
 
@@ -657,23 +664,23 @@
                     <input type="hidden" name="vhs_qty" id="h_vhs" value="0">
                     <input type="hidden" name="total" id="h_total" value="0">
                     
-                    <button type="submit" id="submitBtn" class="elegant-btn mt-4">Отправить заявку</button>
+                    <button type="submit" id="submitBtn" class="elegant-btn mt-2 !py-4">Отправить заявку</button>
                     
                     <div class="flex flex-col items-center">
-                        <div class="w-full h-[1px] bg-slate-100 my-6 flex items-center justify-center">
-                            <span class="bg-white px-4 text-[11px] uppercase text-slate-400 font-bold tracking-[0.2em]">или</span>
+                        <div class="w-full h-[1px] bg-slate-100 my-4 flex items-center justify-center">
+                            <span class="bg-white px-3 text-[10px] uppercase text-slate-300 font-bold tracking-[0.2em]">или</span>
                         </div>
-                        <button type="button" onclick="openTelegram()" class="elegant-btn btn-outline-tg !max-w-full">
-                            <i class="fab fa-telegram-plane"></i> Задать вопрос в Telegram
+                        <button type="button" onclick="openTelegram()" class="elegant-btn btn-outline-tg !max-w-full !py-4">
+                            <i class="fab fa-telegram-plane"></i> В Telegram
                         </button>
                     </div>
                 </form>
             </div>
-            <div id="successMessage" class="hidden text-center py-10">
-                <i class="fas fa-check-circle text-5xl mb-6 text-green-500"></i>
-                <h3 class="text-2xl font-bold uppercase mb-4">Заявка принята!</h3>
-                <p class="text-slate-500 uppercase text-[13px] font-bold mobile-larger-text">Я свяжусь с вами в ближайшее время.</p>
-                <button onclick="toggleModal('orderModal', false)" class="mt-10 underline font-bold uppercase text-[12px] text-[#24A1DE] bg-transparent border-none cursor-pointer">Закрыть окно</button>
+            <div id="successMessage" class="hidden text-center py-6">
+                <i class="fas fa-check-circle text-5xl mb-4 text-green-500"></i>
+                <h3 class="text-xl font-bold uppercase mb-2">Заявка принята!</h3>
+                <p class="text-slate-500 uppercase text-[12px] font-bold mobile-larger-text">Я свяжусь с вами в ближайшее время.</p>
+                <button onclick="toggleModal('orderModal', false)" class="mt-8 underline font-bold uppercase text-[11px] text-[#24A1DE] bg-transparent border-none cursor-pointer">Закрыть окно</button>
             </div>
         </div>
     </div>
