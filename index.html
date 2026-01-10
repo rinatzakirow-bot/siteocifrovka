@@ -430,6 +430,23 @@
             .calc-val { font-size: 2.8rem; }
             .counter-btn { width: 56px; height: 56px; }
         }
+
+        /* --- НОВЫЕ СТИЛИ ДЛЯ КРАСНОЙ ШАПКИ --- */
+        .header-red-bg {
+            background-color: #dc2626 !important; /* Красный цвет */
+        }
+        .header-red-bg .thin-header, 
+        .header-red-bg .premium-label-header {
+            color: #ffffff !important; /* Белый текст */
+        }
+        .header-red-bg .order-btn-white {
+            border-color: #ffffff !important;
+            color: #ffffff !important;
+        }
+        .header-red-bg .order-btn-white:active {
+            background-color: #ffffff !important;
+            color: #dc2626 !important;
+        }
     </style>
 </head>
 <body>
@@ -443,22 +460,23 @@
         <span class="text-[13px] uppercase tracking-widest font-bold">Задать вопрос в Telegram</span>
     </button>
 
-    <header class="fixed w-full z-40 bg-white/90 backdrop-blur-md border-b border-slate-100">
+    <!-- Шапка сайта с красным фоном -->
+    <header class="fixed w-full z-40 header-red-bg shadow-lg border-b border-red-700">
         <div class="container mx-auto px-5 h-20 flex items-center justify-between">
             <div class="flex items-center gap-4">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 flex items-center justify-center rounded-lg overflow-hidden shrink-0">
-                        <img src="logo.jpg" alt="Логотип Рината" class="header-logo" onerror="this.parentElement.innerHTML='<i class=\'fas fa-film text-[#24A1DE] text-sm\'></i>'">
+                    <div class="w-10 h-10 flex items-center justify-center rounded-lg overflow-hidden shrink-0 bg-white/20">
+                        <img src="logo.jpg" alt="Логотип Рината" class="header-logo" onerror="this.parentElement.innerHTML='<i class=\'fas fa-film text-white text-sm\'></i>'">
                     </div>
                     <div class="flex flex-col leading-tight">
-                        <span class="text-lg thin-header tracking-widest text-black font-bold">Rinat Ocifrovka</span>
-                        <span class="text-[9px] tracking-[0.15em] uppercase font-bold text-red-600 premium-label-header">
+                        <span class="text-lg thin-header tracking-widest font-bold">Rinat Ocifrovka</span>
+                        <span class="text-[9px] tracking-[0.15em] uppercase font-bold premium-label-header">
                             Premium Digital Service
                         </span>
                     </div>
                 </div>
             </div>
-            <button onclick="toggleModal('orderModal', true)" class="text-[12px] uppercase tracking-widest border-2 border-red-600 px-5 py-2.5 rounded-full font-bold text-red-600 active:bg-red-600 active:text-white transition-colors shrink-0">
+            <button onclick="toggleModal('orderModal', true)" class="text-[12px] uppercase tracking-widest border-2 order-btn-white px-5 py-2.5 rounded-full font-bold transition-colors shrink-0">
                 Заказать
             </button>
         </div>
@@ -528,7 +546,6 @@
                     </div>
 
                     <div class="calc-grid">
-                        <!-- Блок: От камеры -->
                         <div class="calc-item-block">
                             <div class="calc-item-label">Кассеты от видеокамер</div>
                             <div class="calc-controls-row">
@@ -541,7 +558,6 @@
                             <div class="calc-item-sub">MiniDV, Hi8, 8mm, VHS-C</div>
                         </div>
 
-                        <!-- Блок: VHS -->
                         <div class="calc-item-block">
                             <div class="calc-item-label">Стандартные VHS кассеты</div>
                             <div class="calc-controls-row">
@@ -575,6 +591,7 @@
         </section>
     </main>
 
+    <!-- Модальные окна и скрипты остаются прежними -->
     <div id="orderModal" class="modal-overlay">
         <div class="modal-content">
             <button onclick="toggleModal('orderModal', false)" class="absolute top-6 right-6 text-slate-400 p-2 border-none bg-transparent cursor-pointer">
@@ -713,23 +730,21 @@
             if (show) {
                 modal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
-                // Небольшая задержка для запуска CSS транзиций (active)
                 requestAnimationFrame(() => {
                     modal.classList.add('active');
                     content.classList.remove('fade-out');
                 });
             } else {
-                // Добавляем класс плавного исчезновения
                 content.classList.add('fade-out');
                 modal.style.opacity = '0';
                 
                 setTimeout(() => {
                     modal.classList.remove('active');
                     modal.style.display = 'none';
-                    modal.style.opacity = ''; // Сброс прозрачности оверлея
+                    modal.style.opacity = '';
                     content.classList.remove('fade-out');
                     document.body.style.overflow = 'auto';
-                }, 300); // Время совпадает с transition в CSS
+                }, 300);
             }
         }
 
