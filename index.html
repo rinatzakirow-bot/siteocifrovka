@@ -121,6 +121,7 @@
             line-height: 1;
             padding-bottom: 2px;
             text-shadow: none; 
+            font-variant-numeric: tabular-nums;
         }
 
         .light-beam-effect {
@@ -162,6 +163,7 @@
         .counter-btn {
             width: 64px; height: 64px; display: flex; align-items: center; justify-content: center;
             border: 3px solid #cbd5e1; border-radius: 50%; color: #000000; background: #ffffff; font-size: 20px;
+            flex-shrink: 0;
         }
 
         .card-label { font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; color: #000000; display: flex; align-items: center; gap: 8px; }
@@ -382,14 +384,22 @@
         .calc-controls-row {
             display: flex;
             align-items: center;
+            justify-content: center; /* Центровка всей строки */
+            width: 100%;
+        }
+        .calc-val-container {
+            display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            align-items: center;
+            flex: 1; /* Занимает всё пространство между кнопками для идеальной центровки */
+            min-width: 0;
         }
         .calc-val {
             font-size: 3.5rem;
             font-weight: 700;
-            min-width: 70px;
             line-height: 1;
+            text-align: center;
+            font-variant-numeric: tabular-nums;
         }
         .calc-item-sub {
             font-size: 10px;
@@ -400,10 +410,25 @@
             letter-spacing: 0.05em;
         }
 
+        /* Оптическая центровка итоговой цены */
+        .total-price-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: baseline;
+            justify-content: center;
+        }
+        .currency-symbol {
+            position: absolute;
+            left: 100%;
+            margin-left: 8px;
+            bottom: 0.2em;
+        }
+
         @media (max-width: 480px) {
             .side-nav-btn { width: 36px; height: 36px; font-size: 14px; }
             .gallery-container { gap: 5px; }
             .calc-val { font-size: 2.8rem; }
+            .counter-btn { width: 56px; height: 56px; }
         }
     </style>
 </head>
@@ -508,7 +533,9 @@
                             <div class="calc-item-label">Кассеты от видеокамер</div>
                             <div class="calc-controls-row">
                                 <button onclick="updateQty('cam', -1)" class="counter-btn shadow-sm active:scale-95"><i class="fas fa-minus"></i></button>
-                                <span id="valCam" class="calc-val">0</span>
+                                <div class="calc-val-container">
+                                    <span id="valCam" class="calc-val">0</span>
+                                </div>
                                 <button onclick="updateQty('cam', 1)" class="counter-btn shadow-sm active:scale-95"><i class="fas fa-plus"></i></button>
                             </div>
                             <div class="calc-item-sub">MiniDV, Hi8, 8mm, VHS-C</div>
@@ -519,7 +546,9 @@
                             <div class="calc-item-label">Стандартные VHS кассеты</div>
                             <div class="calc-controls-row">
                                 <button onclick="updateQty('vhs', -1)" class="counter-btn shadow-sm active:scale-95"><i class="fas fa-minus"></i></button>
-                                <span id="valVhs" class="calc-val">0</span>
+                                <div class="calc-val-container">
+                                    <span id="valVhs" class="calc-val">0</span>
+                                </div>
                                 <button onclick="updateQty('vhs', 1)" class="counter-btn shadow-sm active:scale-95"><i class="fas fa-plus"></i></button>
                             </div>
                             <div class="calc-item-sub">Большие кассеты</div>
@@ -527,8 +556,11 @@
                     </div>
 
                     <div class="text-center">
-                        <div class="text-6xl md:text-7xl font-bold flex items-baseline justify-center mb-12">
-                            <span id="totalPrice" class="price-glass-reflection">0</span><span class="text-2xl ml-4 text-slate-300">₽</span>
+                        <div class="text-6xl md:text-7xl font-bold flex items-center justify-center mb-12">
+                            <div class="total-price-wrapper">
+                                <span id="totalPrice" class="price-glass-reflection text-center">0</span>
+                                <span class="currency-symbol text-2xl text-slate-300">₽</span>
+                            </div>
                         </div>
                         <button onclick="toggleModal('orderModal', true)" class="elegant-btn elegant-btn-pulse mx-auto">Сделать заказ</button>
                         
