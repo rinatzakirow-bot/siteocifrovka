@@ -49,6 +49,31 @@
             text-align: center;
         }
 
+        /* ЭФФЕКТ ПЛАВНОГО ПЕРЕЛИВА ДЛЯ ЗАГОЛОВКА (БЕЗ ТЕНИ) */
+        .title-flow-effect {
+            background: linear-gradient(
+                to right,
+                #24A1DE 0%,
+                #24A1DE 35%,
+                #7dd3fc 45%,
+                #ffffff 50%,
+                #7dd3fc 55%,
+                #24A1DE 65%,
+                #24A1DE 100%
+            );
+            background-size: 400% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: flow-shimmer 6s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes flow-shimmer {
+            0% { background-position: 100% 50%; }
+            100% { background-position: -300% 50%; }
+        }
+
         @media (max-width: 768px) {
             body { font-size: 18px; line-height: 1.7; }
             h2 { font-size: 1.75rem !important; font-weight: 700 !important; }
@@ -108,10 +133,7 @@
 
         .header-static-blue {
             color: #24A1DE;
-            text-shadow: 
-                2px 2px 4px rgba(0, 0, 0, 0.1),
-                4px 4px 10px rgba(36, 161, 222, 0.2),
-                6px 6px 20px rgba(0, 0, 0, 0.05);
+            text-shadow: none !important;
         }
 
         .price-glass-reflection {
@@ -297,7 +319,6 @@
         }
         .modal-overlay.active .modal-content { transform: scale(1); opacity: 1; }
 
-        /* Класс для плавного растворения при закрытии */
         .modal-content.fade-out {
             transform: scale(0.9) !important;
             opacity: 0 !important;
@@ -307,7 +328,22 @@
         .simple-badge-container { position: relative; display: inline-block; padding: 15px 35px; z-index: 1; }
 
         .tg-text-color { color: #24A1DE; }
-        .header-logo { width: 100%; height: 100%; object-fit: contain; border-radius: 6px; }
+        
+        /* ОБНОВЛЕННЫЙ СТИЛЬ ЛОГОТИПА С ОКАНТОВКОЙ */
+        .header-logo-wrapper {
+            width: 42px; 
+            height: 42px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border-radius: 10px; 
+            overflow: hidden; 
+            flex-shrink: 0; 
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid #ffffff; /* Белая окантовка */
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .header-logo { width: 100%; height: 100%; object-fit: contain; }
 
         .gallery-container {
             display: flex;
@@ -384,14 +420,14 @@
         .calc-controls-row {
             display: flex;
             align-items: center;
-            justify-content: center; /* Центровка всей строки */
+            justify-content: center;
             width: 100%;
         }
         .calc-val-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            flex: 1; /* Занимает всё пространство между кнопками для идеальной центровки */
+            flex: 1; 
             min-width: 0;
         }
         .calc-val {
@@ -410,7 +446,6 @@
             letter-spacing: 0.05em;
         }
 
-        /* Оптическая центровка итоговой цены */
         .total-price-wrapper {
             position: relative;
             display: inline-flex;
@@ -431,13 +466,13 @@
             .counter-btn { width: 56px; height: 56px; }
         }
 
-        /* --- НОВЫЕ СТИЛИ ДЛЯ КРАСНОЙ ШАПКИ --- */
+        /* КРАСНАЯ ШАПКА */
         .header-red-bg {
-            background-color: #dc2626 !important; /* Красный цвет */
+            background-color: #dc2626 !important; 
         }
         .header-red-bg .thin-header, 
         .header-red-bg .premium-label-header {
-            color: #ffffff !important; /* Белый текст */
+            color: #ffffff !important; 
         }
         .header-red-bg .order-btn-white {
             border-color: #ffffff !important;
@@ -460,12 +495,12 @@
         <span class="text-[13px] uppercase tracking-widest font-bold">Задать вопрос в Telegram</span>
     </button>
 
-    <!-- Шапка сайта с красным фоном -->
     <header class="fixed w-full z-40 header-red-bg shadow-lg border-b border-red-700">
         <div class="container mx-auto px-5 h-20 flex items-center justify-between">
             <div class="flex items-center gap-4">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 flex items-center justify-center rounded-lg overflow-hidden shrink-0 bg-white/20">
+                    <!-- ОБНОВЛЕННЫЙ КОНТЕЙНЕР ЛОГОТИПА -->
+                    <div class="header-logo-wrapper">
                         <img src="logo.jpg" alt="Логотип Рината" class="header-logo" onerror="this.parentElement.innerHTML='<i class=\'fas fa-film text-white text-sm\'></i>'">
                     </div>
                     <div class="flex flex-col leading-tight">
@@ -486,7 +521,9 @@
         <section class="relative pt-32 pb-8">
             <div class="container mx-auto px-4">
                 <div class="glass-block py-6 px-6 text-center max-w-4xl mx-auto">
-                    <h1 class="mb-6 uppercase font-bold header-static-blue">Оцифровка <br> видеокассет</h1>
+                    <h1 class="mb-6 uppercase font-bold header-static-blue">
+                        <span class="title-flow-effect">Оцифровка <br> видеокассет</span>
+                    </h1>
                     <div class="text-lg text-slate-600 max-w-2xl mx-auto mb-8 mobile-description">
                         <p>Перенесите ваши теплые воспоминания в современный цифровой формат. Максимум что возможно получить с кассет гарантирую.</p>
                         <div class="mt-4 block">
@@ -497,6 +534,7 @@
             </div>
         </section>
 
+        <!-- Секция типов кассет -->
         <section class="py-6">
             <div class="container mx-auto px-4">
                 <div class="max-w-4xl mx-auto text-center mb-8">
@@ -515,6 +553,7 @@
             </div>
         </section>
 
+        <!-- Преимущества -->
         <section class="py-10">
             <div class="container mx-auto px-4">
                 <div class="glass-block py-16 px-8 max-w-5xl mx-auto grid md:grid-cols-3 gap-12">
@@ -537,6 +576,7 @@
             </div>
         </section>
 
+        <!-- Калькулятор -->
         <section id="calc" class="py-10 pb-24">
             <div class="container mx-auto px-4">
                 <div class="max-w-2xl mx-auto glass-block p-8 md:p-14">
@@ -591,7 +631,7 @@
         </section>
     </main>
 
-    <!-- Модальные окна и скрипты остаются прежними -->
+    <!-- Модальное окно заказа -->
     <div id="orderModal" class="modal-overlay">
         <div class="modal-content">
             <button onclick="toggleModal('orderModal', false)" class="absolute top-6 right-6 text-slate-400 p-2 border-none bg-transparent cursor-pointer">
@@ -638,6 +678,7 @@
         </div>
     </div>
 
+    <!-- Модальное окно галереи -->
     <div id="imageModal" class="modal-overlay">
         <div class="modal-content text-center">
             <button onclick="toggleModal('imageModal', false)" class="absolute top-6 right-6 text-slate-400 p-2 border-none bg-transparent cursor-pointer z-20">
