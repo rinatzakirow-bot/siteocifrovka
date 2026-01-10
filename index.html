@@ -432,7 +432,7 @@
                     <h1 class="text-4xl md:text-6xl mb-6 leading-tight uppercase font-bold header-static-blue">Оцифровка <br> видеокассет</h1>
                     <div class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto mb-8 mobile-description">
                         <p>Перенесите ваши теплые воспоминания в современный цифровой формат. Максимум что возможно получить с кассет гарантирую.</p>
-                        <div class="mt-2">
+                        <div class="mt-4 block">
                             <span class="magnify-wrapper uppercase tracking-[0.3em] font-extrabold mobile-larger-text" id="magnifyText"></span>
                         </div>
                     </div>
@@ -604,7 +604,7 @@
         textToMagnify.split('').forEach((char, index) => {
             const span = document.createElement('span');
             span.textContent = char === ' ' ? '\u00A0' : char; 
-            span.style.animationDelay = `${index * 0.05}s`; // Ускорена задержка появления букв
+            span.style.animationDelay = `${index * 0.05}s`; 
             container.appendChild(span);
         });
 
@@ -656,10 +656,17 @@
 
         IMask(document.getElementById('phoneInput'), { mask: '+{7} (000) 000-00-00' });
 
-        // --- ЛОГИКА РАССЫПАНИЯ (THANOS SNAP) ---
-        function disintegrate(element) {
-            html2canvas(element, { backgroundColor: null }).then(canvas => {
-                const ctx = canvas.getContext("2d");
+        async function disintegrate(element) {
+            try {
+                // Пытаемся сделать скриншот
+                const canvas = await html2canvas(element, { 
+                    backgroundColor: null,
+                    scale: window.devicePixelRatio || 1,
+                    logging: false,
+                    useCORS: true
+                });
+
+                const ctx = canvas.getContext("2d", { willReadFrequently: true });
                 const { width, height } = canvas;
                 const imgData = ctx.getImageData(0, 0, width, height);
                 const pixelData = imgData.data;
@@ -675,10 +682,12 @@
                 for (let x = 0; x < width; x++) {
                     for (let y = 0; y < height; y++) {
                         const i = (y * width + x) * 4;
-                        const l = Math.floor(layers * (Math.random() + (2 * x) / width) / 3);
-                        const targetCtx = layerContexts[l];
-                        targetCtx.fillStyle = `rgba(${pixelData[i]}, ${pixelData[i+1]}, ${pixelData[i+2]}, ${pixelData[i+3] / 255})`;
-                        targetCtx.fillRect(x, y, 1, 1);
+                        if (pixelData[i+3] > 0) { // Только непрозрачные пиксели
+                            const l = Math.floor(layers * (Math.random() + (2 * x) / width) / 3);
+                            const targetCtx = layerContexts[l];
+                            targetCtx.fillStyle = `rgba(${pixelData[i]}, ${pixelData[i+1]}, ${pixelData[i+2]}, ${pixelData[i+3] / 255})`;
+                            targetCtx.fillRect(x, y, 1, 1);
+                        }
                     }
                 }
 
@@ -703,22 +712,38 @@
 
                     setTimeout(() => c.remove(), 2500);
                 });
-            });
+                return true;
+            } catch (e) {
+                console.warn("Disintegration failed, falling back to instant close", e);
+                return false;
+            }
         }
 
-        function toggleModal(id, show) {
+        async function toggleModal(id, show) {
             const modal = document.getElementById(id);
             const content = modal.querySelector('.modal-content');
+            
             if (show) {
                 content.classList.remove('dust');
                 modal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             } else {
-                disintegrate(content);
-                setTimeout(() => {
+                // Добавляем таймаут-предохранитель: если за 100мс html2canvas не стартанул нормально, закрываем просто так
+                const success = await Promise.race([
+                    disintegrate(content),
+                    new Promise(res => setTimeout(() => res(false), 200))
+                ]);
+
+                if (success) {
+                    setTimeout(() => {
+                        modal.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }, 1500);
+                } else {
+                    // Фолбэк для мобилок
                     modal.classList.remove('active');
                     document.body.style.overflow = 'auto';
-                }, 1500);
+                }
             }
         }
 
