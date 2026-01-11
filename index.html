@@ -175,11 +175,12 @@
         }
 
         .soft-card-static {
-            background: #ffffff; border: 3px solid #e2e8f0; border-radius: 20px;
+            background: #f8fafc; /* ИЗМЕНЕНО: Цвет как у окон калькулятора */
+            border: 3px solid #e2e8f0; border-radius: 20px;
             padding: 20px; display: flex; align-items: center; justify-content: center;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); cursor: pointer; transition: all 0.2s ease;
         }
-        .soft-card-static:hover { border-color: #24A1DE; transform: translateY(-2px); }
+        .soft-card-static:hover { border-color: #24A1DE; transform: translateY(-2px); background: #ffffff; }
 
         .counter-btn {
             width: 64px; height: 64px; display: flex; align-items: center; justify-content: center;
@@ -189,7 +190,6 @@
 
         .card-label { font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; color: #000000; display: flex; align-items: center; gap: 10px; }
         
-        /* УВЕЛИЧЕННАЯ ИКОНКА ГЛАЗА */
         .card-label i {
             font-size: 18px !important;
             color: #24A1DE;
@@ -212,7 +212,6 @@
             100% { transform: scale(1); box-shadow: 0 15px 35px rgba(220, 38, 38, 0.3); }
         }
 
-        /* АНИМАЦИЯ ТРОЙНОГО ВЗДРАГИВАНИЯ */
         .notice-entry-shake {
             animation: shake-triple 0.4s ease-in-out 3;
         }
@@ -294,7 +293,6 @@
             transform: translateX(-50) scale(0.96);
         }
 
-        /* --- МОДАЛЬНЫЕ ОКНА --- */
         .modal-overlay {
             display: none; position: fixed; inset: 0; z-index: 100;
             background: rgba(255, 255, 255, 0.15);
@@ -307,7 +305,7 @@
         .modal-overlay.active { display: flex; opacity: 1; }
         
         .modal-content {
-            background: #f8fafc; /* Серый цвет вместо белого */
+            background: #f8fafc; 
             width: 100%; max-width: 480px; border-radius: 40px;
             padding: 36px 24px; border: 3px solid #e2e8f0; 
             box-shadow: 0 40px 100px rgba(0,0,0,0.12), 0 10px 30px rgba(0,0,0,0.05);
@@ -325,7 +323,6 @@
             pointer-events: none;
         }
 
-        /* ЛОГОТИП */
         .header-logo-wrapper {
             width: 42px; 
             height: 42px; 
@@ -389,7 +386,6 @@
             background: white;
         }
 
-        /* КАЛЬКУЛЯТОР */
         .calc-grid {
             display: flex;
             flex-direction: column;
@@ -460,7 +456,7 @@
             .counter-btn { width: 56px; height: 56px; }
             .modal-content { padding: 32px 20px; }
             .elegant-btn { padding: 18px 24px !important; font-size: 14px !important; }
-            .card-label i { font-size: 20px !important; } /* На мобилках еще чуть больше */
+            .card-label i { font-size: 20px !important; } 
         }
 
         .header-red-bg {
@@ -479,6 +475,39 @@
             color: #dc2626 !important;
         }
         .form-row { margin-bottom: 1rem; }
+
+        /* СТИЛЬ ПЛАШКИ FAQ */
+        .faq-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: #f8fafc;
+            border: 3px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 16px 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: #1a1a1a;
+            max-width: 100%;
+        }
+        .faq-banner:hover {
+            border-color: #24A1DE;
+            background: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        .faq-banner i {
+            color: #24A1DE;
+            font-size: 20px;
+        }
+        .faq-banner span {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
     </style>
 </head>
 <body>
@@ -569,6 +598,14 @@
                         <p class="text-slate-500 uppercase text-[13px] font-bold leading-relaxed mobile-larger-text">Прозрачный расчёт. Минимальный заказ — всего 2070 ₽.</p>
                     </div>
                 </div>
+                
+                <!-- ПЛАШКА ПОДРОБНЕЕ -->
+                <div class="max-w-sm mx-auto mt-8 px-4">
+                    <a href="https://rinatzakirow-bot.github.io/ocifrovka/" target="_blank" class="faq-banner">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Ещё более подробно</span>
+                    </a>
+                </div>
             </div>
         </section>
 
@@ -615,7 +652,6 @@
                             </div>
                         </div>
 
-                        <!-- ПРЕДУПРЕЖДАЮЩАЯ НАДПИСЬ ТЕПЕРЬ ТУТ -->
                         <div id="finalPriceNotice" class="hidden mb-10 max-w-md mx-auto px-4">
                             <p id="targetNoticeText" class="text-[12px] md:text-[13px] uppercase tracking-widest font-bold pulse-text leading-relaxed mobile-larger-text">
                                 Окончательная стоимость обычно значительно ниже, так как кассеты крайне редко записаны полностью
@@ -682,7 +718,7 @@
 
     <!-- Модальное окно галереи -->
     <div id="imageModal" class="modal-overlay">
-        <div class="modal-content text-center" style="background: #ffffff;"> <!-- Для галереи оставляем белый фон для контраста фото -->
+        <div class="modal-content text-center" style="background: #ffffff;">
             <button onclick="toggleModal('imageModal', false)" class="absolute top-6 right-6 text-slate-400 p-2 border-none bg-transparent cursor-pointer z-20">
                 <i class="fas fa-times text-2xl"></i>
             </button>
@@ -808,7 +844,6 @@
             if (calculatedPrice > minOrder) {
                 if (notice.classList.contains('hidden')) {
                     notice.classList.remove('hidden');
-                    // Добавляем вздрагивание при ПЕРВОМ появлении
                     notice.classList.add('notice-entry-shake');
                     setTimeout(() => notice.classList.remove('notice-entry-shake'), 1300);
                 }
