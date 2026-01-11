@@ -212,23 +212,15 @@
             100% { transform: scale(1); box-shadow: 0 15px 35px rgba(220, 38, 38, 0.3); }
         }
 
+        /* АНИМАЦИЯ ТРОЙНОГО ВЗДРАГИВАНИЯ */
         .notice-entry-shake {
-            animation: shake-triple 1.2s cubic-bezier(.36,.07,.19,.97) both;
-            transform: translate3d(0, 0, 0);
-            backface-visibility: hidden;
-            perspective: 1000px;
+            animation: shake-triple 0.4s ease-in-out 3;
         }
 
         @keyframes shake-triple {
-            3%, 10%, 17%, 24% { transform: translate3d(-3px, 0, 0); }
-            6%, 13%, 20% { transform: translate3d(3px, 0, 0); }
-            28%, 35% { transform: translate3d(0, 0, 0); }
-            38%, 45%, 52%, 59% { transform: translate3d(-3px, 0, 0); }
-            41%, 48%, 55% { transform: translate3d(3px, 0, 0); }
-            63%, 70% { transform: translate3d(0, 0, 0); }
-            73%, 80%, 87%, 94% { transform: translate3d(-3px, 0, 0); }
-            76%, 83%, 90% { transform: translate3d(3px, 0, 0); }
-            100% { transform: translate3d(0, 0, 0); }
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
         }
 
         .attention-shake {
@@ -616,23 +608,24 @@
                     </div>
 
                     <div class="text-center">
-                        <div class="text-6xl md:text-7xl font-bold flex items-center justify-center mb-12">
+                        <div class="text-6xl md:text-7xl font-bold flex items-center justify-center mb-4">
                             <div class="total-price-wrapper">
                                 <span id="totalPrice" class="price-glass-reflection text-center">0</span>
                                 <span class="currency-symbol text-2xl text-slate-300">₽</span>
                             </div>
                         </div>
-                        <button onclick="toggleModal('orderModal', true)" class="elegant-btn elegant-btn-pulse mx-auto">Сделать заказ</button>
-                        
-                        <!-- НОВАЯ НАДПИСЬ ПОД КНОПКОЙ -->
-                        <div class="mt-4">
-                            <span class="text-[12px] uppercase tracking-[0.2em] font-bold text-slate-400 mobile-larger-text">Готово будет уже завтра</span>
-                        </div>
 
-                        <div id="finalPriceNotice" class="hidden mt-10 max-w-md mx-auto px-4">
+                        <!-- ПРЕДУПРЕЖДАЮЩАЯ НАДПИСЬ ТЕПЕРЬ ТУТ -->
+                        <div id="finalPriceNotice" class="hidden mb-10 max-w-md mx-auto px-4">
                             <p id="targetNoticeText" class="text-[12px] md:text-[13px] uppercase tracking-widest font-bold pulse-text leading-relaxed mobile-larger-text">
                                 Окончательная стоимость обычно значительно ниже, так как кассеты крайне редко записаны полностью
                             </p>
+                        </div>
+
+                        <button onclick="toggleModal('orderModal', true)" class="elegant-btn elegant-btn-pulse mx-auto">Сделать заказ</button>
+                        
+                        <div class="mt-4">
+                            <span class="text-[12px] uppercase tracking-[0.2em] font-bold text-slate-400 mobile-larger-text">Готово будет уже завтра</span>
                         </div>
                     </div>
                 </div>
@@ -813,20 +806,23 @@
             document.getElementById('h_total').value = finalPrice;
             const notice = document.getElementById('finalPriceNotice');
             if (calculatedPrice > minOrder) {
-                notice.classList.remove('hidden');
+                if (notice.classList.contains('hidden')) {
+                    notice.classList.remove('hidden');
+                    // Добавляем вздрагивание при ПЕРВОМ появлении
+                    notice.classList.add('notice-entry-shake');
+                    setTimeout(() => notice.classList.remove('notice-entry-shake'), 1300);
+                }
             } else {
                 notice.classList.add('hidden');
             }
-            checkTgOverlap(); // Проверяем перекрытие сразу после изменения цены
+            checkTgOverlap(); 
         }
 
-        // Логика скрытия кнопки Telegram при перекрытии текста
         function checkTgOverlap() {
             const tgBtn = document.getElementById('floatingTgBtn');
             const notice = document.getElementById('finalPriceNotice');
             const targetText = document.getElementById('targetNoticeText');
             
-            // Если блок с текстом скрыт, кнопка всегда видна
             if (notice.classList.contains('hidden')) {
                 tgBtn.style.opacity = '1';
                 tgBtn.style.pointerEvents = 'auto';
@@ -837,7 +833,6 @@
             const tgRect = tgBtn.getBoundingClientRect();
             const textRect = targetText.getBoundingClientRect();
 
-            // Проверяем пересечение по вертикали и горизонтали (с учетом центрирования)
             const isOverlapping = !(
                 tgRect.top > textRect.bottom || 
                 tgRect.bottom < textRect.top || 
@@ -856,7 +851,6 @@
             }
         }
 
-        // Слушаем скролл и изменение размеров окна
         window.addEventListener('scroll', checkTgOverlap);
         window.addEventListener('resize', checkTgOverlap);
 
