@@ -110,7 +110,7 @@
             display: inline-flex;
             justify-content: center;
             gap: 0;
-            color: #dc2626; /* ИЗМЕНЕНО: Цвет текста на красный */
+            color: #dc2626; 
             font-size: 24px; 
             flex-wrap: wrap;
         }
@@ -175,7 +175,7 @@
         }
 
         .soft-card-static {
-            background: #f8fafc; /* ИЗМЕНЕНО: Цвет как у окон калькулятора */
+            background: #f8fafc; 
             border: 3px solid #e2e8f0; border-radius: 20px;
             padding: 20px; display: flex; align-items: center; justify-content: center;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); cursor: pointer; transition: all 0.2s ease;
@@ -508,6 +508,46 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
         }
+
+        /* НОВЫЙ БЛОК ОТЗЫВОВ */
+        .review-card {
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 32px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+        .review-card:hover {
+            border-color: #24A1DE;
+            background: #ffffff;
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+        }
+        .stars-gold {
+            color: #fbbf24;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        /* РЕЙТИНГ В ФОРМЕ */
+        .rating-select {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .rating-dot {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #cbd5e1;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .rating-dot.active {
+            background: #fbbf24;
+            border-color: #fbbf24;
+        }
     </style>
 </head>
 <body>
@@ -610,7 +650,7 @@
         </section>
 
         <!-- Калькулятор -->
-        <section id="calc" class="py-10 pb-24">
+        <section id="calc" class="py-10">
             <div class="container mx-auto px-4">
                 <div class="max-w-2xl mx-auto glass-block p-8 md:p-14">
                     <div class="text-center mb-10">
@@ -667,7 +707,108 @@
                 </div>
             </div>
         </section>
+
+        <!-- БЛОК ОТЗЫВОВ -->
+        <section id="reviews" class="py-20">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center mb-12">
+                    <h2 class="text-2xl md:text-3xl uppercase tracking-[0.2em] font-bold mb-4">Отзывы клиентов</h2>
+                    <p class="text-[11px] md:text-[13px] uppercase tracking-[0.25em] font-bold text-slate-400">Что говорят о моей работе</p>
+                </div>
+                
+                <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                    <div class="review-card">
+                        <div class="stars-gold">★★★★★</div>
+                        <p class="text-[14px] font-medium leading-relaxed mb-6 italic">"Оцифровала старые кассеты со свадьбы родителей. Качество превзошло все ожидания! Ринат сам забрал и привез уже готовую флешку. Очень удобно и быстро."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-500">Е</div>
+                            <div class="text-left">
+                                <div class="text-[12px] font-bold uppercase tracking-wider">Елена Воронова</div>
+                                <div class="text-[10px] text-slate-400 uppercase font-bold">Москва</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="stars-gold">★★★★★</div>
+                        <p class="text-[14px] font-medium leading-relaxed mb-6 italic">"Нужно было срочно оцифровать 5 кассет MiniDV для фильма. Ринат сделал всё за сутки. Цвета сочные, звук чистый. Рекомендую как профессионала своего дела."</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-500">М</div>
+                            <div class="text-left">
+                                <div class="text-[12px] font-bold uppercase tracking-wider">Михаил П.</div>
+                                <div class="text-[10px] text-slate-400 uppercase font-bold">Химки</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="stars-gold">★★★★★</div>
+                        <p class="text-[14px] font-medium leading-relaxed mb-6 italic">"Самый честный сервис. По калькулятору выходило 5000, а по факту заплатил 3200, потому что кассеты были записаны наполовину. Огромное спасибо за честность!"</p>
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center font-bold text-slate-500">А</div>
+                            <div class="text-left">
+                                <div class="text-[12px] font-bold uppercase tracking-wider">Андрей Котов</div>
+                                <div class="text-[10px] text-slate-400 uppercase font-bold">Москва</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- КНОПКА ОСТАВИТЬ ОТЗЫВ -->
+                <div class="text-center">
+                    <button onclick="toggleModal('reviewModal', true)" class="elegant-btn btn-outline-tg mx-auto !w-auto">Оставить отзыв</button>
+                </div>
+            </div>
+        </section>
     </main>
+
+    <!-- Модальное окно для нового отзыва -->
+    <div id="reviewModal" class="modal-overlay">
+        <div class="modal-content">
+            <button onclick="toggleModal('reviewModal', false)" class="absolute top-5 right-5 text-slate-300 p-2 border-none bg-transparent cursor-pointer hover:text-slate-500 transition-colors">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <div id="reviewFormContainer">
+                <div class="text-center mb-6">
+                    <h3 class="text-xl font-bold uppercase tracking-wider mb-1">Ваш отзыв</h3>
+                    <p class="text-[10px] text-slate-400 uppercase font-bold tracking-widest mobile-larger-text">Ваше мнение очень важно для меня</p>
+                </div>
+                <form id="reviewForm" action="https://formspree.io/f/xkowabkp" method="POST" class="space-y-4">
+                    <div class="form-row">
+                        <label class="text-[10px] uppercase font-bold text-slate-400 ml-2 mb-1 block mobile-larger-text">Как вас зовут?</label>
+                        <input type="text" name="name" required placeholder="Имя Фамилия" class="form-input">
+                    </div>
+                    
+                    <div class="form-row">
+                        <label class="text-[10px] uppercase font-bold text-slate-400 ml-2 mb-1 block mobile-larger-text">Ваш отзыв</label>
+                        <textarea name="review" required rows="4" placeholder="Напишите пару слов о моей работе..." class="form-input"></textarea>
+                    </div>
+
+                    <div class="form-row text-center">
+                         <label class="text-[10px] uppercase font-bold text-slate-400 mb-2 block">Оценка</label>
+                         <div class="rating-select" id="ratingDots">
+                             <div class="rating-dot active" data-val="1"></div>
+                             <div class="rating-dot active" data-val="2"></div>
+                             <div class="rating-dot active" data-val="3"></div>
+                             <div class="rating-dot active" data-val="4"></div>
+                             <div class="rating-dot active" data-val="5"></div>
+                         </div>
+                         <input type="hidden" name="stars" id="starsInput" value="5">
+                    </div>
+
+                    <input type="hidden" name="_subject" value="Новый отзыв на сайте">
+                    
+                    <button type="submit" id="reviewSubmitBtn" class="elegant-btn mt-2 !py-4">Опубликовать</button>
+                </form>
+            </div>
+            <div id="reviewSuccessMessage" class="hidden text-center py-6">
+                <i class="fas fa-heart text-5xl mb-4 text-red-500"></i>
+                <h3 class="text-xl font-bold uppercase mb-2">Спасибо!</h3>
+                <p class="text-slate-500 uppercase text-[12px] font-bold mobile-larger-text">Ваш отзыв отправлен на модерацию</p>
+                <button onclick="toggleModal('reviewModal', false)" class="mt-8 underline font-bold uppercase text-[11px] text-[#24A1DE] bg-transparent border-none cursor-pointer">Закрыть окно</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Модальное окно заказа -->
     <div id="orderModal" class="modal-overlay">
@@ -694,6 +835,7 @@
                     <input type="hidden" name="cam_qty" id="h_cam" value="0">
                     <input type="hidden" name="vhs_qty" id="h_vhs" value="0">
                     <input type="hidden" name="total" id="h_total" value="0">
+                    <input type="hidden" name="_subject" value="Новый заказ на оцифровку">
                     
                     <button type="submit" id="submitBtn" class="elegant-btn mt-2 !py-4">Отправить заявку</button>
                     
@@ -743,6 +885,10 @@
             <p class="text-[12px] text-slate-400 uppercase font-bold tracking-widest">Кассету этого типа</p>
         </div>
     </div>
+
+    <footer class="p-10 text-center text-gray-400 text-xs uppercase tracking-widest border-t border-gray-50">
+        © 2024 Rinat Ocifrovka. Все права защищены.
+    </footer>
 
     <script>
         const textToMagnify = "Готово уже завтра";
@@ -858,6 +1004,8 @@
             const notice = document.getElementById('finalPriceNotice');
             const targetText = document.getElementById('targetNoticeText');
             
+            if (!tgBtn || !notice || !targetText) return;
+
             if (notice.classList.contains('hidden')) {
                 tgBtn.style.opacity = '1';
                 tgBtn.style.pointerEvents = 'auto';
@@ -889,6 +1037,22 @@
         window.addEventListener('scroll', checkTgOverlap);
         window.addEventListener('resize', checkTgOverlap);
 
+        // Логика выбора рейтинга в форме
+        const dots = document.querySelectorAll('.rating-dot');
+        const starsInput = document.getElementById('starsInput');
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const val = parseInt(dot.dataset.val);
+                starsInput.value = val;
+                dots.forEach(d => {
+                    const dVal = parseInt(d.dataset.val);
+                    if(dVal <= val) d.classList.add('active');
+                    else d.classList.remove('active');
+                });
+            });
+        });
+
+        // Отправка основной формы заказа
         document.getElementById('orderForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const form = e.target;
@@ -914,6 +1078,34 @@
             } finally {
                 submitBtn.disabled = false;
                 submitBtn.innerText = originalBtnText;
+            }
+        });
+
+        // Отправка формы отзыва
+        document.getElementById('reviewForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const form = e.target;
+            const submitBtn = document.getElementById('reviewSubmitBtn');
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Публикация...';
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (response.ok) {
+                    document.getElementById('reviewFormContainer').classList.add('hidden');
+                    document.getElementById('reviewSuccessMessage').classList.remove('hidden');
+                    form.reset();
+                } else {
+                    alert('Ошибка при отправке.');
+                }
+            } catch (error) {
+                alert('Ошибка соединения.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = 'Опубликовать';
             }
         });
     </script>
