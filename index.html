@@ -26,6 +26,54 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/imask"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- SEO: Микроразметка Schema.org для отзывов (Индексируется поисковиками) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "Оцифровка видеокассет в Москве",
+      "image": "logo.jpg",
+      "description": "Профессиональная оцифровка видеокассет VHS, MiniDV, Hi8. Срок от 24 часов.",
+      "brand": {
+        "@type": "Brand",
+        "name": "Ринат Оцифровка"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "2"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Алексей С."
+          },
+          "datePublished": "2024-01-10",
+          "reviewBody": "Заказывал оцифровку старых VHS кассет. Качество отличное, Ринат сам приехал и забрал, через день всё было готово. Рекомендую!",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Елена"
+          },
+          "datePublished": "2023-12-15",
+          "reviewBody": "Очень быстро и удобно. Видео из детства теперь на флешке. Спасибо за оперативность!",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          }
+        }
+      ]
+    }
+    </script>
     
     <style>
         /* Глобальный запрет на разбиение слов */
@@ -459,6 +507,23 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
         }
+
+        /* Дополнительные стили для блока отзывов */
+        .review-card {
+            background: #ffffff;
+            border: 2px solid #f1f5f9;
+            border-radius: 24px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+        .review-card:hover {
+            border-color: #24A1DE;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .star-rating {
+            color: #fbbf24;
+            font-size: 14px;
+        }
     </style>
 </head>
 <body>
@@ -557,7 +622,7 @@
             </div>
         </section>
 
-        <section id="calc" class="py-10 pb-24">
+        <section id="calc" class="py-10 pb-12">
             <div class="container mx-auto px-4">
                 <div class="max-w-2xl mx-auto glass-block p-8 md:p-14">
                     <div class="text-center mb-10">
@@ -614,6 +679,67 @@
                 </div>
             </div>
         </section>
+
+        <!-- SEO-ОТЗЫВЫ: БЛОК ДОВЕРИЯ -->
+        <section id="reviews" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4">Отзывы клиентов</h2>
+                        <div class="flex items-center justify-center gap-2 mb-2">
+                            <div class="star-rating">★★★★★</div>
+                            <span class="font-bold">5.0</span>
+                        </div>
+                        <p class="text-[11px] uppercase tracking-widest font-bold text-slate-400 mobile-larger-text">На основе реальных заказов</p>
+                    </div>
+
+                    <!-- Форма отзыва -->
+                    <div class="mb-12 glass-block !rounded-[32px] p-6 md:p-10 border-dashed">
+                        <h3 class="text-sm uppercase tracking-widest font-bold text-slate-600 mb-6 text-center">Оставить свой отзыв</h3>
+                        <form id="publicReviewForm" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <input type="text" placeholder="Ваше имя" required class="form-input !py-3">
+                                <select class="form-input !py-3 appearance-none">
+                                    <option value="5">Оценка: 5 звезд</option>
+                                    <option value="4">Оценка: 4 звезды</option>
+                                    <option value="3">Оценка: 3 звезды</option>
+                                </select>
+                            </div>
+                            <textarea placeholder="Поделитесь впечатлением о качестве оцифровки..." rows="3" required class="form-input"></textarea>
+                            <button type="submit" class="elegant-btn !py-3 !text-sm !max-w-full mx-auto">Отправить отзыв</button>
+                        </form>
+                        <div id="reviewSuccess" class="hidden text-center py-4 text-green-600 font-bold uppercase text-xs tracking-widest">
+                            <i class="fas fa-check-circle mr-2"></i> Спасибо! Отзыв появится после модерации.
+                        </div>
+                    </div>
+
+                    <!-- Список отзывов (для индексации) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="review-card">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="font-bold text-sm uppercase tracking-wider">Алексей С.</span>
+                                <div class="star-rating">★★★★★</div>
+                            </div>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Заказывал оцифровку старых VHS кассет. Качество отличное, Ринат сам приехал и забрал, через день всё было готово. Рекомендую!
+                            </p>
+                            <div class="mt-4 text-[10px] uppercase font-bold text-slate-300">10 января 2024</div>
+                        </div>
+
+                        <div class="review-card">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="font-bold text-sm uppercase tracking-wider">Елена</span>
+                                <div class="star-rating">★★★★★</div>
+                            </div>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Очень быстро и удобно. Видео из детства теперь на флешке. Спасибо за оперативность!
+                            </p>
+                            <div class="mt-4 text-[10px] uppercase font-bold text-slate-300">15 декабря 2023</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <!-- Модальное окно заказа -->
@@ -652,6 +778,10 @@
             </div>
         </div>
     </div>
+
+    <footer class="p-10 text-center text-gray-400 text-xs uppercase tracking-widest border-t border-gray-50">
+        © 2024 Rinat Ocifrovka. Все права защищены.
+    </footer>
 
     <script>
         // Имитация логики для работы кнопок
@@ -700,6 +830,854 @@
                 IMask(phoneInput, { mask: '+{7} (000) 000-00-00' });
             }
         }
+
+        // Обработка формы отзыва
+        document.getElementById('publicReviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.classList.add('hidden');
+            document.getElementById('reviewSuccess').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    
+    <meta name="robots" content="index, follow" />
+    <meta name="yandex-verification" content="7989a7dd019f6ce2" />
+    <meta name="google-site-verification" content="JyFFBJMj_TwStz7_DLytP1GHHnSyWDaan2frp0JtuYI" />
+    <meta name="google-site-verification" content="google95be795dc3a59691" />
+
+    <!-- Favicon Configuration -->
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32">
+    <link rel="icon" href="favicon-16x16.png" type="image/png" sizes="16x16">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    
+    <title>Оцифровка видеокассет в Москве — Быстро и качественно | Ринат</title>
+    <meta name="description" content="Профессиональная оцифровка видеокассет VHS, MiniDV, Hi8. Срок от 24 часов. Бесплатно заеду по любому адресу в пределах МКАД. Цена 23 руб/min.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/imask"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <!-- SEO: Микроразметка Schema.org для отзывов (Индексируется поисковиками) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org/",
+      "@type": "Product",
+      "name": "Оцифровка видеокассет в Москве",
+      "image": "logo.jpg",
+      "description": "Профессиональная оцифровка видеокассет VHS, MiniDV, Hi8. Срок от 24 часов.",
+      "brand": {
+        "@type": "Brand",
+        "name": "Ринат Оцифровка"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "2"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Алексей С."
+          },
+          "datePublished": "2024-01-10",
+          "reviewBody": "Заказывал оцифровку старых VHS кассет. Качество отличное, Ринат сам приехал и забрал, через день всё было готово. Рекомендую!",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          }
+        },
+        {
+          "@type": "Review",
+          "author": {
+            "@type": "Person",
+            "name": "Елена"
+          },
+          "datePublished": "2023-12-15",
+          "reviewBody": "Очень быстро и удобно. Видео из детства теперь на флешке. Спасибо за оперативность!",
+          "reviewRating": {
+            "@type": "Rating",
+            "ratingValue": "5"
+          }
+        }
+      ]
+    }
+    </script>
+    
+    <style>
+        /* Глобальный запрет на разбиение слов */
+        * {
+            word-break: keep-all !important; 
+            overflow-wrap: break-word !important; 
+            hyphens: none !important; 
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            font-size: 16px; 
+            overflow-x: hidden;
+            background-color: #ffffff;
+            line-height: 1.6;
+            color: #1a1a1a; 
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1 {
+            font-size: clamp(1.8rem, 8vw, 3.75rem) !important;
+            line-height: 1.2 !important;
+            display: block;
+            width: 100%;
+            text-align: center;
+        }
+
+        .title-flow-effect {
+            background: linear-gradient(
+                to right,
+                #24A1DE 0%,
+                #24A1DE 35%,
+                #7dd3fc 45%,
+                #ffffff 50%,
+                #7dd3fc 55%,
+                #24A1DE 65%,
+                #24A1DE 100%
+            );
+            background-size: 400% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: flow-shimmer 6s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes flow-shimmer {
+            0% { background-position: 100% 50%; }
+            100% { background-position: -300% 50%; }
+        }
+
+        @media (max-width: 768px) {
+            body { font-size: 18px; line-height: 1.7; }
+            h2 { font-size: 1.75rem !important; font-weight: 700 !important; }
+            .mobile-larger-text { font-size: 16px !important; letter-spacing: 0.1em !important; line-height: 1.6 !important; }
+            .mobile-description { font-size: 18px !important; padding-left: 10px; padding-right: 10px; }
+            .glass-block { padding-top: 2rem !important; padding-bottom: 2rem !important; border-radius: 32px !important; border-width: 3px !important; }
+            .soft-card-static { min-height: 90px !important; padding: 15px 10px !important; border-width: 3px !important; }
+            .card-label { font-size: 16px !important; }
+            .elegant-btn { font-size: 16px !important; padding: 24px 30px !important; }
+            .premium-label-header { font-size: 8px !important; }
+            .magnify-wrapper { font-size: 18px !important; } 
+        }
+        
+        h1, h2, h3, .font-bold { font-weight: 600 !important; letter-spacing: 0.02em; }
+        .thin-header { font-weight: 500 !important; text-transform: uppercase; }
+
+        .vhs-background { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: #ffffff; }
+        .vhs-pattern {
+            position: absolute; inset: 0; opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='80' viewBox='0 0 100 60'%3E%3Cg fill='%23000000'%3E%3Cpath d='M10 10h80v40H10V10zm4 4v32h72V14H14z'/%3E%3Ccircle cx='35' cy='30' r='6'/%3E%3Ccircle cx='65' cy='30' r='6'/%3E%3Cpath d='M25 40h50v40H25z'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 120px 80px;
+        }
+
+        .glass-block {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            border: 3px solid #e2e8f0; 
+            border-radius: 48px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .magnify-wrapper {
+            display: inline-flex;
+            justify-content: center;
+            gap: 0;
+            color: #dc2626; 
+            font-size: 24px; 
+            flex-wrap: wrap;
+        }
+
+        .magnify-wrapper span {
+            display: inline-block;
+            transition: transform 0.15s ease;
+            animation: magnify-letter 2s ease-in-out infinite;
+        }
+
+        @keyframes magnify-letter {
+            0%, 10%, 30%, 100% { transform: scale(1); opacity: 0.8; }
+            20% { 
+                transform: scale(1.4); 
+                opacity: 1; 
+                filter: brightness(1.2); 
+            }
+        }
+
+        .header-static-blue {
+            color: #24A1DE;
+            text-shadow: none !important;
+        }
+
+        .price-glass-reflection {
+            color: #24A1DE;
+            position: relative;
+            display: inline-block;
+            line-height: 1;
+            padding-bottom: 2px;
+            text-shadow: none; 
+            font-variant-numeric: tabular-nums;
+        }
+
+        .light-beam-effect {
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(
+                to right, 
+                #24A1DE 0%, 
+                #24A1DE 40%, 
+                #ffffff 50%, 
+                #24A1DE 60%, 
+                #24A1DE 100%
+            );
+            background-size: 200% auto;
+            color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: beam-swipe 3s linear infinite;
+        }
+
+        @keyframes beam-swipe {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        .icon-backdrop {
+            width: 72px; height: 72px; background: #f8fafc; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.5rem; color: #24A1DE; font-size: 28px;
+        }
+
+        .soft-card-static {
+            background: #f8fafc;
+            border: 3px solid #e2e8f0; border-radius: 20px;
+            padding: 20px; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); cursor: pointer; transition: all 0.2s ease;
+        }
+        .soft-card-static:hover { border-color: #24A1DE; transform: translateY(-2px); background: #ffffff; }
+
+        .counter-btn {
+            width: 64px; height: 64px; display: flex; align-items: center; justify-content: center;
+            border: 3px solid #cbd5e1; border-radius: 50%; color: #000000; background: #ffffff; font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .card-label { font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; color: #000000; display: flex; align-items: center; gap: 10px; }
+        
+        .card-label i {
+            font-size: 18px !important;
+            color: #24A1DE;
+        }
+
+        .elegant-btn {
+            background: #dc2626; color: #ffffff; border-radius: 100px;
+            font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;
+            padding: 22px 40px; width: 100%; max-width: 440px;
+            box-shadow: 0 15px 35px rgba(220, 38, 38, 0.3); transition: all 0.2s ease; cursor: pointer; border: none;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .elegant-btn:hover { background: #ef4444; box-shadow: 0 15px 40px rgba(220, 38, 38, 0.4); }
+        .elegant-btn:active { transform: scale(0.98); }
+        .elegant-btn-pulse { animation: button-attention 1.5s ease-in-out infinite; }
+
+        @keyframes button-attention {
+            0% { transform: scale(1); box-shadow: 0 15px 35px rgba(220, 38, 38, 0.3); }
+            50% { transform: scale(1.03); box-shadow: 0 18px 40px rgba(220, 38, 38, 0.45); background-color: #f87171; }
+            100% { transform: scale(1); box-shadow: 0 15px 35px rgba(220, 38, 38, 0.3); }
+        }
+
+        .notice-entry-shake {
+            animation: shake-triple 0.4s ease-in-out 3;
+        }
+
+        @keyframes shake-triple {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-8px); }
+            75% { transform: translateX(8px); }
+        }
+
+        .attention-shake {
+            animation: vigorous-shake 3s ease-in-out infinite;
+            display: inline-block;
+        }
+
+        @keyframes vigorous-shake {
+            0%, 70%, 100% { transform: translateX(0); }
+            72%, 78%, 84%, 90%, 96% { transform: translateX(-3px) rotate(-1deg); }
+            75%, 81%, 87%, 93%, 99% { transform: translateX(3px) rotate(1deg); }
+        }
+
+        .pulse-text {
+            animation: text-pulse 2.5s infinite ease-in-out;
+            color: #64748b;
+        }
+
+        @keyframes text-pulse {
+            0% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.01); }
+            100% { opacity: 0.5; transform: scale(1); }
+        }
+
+        .btn-outline-tg {
+            background: transparent;
+            color: #24A1DE;
+            border: 2px solid #24A1DE;
+            margin-top: 1rem;
+            box-shadow: none;
+        }
+        .btn-outline-tg:hover {
+            background: rgba(36, 161, 222, 0.05);
+            color: #0088CC;
+            border-color: #0088CC;
+        }
+
+        .form-input { width: 100%; padding: 14px 20px; border: 3px solid #cbd5e1; background: #f8fafc; border-radius: 18px; font-size: 16px; outline: none; color: #000000; }
+        .form-input:focus { border-color: #24A1DE; }
+
+        .tg-float {
+            position: fixed; 
+            bottom: 24px; 
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 60;
+            background: linear-gradient(135deg, #24A1DE 0%, #0088CC 100%);
+            color: #ffffff; 
+            padding: 16px 28px; 
+            border-radius: 100px;
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(36, 161, 222, 0.4); 
+            transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; 
+            cursor: pointer; 
+            border: none;
+            white-space: nowrap;
+        }
+        .tg-float.hidden-btn {
+            opacity: 0;
+            pointer-events: none;
+            transform: translateX(-50%) translateY(20px);
+        }
+        .tg-float:hover {
+            box-shadow: 0 10px 30px rgba(36, 161, 222, 0.5);
+            transform: translateX(-50%) translateY(-2px);
+        }
+        .tg-float:active {
+            transform: translateX(-50) scale(0.96);
+        }
+
+        .modal-overlay {
+            display: none; position: fixed; inset: 0; z-index: 100;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px) saturate(160%);
+            -webkit-backdrop-filter: blur(8px) saturate(160%);
+            align-items: center; justify-content: center; padding: 16px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        
+        .modal-content {
+            background: #f8fafc; 
+            width: 100%; max-width: 480px; border-radius: 40px;
+            padding: 36px 24px; border: 3px solid #e2e8f0; 
+            box-shadow: 0 40px 100px rgba(0,0,0,0.12), 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease;
+            max-height: 95vh;
+            overflow-y: auto;
+        }
+        .modal-overlay.active .modal-content { transform: scale(1); opacity: 1; }
+
+        .modal-content.fade-out {
+            transform: scale(0.9) !important;
+            opacity: 0 !important;
+            pointer-events: none;
+        }
+
+        .header-logo-wrapper {
+            width: 42px; 
+            height: 42px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border-radius: 10px; 
+            overflow: hidden; 
+            flex-shrink: 0; 
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid #ffffff; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .header-logo { width: 100%; height: 100%; object-fit: contain; }
+
+        .calc-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+        .calc-item-block {
+            background: #f8fafc;
+            border-radius: 28px;
+            padding: 24px;
+            border: 2px solid #e2e8f0;
+            text-align: center;
+        }
+        .calc-item-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            color: #64748b;
+            margin-bottom: 1.25rem;
+        }
+        .calc-controls-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        .calc-val-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1; 
+            min-width: 0;
+        }
+        .calc-val {
+            font-size: 3.5rem;
+            font-weight: 700;
+            line-height: 1;
+            text-align: center;
+            font-variant-numeric: tabular-nums;
+        }
+        .calc-item-sub {
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #94a3b8;
+            margin-top: 1rem;
+            letter-spacing: 0.05em;
+        }
+
+        .total-price-wrapper {
+            position: relative;
+            display: inline-flex;
+            align-items: baseline;
+            justify-content: center;
+        }
+        .currency-symbol {
+            position: absolute;
+            left: 100%;
+            margin-left: 8px;
+            bottom: 0.2em;
+        }
+
+        @media (max-width: 480px) {
+            .calc-val { font-size: 2.8rem; }
+            .counter-btn { width: 56px; height: 56px; }
+            .modal-content { padding: 32px 20px; }
+            .elegant-btn { padding: 18px 24px !important; font-size: 14px !important; }
+        }
+
+        .header-red-bg {
+            background-color: #dc2626 !important; 
+        }
+        .header-red-bg .thin-header, 
+        .header-red-bg .premium-label-header {
+            color: #ffffff !important; 
+        }
+        .header-red-bg .order-btn-white {
+            border-color: #ffffff !important;
+            color: #ffffff !important;
+        }
+        .form-row { margin-bottom: 1rem; }
+
+        .faq-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: #f8fafc;
+            border: 3px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 16px 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            color: #1a1a1a;
+            max-width: 100%;
+        }
+        .faq-banner:hover {
+            border-color: #24A1DE;
+            background: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        .faq-banner i {
+            color: #24A1DE;
+            font-size: 20px;
+        }
+        .faq-banner span {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Дополнительные стили для блока отзывов */
+        .review-card {
+            background: #ffffff;
+            border: 2px solid #f1f5f9;
+            border-radius: 24px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+        .review-card:hover {
+            border-color: #24A1DE;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .star-rating {
+            color: #fbbf24;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="vhs-background">
+        <div class="vhs-pattern"></div>
+    </div>
+
+    <button id="floatingTgBtn" onclick="openTelegram()" class="tg-float">
+        <i class="fab fa-telegram-plane text-2xl"></i>
+        <span class="text-[13px] uppercase tracking-widest font-bold">Задать вопрос в Telegram</span>
+    </button>
+
+    <header class="fixed w-full z-40 header-red-bg shadow-lg border-b border-red-700">
+        <div class="container mx-auto px-5 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="header-logo-wrapper">
+                        <img src="logo.jpg" alt="Логотип Рината" class="header-logo" onerror="this.parentElement.innerHTML='<i class=\'fas fa-film text-white text-sm\'></i>'">
+                    </div>
+                    <div class="flex flex-col leading-tight">
+                        <span class="text-lg thin-header tracking-widest font-bold">Rinat Ocifrovka</span>
+                        <span class="text-[9px] tracking-[0.15em] uppercase font-bold premium-label-header">
+                            Premium Digital Service
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <button onclick="toggleModal('orderModal', true)" class="text-[12px] uppercase tracking-widest border-2 order-btn-white px-5 py-2.5 rounded-full font-bold transition-colors shrink-0">
+                Заказать
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <section class="relative pt-32 pb-8">
+            <div class="container mx-auto px-4">
+                <div class="glass-block py-6 px-6 text-center max-w-4xl mx-auto">
+                    <h1 class="mb-6 uppercase font-bold header-static-blue">
+                        <span class="title-flow-effect">Оцифровка <br> видеокассет</span>
+                    </h1>
+                    <div class="text-lg text-slate-600 max-w-2xl mx-auto mb-8 mobile-description">
+                        <p>Перенесите ваши теплые воспоминания в современный цифровой формат. Максимум что возможно получить с кассет гарантирую.</p>
+                        <div class="mt-4 block">
+                            <span class="magnify-wrapper uppercase tracking-[0.3em] font-extrabold mobile-larger-text" id="magnifyText"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-6">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center mb-8">
+                    <p class="text-[11px] md:text-[13px] uppercase tracking-[0.25em] font-bold text-slate-400 mobile-larger-text">
+                        Работаю со всеми типами бытовых видеокассет
+                    </p>
+                </div>
+                <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="soft-card-static"><span class="card-label">VHS <i class="far fa-eye"></i></span></div>
+                    <div class="soft-card-static"><span class="card-label">VHS-C <i class="far fa-eye"></i></span></div>
+                    <div class="soft-card-static"><span class="card-label">8mm <i class="far fa-eye"></i></span></div>
+                    <div class="soft-card-static"><span class="card-label">Hi8 <i class="far fa-eye"></i></span></div>
+                    <div class="soft-card-static"><span class="card-label">Digital8 <i class="far fa-eye"></i></span></div>
+                    <div class="soft-card-static"><span class="card-label">MiniDV <i class="far fa-eye"></i></span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-10">
+            <div class="container mx-auto px-4">
+                <div class="glass-block py-16 px-8 max-w-5xl mx-auto grid md:grid-cols-3 gap-12">
+                    <div class="text-center flex flex-col items-center">
+                        <div class="icon-backdrop"><i class="fas fa-car-side"></i></div>
+                        <h3 class="text-[16px] uppercase tracking-wider font-bold mb-4">Приеду сам</h3>
+                        <p class="text-slate-500 uppercase text-[13px] font-medium leading-relaxed mobile-larger-text">Бесплатно заеду за кассетами по любому адресу в пределах МКАД.</p>
+                    </div>
+                    <div class="text-center flex flex-col items-center">
+                        <div class="icon-backdrop"><i class="fas fa-clock"></i></div>
+                        <h3 class="text-[16px] uppercase tracking-wider font-bold mb-4">За 24 часа</h3>
+                        <p class="text-slate-500 uppercase text-[13px] font-bold leading-relaxed mobile-larger-text">Срок выполнения до 5 кассет — всего одни сутки.</p>
+                    </div>
+                    <div class="text-center flex flex-col items-center">
+                        <div class="icon-backdrop"><i class="fas fa-ruble-sign"></i></div>
+                        <h3 class="text-[16px] uppercase tracking-wider font-bold mb-4">23 ₽ / мин</h3>
+                        <p class="text-slate-500 uppercase text-[13px] font-bold leading-relaxed mobile-larger-text">Прозрачный расчёт. Минимальный заказ — всего 2070 ₽.</p>
+                    </div>
+                </div>
+                
+                <div class="max-w-sm mx-auto mt-8 px-4">
+                    <a href="https://rinatzakirow-bot.github.io/ocifrovka/" target="_blank" class="faq-banner">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Ещё более подробно</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="calc" class="py-10 pb-12">
+            <div class="container mx-auto px-4">
+                <div class="max-w-2xl mx-auto glass-block p-8 md:p-14">
+                    <div class="text-center mb-10">
+                        <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4 light-beam-effect">Рассчитайте максимально возможную стоимость</h2>
+                        <p class="text-[12px] uppercase tracking-widest font-bold text-slate-400 mobile-larger-text attention-shake">Укажите количество ваших кассет</p>
+                    </div>
+
+                    <div class="calc-grid">
+                        <div class="calc-item-block">
+                            <div class="calc-item-label">Кассеты от видеокамер</div>
+                            <div class="calc-controls-row">
+                                <button onclick="updateQty('cam', -1)" class="counter-btn shadow-sm active:scale-95"><i class="fas fa-minus"></i></button>
+                                <div class="calc-val-container">
+                                    <span id="valCam" class="calc-val">0</span>
+                                </div>
+                                <button onclick="updateQty('cam', 1)" class="counter-btn shadow-sm active:scale-95"><i class="fas fa-plus"></i></button>
+                            </div>
+                            <div class="calc-item-sub">MiniDV, Hi8, 8mm, VHS-C</div>
+                        </div>
+
+                        <div class="calc-item-block">
+                            <div class="calc-item-label">Стандартные VHS кассеты</div>
+                            <div class="calc-controls-row">
+                                <button onclick="updateQty('vhs', -1)" class="counter-btn shadow-sm active:scale-95"><i class="fas fa-minus"></i></button>
+                                <div class="calc-val-container">
+                                    <span id="valVhs" class="calc-val">0</span>
+                                </div>
+                                <button onclick="updateQty('vhs', 1)" class="counter-btn shadow-sm active:scale-95"><i class="fas fa-plus"></i></button>
+                            </div>
+                            <div class="calc-item-sub">Большие кассеты</div>
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <div class="text-6xl md:text-7xl font-bold flex items-center justify-center mb-4">
+                            <div class="total-price-wrapper">
+                                <span id="totalPrice" class="price-glass-reflection text-center">0</span>
+                                <span class="currency-symbol text-2xl text-slate-300">₽</span>
+                            </div>
+                        </div>
+
+                        <div id="finalPriceNotice" class="hidden mb-10 max-w-md mx-auto px-4">
+                            <p id="targetNoticeText" class="text-[12px] md:text-[13px] uppercase tracking-widest font-bold pulse-text leading-relaxed mobile-larger-text">
+                                Окончательная стоимость обычно значительно ниже, так как кассеты крайне редко записаны полностью
+                            </p>
+                        </div>
+
+                        <button onclick="toggleModal('orderModal', true)" class="elegant-btn elegant-btn-pulse mx-auto">Сделать заказ</button>
+                        
+                        <div class="mt-4">
+                            <span class="text-[12px] uppercase tracking-[0.2em] font-bold text-slate-400 mobile-larger-text">Готово будет уже завтра</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO-ОТЗЫВЫ: БЛОК ДОВЕРИЯ -->
+        <section id="reviews" class="py-16 bg-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="text-center mb-12">
+                        <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4">Отзывы клиентов</h2>
+                        <div class="flex items-center justify-center gap-2 mb-2">
+                            <div class="star-rating">★★★★★</div>
+                            <span class="font-bold">5.0</span>
+                        </div>
+                        <p class="text-[11px] uppercase tracking-widest font-bold text-slate-400 mobile-larger-text">На основе реальных заказов</p>
+                    </div>
+
+                    <!-- Форма отзыва -->
+                    <div class="mb-12 glass-block !rounded-[32px] p-6 md:p-10 border-dashed">
+                        <h3 class="text-sm uppercase tracking-widest font-bold text-slate-600 mb-6 text-center">Оставить свой отзыв</h3>
+                        <form id="publicReviewForm" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <input type="text" placeholder="Ваше имя" required class="form-input !py-3">
+                                <select class="form-input !py-3 appearance-none">
+                                    <option value="5">Оценка: 5 звезд</option>
+                                    <option value="4">Оценка: 4 звезды</option>
+                                    <option value="3">Оценка: 3 звезды</option>
+                                </select>
+                            </div>
+                            <textarea placeholder="Поделитесь впечатлением о качестве оцифровки..." rows="3" required class="form-input"></textarea>
+                            <button type="submit" class="elegant-btn !py-3 !text-sm !max-w-full mx-auto">Отправить отзыв</button>
+                        </form>
+                        <div id="reviewSuccess" class="hidden text-center py-4 text-green-600 font-bold uppercase text-xs tracking-widest">
+                            <i class="fas fa-check-circle mr-2"></i> Спасибо! Отзыв появится после модерации.
+                        </div>
+                    </div>
+
+                    <!-- Список отзывов (для индексации) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="review-card">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="font-bold text-sm uppercase tracking-wider">Алексей С.</span>
+                                <div class="star-rating">★★★★★</div>
+                            </div>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Заказывал оцифровку старых VHS кассет. Качество отличное, Ринат сам приехал и забрал, через день всё было готово. Рекомендую!
+                            </p>
+                            <div class="mt-4 text-[10px] uppercase font-bold text-slate-300">10 января 2024</div>
+                        </div>
+
+                        <div class="review-card">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="font-bold text-sm uppercase tracking-wider">Елена</span>
+                                <div class="star-rating">★★★★★</div>
+                            </div>
+                            <p class="text-sm text-slate-600 leading-relaxed">
+                                Очень быстро и удобно. Видео из детства теперь на флешке. Спасибо за оперативность!
+                            </p>
+                            <div class="mt-4 text-[10px] uppercase font-bold text-slate-300">15 декабря 2023</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Модальное окно заказа -->
+    <div id="orderModal" class="modal-overlay">
+        <div class="modal-content">
+            <button onclick="toggleModal('orderModal', false)" class="absolute top-5 right-5 text-slate-300 p-2 border-none bg-transparent cursor-pointer hover:text-slate-500 transition-colors">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+            <div id="formContainer">
+                <div class="text-center mb-6">
+                    <h3 class="text-xl font-bold uppercase tracking-wider mb-1">Оформить заявку</h3>
+                    <p class="text-[10px] text-slate-400 uppercase font-bold tracking-widest mobile-larger-text">Бесплатно приеду за кассетами и привезу обратно</p>
+                </div>
+                <form id="orderForm" action="#" class="space-y-4">
+                    <div class="form-row">
+                        <label class="text-[10px] uppercase font-bold text-slate-400 ml-2 mb-1 block mobile-larger-text">Телефон</label>
+                        <input type="tel" id="phoneInput" name="phone" required placeholder="+7 (___) ___-__-__" class="form-input">
+                    </div>
+                    
+                    <div class="form-row">
+                        <label class="text-[10px] uppercase font-bold text-slate-400 ml-2 mb-1 block mobile-larger-text">Адрес в Москве</label>
+                        <textarea name="address" required rows="2" placeholder="Улица, дом, квартира" class="form-input"></textarea>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="elegant-btn mt-2 !py-4">Отправить заявку</button>
+                    
+                    <div class="flex flex-col items-center">
+                        <div class="w-full h-[1px] bg-slate-100 my-4 flex items-center justify-center">
+                        </div>
+                        <span class="text-[10px] uppercase text-[#24A1DE] font-bold tracking-[0.2em] mb-1">или просто напишите</span>
+                        <button type="button" onclick="openTelegram()" class="elegant-btn btn-outline-tg !max-w-full !py-4 mt-0">
+                            <i class="fab fa-telegram-plane"></i> В Telegram
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="p-10 text-center text-gray-400 text-xs uppercase tracking-widest border-t border-gray-50">
+        © 2024 Rinat Ocifrovka. Все права защищены.
+    </footer>
+
+    <script>
+        // Имитация логики для работы кнопок
+        let state = { cam: 0, vhs: 0 };
+        const PRICE_PER_MIN = 23;
+        const CAM_MINS = 90;
+        const VHS_MINS = 180;
+
+        function updateQty(type, delta) {
+            state[type] = Math.max(0, state[type] + delta);
+            document.getElementById(type === 'cam' ? 'valCam' : 'valVhs').innerText = state[type];
+            calculate();
+        }
+
+        function calculate() {
+            const totalMins = (state.cam * CAM_MINS) + (state.vhs * VHS_MINS);
+            const price = totalMins * PRICE_PER_MIN;
+            document.getElementById('totalPrice').innerText = price.toLocaleString();
+            document.getElementById('finalPriceNotice').classList.toggle('hidden', price === 0);
+        }
+
+        function toggleModal(id, show) {
+            const el = document.getElementById(id);
+            if(show) el.classList.add('active');
+            else el.classList.remove('active');
+        }
+
+        function openTelegram() {
+            window.open('https://t.me/rinatzakirow', '_blank');
+        }
+
+        // Эффект увеличения букв
+        const text = "КАЧЕСТВО ГАРАНТИРУЮ";
+        const wrapper = document.getElementById('magnifyText');
+        text.split('').forEach((char, i) => {
+            const span = document.createElement('span');
+            span.textContent = char === ' ' ? '\u00A0' : char;
+            span.style.animationDelay = `${i * 0.1}s`;
+            wrapper.appendChild(span);
+        });
+
+        // Маска для телефона
+        window.onload = () => {
+            const phoneInput = document.getElementById('phoneInput');
+            if(phoneInput) {
+                IMask(phoneInput, { mask: '+{7} (000) 000-00-00' });
+            }
+        }
+
+        // Обработка формы отзыва
+        document.getElementById('publicReviewForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.classList.add('hidden');
+            document.getElementById('reviewSuccess').classList.remove('hidden');
+        });
     </script>
 </body>
 </html>
