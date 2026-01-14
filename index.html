@@ -323,6 +323,17 @@
             pointer-events: none;
         }
 
+        /* КЛАСС ДЛЯ ЦИФРОВОГО РАСПАДА */
+        .binary-particle {
+            position: fixed;
+            pointer-events: none;
+            font-family: 'Courier New', monospace;
+            font-weight: 900;
+            color: #24A1DE;
+            z-index: 9999;
+            user-select: none;
+        }
+
         .header-logo-wrapper {
             width: 42px; 
             height: 42px; 
@@ -947,6 +958,50 @@
         let quantities = { cam: 0, vhs: 0 };
         IMask(document.getElementById('phoneInput'), { mask: '+{7} (000) 000-00-00' });
 
+        /**
+         * Функция цифрового распада
+         * Создает эффект разлетающихся битов при закрытии окна
+         */
+        function binaryDissolve(element) {
+            const rect = element.getBoundingClientRect();
+            const width = rect.width;
+            const height = rect.height;
+            const particleCount = Math.min((width * height) / 150, 250); // Плотность частиц
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('span');
+                particle.className = 'binary-particle';
+                particle.textContent = Math.round(Math.random());
+                
+                // Начальная позиция внутри границ окна
+                const startX = rect.left + Math.random() * width;
+                const startY = rect.top + Math.random() * height;
+                
+                particle.style.left = startX + 'px';
+                particle.style.top = startY + 'px';
+                particle.style.fontSize = (Math.random() * 8 + 10) + 'px';
+                particle.style.opacity = Math.random();
+
+                document.body.appendChild(particle);
+
+                // Случайная траектория разлета
+                const destX = (Math.random() - 0.5) * 400;
+                const destY = (Math.random() - 0.5) * 400;
+                const rotate = (Math.random() - 0.5) * 1080;
+
+                const anim = particle.animate([
+                    { transform: 'translate(0, 0) rotate(0deg)', opacity: 1 },
+                    { transform: `translate(${destX}px, ${destY}px) rotate(${rotate}deg)`, opacity: 0 }
+                ], {
+                    duration: 700 + Math.random() * 800,
+                    easing: 'cubic-bezier(0, .9, .57, 1)',
+                    fill: 'forwards'
+                });
+
+                anim.onfinish = () => particle.remove();
+            }
+        }
+
         function toggleModal(id, show) {
             const modal = document.getElementById(id);
             const content = modal.querySelector('.modal-content');
@@ -958,6 +1013,9 @@
                     content.classList.remove('fade-out');
                 });
             } else {
+                // ПЕРЕД закрытием запускаем эффект рассыпания
+                binaryDissolve(content);
+                
                 content.classList.add('fade-out');
                 modal.style.opacity = '0';
                 setTimeout(() => {
