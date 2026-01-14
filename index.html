@@ -537,6 +537,34 @@
             color: #fbbf24;
             font-size: 14px;
         }
+
+        /* Стили для модального окна просмотра кассет */
+        .cassette-preview-modal .modal-content {
+            max-width: 600px;
+            padding: 0;
+            overflow: hidden;
+            background: white;
+        }
+        .cassette-image-container {
+            width: 100%;
+            height: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .cassette-image-container img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        .cassette-image-caption {
+            padding: 20px;
+            text-align: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #1a1a1a;
+            background: #f8fafc;
+        }
     </style>
 </head>
 <body>
@@ -595,13 +623,14 @@
                         Работаю со всеми типами бытовых видеокассет
                     </p>
                 </div>
+                <!-- Обновленные кнопки с вызовом функции просмотра -->
                 <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="soft-card-static"><span class="card-label">VHS <i class="far fa-eye"></i></span></div>
-                    <div class="soft-card-static"><span class="card-label">VHS-C <i class="far fa-eye"></i></span></div>
-                    <div class="soft-card-static"><span class="card-label">8mm <i class="far fa-eye"></i></span></div>
-                    <div class="soft-card-static"><span class="card-label">Hi8 <i class="far fa-eye"></i></span></div>
-                    <div class="soft-card-static"><span class="card-label">Digital8 <i class="far fa-eye"></i></span></div>
-                    <div class="soft-card-static"><span class="card-label">MiniDV <i class="far fa-eye"></i></span></div>
+                    <div class="soft-card-static" onclick="showCassetteImage('VHS')"><span class="card-label">VHS <i class="far fa-eye"></i></span></div>
+                    <div class="soft-card-static" onclick="showCassetteImage('VHS-C')"><span class="card-label">VHS-C <i class="far fa-eye"></i></span></div>
+                    <div class="soft-card-static" onclick="showCassetteImage('8mm')"><span class="card-label">8mm <i class="far fa-eye"></i></span></div>
+                    <div class="soft-card-static" onclick="showCassetteImage('Hi8')"><span class="card-label">Hi8 <i class="far fa-eye"></i></span></div>
+                    <div class="soft-card-static" onclick="showCassetteImage('Digital8')"><span class="card-label">Digital8 <i class="far fa-eye"></i></span></div>
+                    <div class="soft-card-static" onclick="showCassetteImage('MiniDV')"><span class="card-label">MiniDV <i class="far fa-eye"></i></span></div>
                 </div>
             </div>
         </section>
@@ -804,6 +833,19 @@
         </div>
     </div>
 
+    <!-- Модальное окно для просмотра изображения кассеты -->
+    <div id="cassetteModal" class="modal-overlay cassette-preview-modal" onclick="toggleModal('cassetteModal', false)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button onclick="toggleModal('cassetteModal', false)" class="absolute top-4 right-4 text-slate-400 z-10 bg-white/80 rounded-full w-8 h-8 flex items-center justify-center shadow-md">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="cassette-image-container">
+                <img id="cassetteViewImg" src="" alt="Тип кассеты" onerror="this.src='https://via.placeholder.com/600x400?text=Изображение+загружается...'">
+                <div id="cassetteViewCaption" class="cassette-image-caption"></div>
+            </div>
+        </div>
+    </div>
+
     <footer class="p-10 text-center text-gray-400 text-xs uppercase tracking-widest border-t border-gray-50">
         © 2024 Rinat Ocifrovka. Все права защищены.
     </footer>
@@ -831,11 +873,27 @@
         function toggleModal(id, show) {
             const el = document.getElementById(id);
             if(show) el.classList.add('active');
-            else el.classList.remove('active');
+            else {
+                el.classList.remove('active');
+                // Если закрываем модалку кассеты, очищаем src
+                if(id === 'cassetteModal') document.getElementById('cassetteViewImg').src = '';
+            }
         }
 
         function openTelegram() {
             window.open('https://t.me/rinatzakirow', '_blank');
+        }
+
+        // Функция показа изображения кассеты
+        function showCassetteImage(typeName) {
+            const img = document.getElementById('cassetteViewImg');
+            const caption = document.getElementById('cassetteViewCaption');
+            
+            // Формируем путь: ИмяКнопки.jpg
+            img.src = `${typeName}.jpg`;
+            caption.innerText = `Тип кассеты: ${typeName}`;
+            
+            toggleModal('cassetteModal', true);
         }
 
         // Эффект увеличения букв
@@ -861,6 +919,14 @@
             e.preventDefault();
             this.classList.add('hidden');
             document.getElementById('reviewSuccess').classList.remove('hidden');
+        });
+
+        // Закрытие модалок по ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                toggleModal('orderModal', false);
+                toggleModal('cassetteModal', false);
+            }
         });
     </script>
 </body>
