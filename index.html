@@ -78,6 +78,17 @@
             100% { background-position: -300% 50%; }
         }
 
+        /* Анимация пульсации для кнопки в шапке */
+        @keyframes header-button-pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 255, 255, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+
+        .header-pulse {
+            animation: header-button-pulse 2s infinite ease-in-out;
+        }
+
         @media (max-width: 768px) {
             body { font-size: 18px; line-height: 1.7; }
             h2 { font-size: 1.75rem !important; font-weight: 700 !important; }
@@ -593,7 +604,8 @@
                     </div>
                 </div>
             </div>
-            <button onclick="toggleModal('orderModal', true)" class="text-[12px] uppercase tracking-widest border-2 order-btn-white px-5 py-2.5 rounded-full font-bold transition-colors shrink-0">
+            <!-- Добавлена анимация header-pulse -->
+            <button onclick="toggleModal('orderModal', true)" class="text-[12px] uppercase tracking-widest border-2 order-btn-white px-5 py-2.5 rounded-full font-bold transition-colors shrink-0 header-pulse">
                 Заказать
             </button>
         </div>
@@ -715,7 +727,7 @@
                     </div>
                 </div>
 
-                <!-- ПЛАШКА ПОДРОБНЕЕ (ТЕПЕРЬ ТУТ) -->
+                <!-- ПЛАШКА ПОДРОБНЕЕ -->
                 <div class="max-w-sm mx-auto mt-8 px-4">
                     <a href="https://rinatzakirow-bot.github.io/ocifrovka/" target="_blank" class="faq-banner">
                         <i class="fas fa-info-circle"></i>
@@ -779,7 +791,7 @@
         </section>
     </main>
 
-    <!-- Модальное окно для нового отзыва -->
+    <!-- Модальные окна и скрипты остаются без изменений -->
     <div id="reviewModal" class="modal-overlay">
         <div class="modal-content">
             <button onclick="toggleModal('reviewModal', false)" class="absolute top-5 right-5 text-slate-300 p-2 border-none bg-transparent cursor-pointer hover:text-slate-500 transition-colors">
@@ -795,12 +807,10 @@
                         <label class="text-[10px] uppercase font-bold text-slate-400 ml-2 mb-1 block mobile-larger-text">Как вас зовут?</label>
                         <input type="text" name="name" required placeholder="Имя Фамилия" class="form-input">
                     </div>
-                    
                     <div class="form-row">
                         <label class="text-[10px] uppercase font-bold text-slate-400 ml-2 mb-1 block mobile-larger-text">Ваш отзыв</label>
                         <textarea name="review" required rows="4" placeholder="Напишите пару слов о моей работе..." class="form-input"></textarea>
                     </div>
-
                     <div class="form-row text-center">
                          <label class="text-[10px] uppercase font-bold text-slate-400 mb-2 block">Оценка</label>
                          <div class="rating-select" id="ratingDots">
@@ -812,9 +822,7 @@
                          </div>
                          <input type="hidden" name="stars" id="starsInput" value="5">
                     </div>
-
                     <input type="hidden" name="_subject" value="Новый отзыв на сайте">
-                    
                     <button type="submit" id="reviewSubmitBtn" class="elegant-btn mt-2 !py-4">Опубликовать</button>
                 </form>
             </div>
@@ -827,7 +835,6 @@
         </div>
     </div>
 
-    <!-- Модальное окно заказа -->
     <div id="orderModal" class="modal-overlay">
         <div class="modal-content">
             <button onclick="toggleModal('orderModal', false)" class="absolute top-5 right-5 text-slate-300 p-2 border-none bg-transparent cursor-pointer hover:text-slate-500 transition-colors">
@@ -843,22 +850,17 @@
                         <label class="text-[10px] uppercase font-bold text-slate-400 ml-2 mb-1 block mobile-larger-text">Телефон</label>
                         <input type="tel" id="phoneInput" name="phone" required placeholder="+7 (___) ___-__-__" class="form-input">
                     </div>
-                    
                     <div class="form-row">
                         <label class="text-[10px] uppercase font-bold text-slate-400 ml-2 mb-1 block mobile-larger-text">Адрес в Москве</label>
                         <textarea name="address" required rows="2" placeholder="Улица, дом, квартира" class="form-input"></textarea>
                     </div>
-
                     <input type="hidden" name="cam_qty" id="h_cam" value="0">
                     <input type="hidden" name="vhs_qty" id="h_vhs" value="0">
                     <input type="hidden" name="total" id="h_total" value="0">
                     <input type="hidden" name="_subject" value="Новый заказ на оцифровку">
-                    
                     <button type="submit" id="submitBtn" class="elegant-btn mt-2 !py-4">Отправить заявку</button>
-                    
                     <div class="flex flex-col items-center">
-                        <div class="w-full h-[1px] bg-slate-100 my-4 flex items-center justify-center">
-                        </div>
+                        <div class="w-full h-[1px] bg-slate-100 my-4 flex items-center justify-center"></div>
                         <span class="text-[10px] uppercase text-[#24A1DE] font-bold tracking-[0.2em] mb-1">или просто напишите</span>
                         <button type="button" onclick="openTelegram()" class="elegant-btn btn-outline-tg !max-w-full !py-4 mt-0">
                             <i class="fab fa-telegram-plane"></i> В Telegram
@@ -875,29 +877,17 @@
         </div>
     </div>
 
-    <!-- Модальное окно галереи -->
     <div id="imageModal" class="modal-overlay">
         <div class="modal-content text-center" style="background: #ffffff;">
             <button onclick="toggleModal('imageModal', false)" class="absolute top-6 right-6 text-slate-400 p-2 border-none bg-transparent cursor-pointer z-20">
                 <i class="fas fa-times text-2xl"></i>
             </button>
-
             <h3 id="imageTitle" class="text-xl font-bold uppercase tracking-widest mb-6">VHS</h3>
-
             <div class="gallery-container">
-                <button onclick="navGallery(-1)" class="side-nav-btn" aria-label="Назад">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                
-                <div class="gallery-image-wrapper">
-                    <img id="previewImage" src="" alt="Формат кассеты">
-                </div>
-
-                <button onclick="navGallery(1)" class="side-nav-btn" aria-label="Вперед">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
+                <button onclick="navGallery(-1)" class="side-nav-btn" aria-label="Назад"><i class="fas fa-chevron-left"></i></button>
+                <div class="gallery-image-wrapper"><img id="previewImage" src="" alt="Формат кассеты"></div>
+                <button onclick="navGallery(1)" class="side-nav-btn" aria-label="Вперед"><i class="fas fa-chevron-right"></i></button>
             </div>
-            
             <p id="imagePrice" class="text-[14px] md:text-[16px] text-[#24A1DE] uppercase font-bold tracking-widest mt-2 mb-2">Цена</p>
             <p class="text-[12px] text-slate-400 uppercase font-bold tracking-widest">Кассету этого типа</p>
         </div>
@@ -910,7 +900,6 @@
     <script>
         const textToMagnify = "Готово уже завтра";
         const container = document.getElementById('magnifyText');
-        
         textToMagnify.split('').forEach((char, index) => {
             const span = document.createElement('span');
             span.textContent = char === ' ' ? '\u00A0' : char; 
@@ -928,18 +917,15 @@
         ];
         
         let currentGalleryIndex = 0;
-
         function openGallery(formatId) {
             currentGalleryIndex = galleryFormats.findIndex(f => f.id === formatId);
             updateGalleryUI();
             toggleModal('imageModal', true);
         }
-
         function navGallery(step) {
             currentGalleryIndex = (currentGalleryIndex + step + galleryFormats.length) % galleryFormats.length;
             updateGalleryUI();
         }
-
         function updateGalleryUI() {
             const format = galleryFormats[currentGalleryIndex];
             const img = document.getElementById('previewImage');
@@ -969,35 +955,21 @@
             const width = rect.width;
             const height = rect.height;
             const particleCount = Math.min((width * height) / 400, 150); 
-
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('span');
                 particle.className = 'binary-particle';
                 particle.textContent = Math.round(Math.random());
-                
                 const startX = rect.left + Math.random() * width;
                 const startY = rect.top + Math.random() * height;
-                
                 particle.style.left = startX + 'px';
                 particle.style.top = startY + 'px';
                 particle.style.fontSize = (Math.random() * 14 + 18) + 'px';
                 particle.style.opacity = (Math.random() * 0.6) + 0.4; 
-
                 document.body.appendChild(particle);
-
                 const destX = (Math.random() - 0.5) * 300;
                 const destY = (Math.random() * 400); 
                 const rotate = (Math.random() - 0.5) * 360;
-
-                const anim = particle.animate([
-                    { transform: 'translate(0, 0) rotate(0deg) scale(1)', opacity: particle.style.opacity },
-                    { transform: `translate(${destX}px, ${destY}px) rotate(${rotate}deg) scale(0.3)`, opacity: 0 }
-                ], {
-                    duration: 1500 + Math.random() * 1000, 
-                    easing: 'cubic-bezier(0.1, 0, 0.2, 1)', 
-                    fill: 'forwards'
-                });
-
+                const anim = particle.animate([{ transform: 'translate(0, 0) rotate(0deg) scale(1)', opacity: particle.style.opacity },{ transform: `translate(${destX}px, ${destY}px) rotate(${rotate}deg) scale(0.3)`, opacity: 0 }], { duration: 1500 + Math.random() * 1000, easing: 'cubic-bezier(0.1, 0, 0.2, 1)', fill: 'forwards' });
                 anim.onfinish = () => particle.remove();
             }
         }
@@ -1008,21 +980,12 @@
             if (show) {
                 modal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
-                requestAnimationFrame(() => {
-                    modal.classList.add('active');
-                    content.classList.remove('fade-out');
-                });
+                requestAnimationFrame(() => { modal.classList.add('active'); content.classList.remove('fade-out'); });
             } else {
                 binaryDissolve(content);
                 content.classList.add('fade-out');
                 modal.style.opacity = '0';
-                setTimeout(() => {
-                    modal.classList.remove('active');
-                    modal.style.display = 'none';
-                    modal.style.opacity = '';
-                    content.classList.remove('fade-out');
-                    document.body.style.overflow = 'auto';
-                }, 400); 
+                setTimeout(() => { modal.classList.remove('active'); modal.style.display = 'none'; modal.style.opacity = ''; content.classList.remove('fade-out'); document.body.style.overflow = 'auto'; }, 400); 
             }
         }
 
@@ -1059,34 +1022,18 @@
             const tgBtn = document.getElementById('floatingTgBtn');
             const notice = document.getElementById('finalPriceNotice');
             const targetText = document.getElementById('targetNoticeText');
-            
             if (!tgBtn || !notice || !targetText) return;
-
             if (notice.classList.contains('hidden')) {
-                tgBtn.style.opacity = '1';
-                tgBtn.style.pointerEvents = 'auto';
-                tgBtn.style.transform = 'translateX(-50%) translateY(0)';
+                tgBtn.style.opacity = '1'; tgBtn.style.pointerEvents = 'auto'; tgBtn.style.transform = 'translateX(-50%) translateY(0)';
                 return;
             }
-
             const tgRect = tgBtn.getBoundingClientRect();
             const textRect = targetText.getBoundingClientRect();
-
-            const isOverlapping = !(
-                tgRect.top > textRect.bottom || 
-                tgRect.bottom < textRect.top || 
-                tgRect.left > textRect.right || 
-                tgRect.right < textRect.left
-            );
-
+            const isOverlapping = !(tgRect.top > textRect.bottom || tgRect.bottom < textRect.top || tgRect.left > textRect.right || tgRect.right < textRect.left);
             if (isOverlapping) {
-                tgBtn.style.opacity = '0';
-                tgBtn.style.pointerEvents = 'none';
-                tgBtn.style.transform = 'translateX(-50%) translateY(20px)';
+                tgBtn.style.opacity = '0'; tgBtn.style.pointerEvents = 'none'; tgBtn.style.transform = 'translateX(-50%) translateY(20px)';
             } else {
-                tgBtn.style.opacity = '1';
-                tgBtn.style.pointerEvents = 'auto';
-                tgBtn.style.transform = 'translateX(-50%) translateY(0)';
+                tgBtn.style.opacity = '1'; tgBtn.style.pointerEvents = 'auto'; tgBtn.style.transform = 'translateX(-50%) translateY(0)';
             }
         }
 
@@ -1115,24 +1062,9 @@
             submitBtn.disabled = true;
             submitBtn.innerText = 'Отправка...';
             try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: new FormData(form),
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (response.ok) {
-                    document.getElementById('formContainer').classList.add('hidden');
-                    document.getElementById('successMessage').classList.remove('hidden');
-                    form.reset();
-                } else {
-                    alert('Ошибка при отправке.');
-                }
-            } catch (error) {
-                alert('Ошибка соединения.');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerText = originalBtnText;
-            }
+                const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+                if (response.ok) { document.getElementById('formContainer').classList.add('hidden'); document.getElementById('successMessage').classList.remove('hidden'); form.reset(); } else { alert('Ошибка при отправке.'); }
+            } catch (error) { alert('Ошибка соединения.'); } finally { submitBtn.disabled = false; submitBtn.innerText = originalBtnText; }
         });
 
         document.getElementById('reviewForm').addEventListener('submit', async function(e) {
@@ -1142,24 +1074,9 @@
             submitBtn.disabled = true;
             submitBtn.innerText = 'Публикация...';
             try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: new FormData(form),
-                    headers: { 'Accept': 'application/json' }
-                });
-                if (response.ok) {
-                    document.getElementById('reviewFormContainer').classList.add('hidden');
-                    document.getElementById('reviewSuccessMessage').classList.remove('hidden');
-                    form.reset();
-                } else {
-                    alert('Ошибка при отправке.');
-                }
-            } catch (error) {
-                alert('Ошибка соединения.');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerText = 'Опубликовать';
-            }
+                const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+                if (response.ok) { document.getElementById('reviewFormContainer').classList.add('hidden'); document.getElementById('reviewSuccessMessage').classList.remove('hidden'); form.reset(); } else { alert('Ошибка при отправке.'); }
+            } catch (error) { alert('Ошибка соединения.'); } finally { submitBtn.disabled = false; submitBtn.innerText = 'Опубликовать'; }
         });
     </script>
 </body>
