@@ -641,8 +641,8 @@
                 <div class="glass-block py-16 px-8 max-w-5xl mx-auto grid md:grid-cols-3 gap-12">
                     <div class="text-center flex flex-col items-center">
                         <div class="icon-backdrop"><i class="fas fa-car-side"></i></div>
-                        <h3 class="text-[16px] uppercase tracking-wider font-bold mb-4">Приеду сам</h3>
-                        <p class="text-slate-500 uppercase text-[13px] font-medium leading-relaxed mobile-larger-text">Бесплатно заеду за кассетами по любому адресу в пределах МКАД.</p>
+                        <h3 class="text-[16px] uppercase tracking-wider font-bold mb-4">Москва и МО</h3>
+                        <p class="text-slate-500 uppercase text-[13px] font-medium leading-relaxed mobile-larger-text">Работаю по Москве и всей Московской области с бесплатной доставкой.</p>
                     </div>
                     <div class="text-center flex flex-col items-center">
                         <div class="icon-backdrop"><i class="fas fa-clock"></i></div>
@@ -964,14 +964,10 @@
         let quantities = { cam: 0, vhs: 0 };
         IMask(document.getElementById('phoneInput'), { mask: '+{7} (000) 000-00-00' });
 
-        /**
-         * Плавный цифровой распад с КРУПНЫМИ цифрами
-         */
         function binaryDissolve(element) {
             const rect = element.getBoundingClientRect();
             const width = rect.width;
             const height = rect.height;
-            // Уменьшаем количество из-за крупного размера для баланса производительности
             const particleCount = Math.min((width * height) / 400, 150); 
 
             for (let i = 0; i < particleCount; i++) {
@@ -979,19 +975,16 @@
                 particle.className = 'binary-particle';
                 particle.textContent = Math.round(Math.random());
                 
-                // Равномерный старт
                 const startX = rect.left + Math.random() * width;
                 const startY = rect.top + Math.random() * height;
                 
                 particle.style.left = startX + 'px';
                 particle.style.top = startY + 'px';
-                // СДЕЛАНО КРУПНЕЕ: диапазон от 18px до 32px
                 particle.style.fontSize = (Math.random() * 14 + 18) + 'px';
                 particle.style.opacity = (Math.random() * 0.6) + 0.4; 
 
                 document.body.appendChild(particle);
 
-                // Плавная траектория "рассеивания"
                 const destX = (Math.random() - 0.5) * 300;
                 const destY = (Math.random() * 400); 
                 const rotate = (Math.random() - 0.5) * 360;
@@ -1020,9 +1013,7 @@
                     content.classList.remove('fade-out');
                 });
             } else {
-                // Запускаем эффект распада перед закрытием
                 binaryDissolve(content);
-                
                 content.classList.add('fade-out');
                 modal.style.opacity = '0';
                 setTimeout(() => {
@@ -1102,7 +1093,6 @@
         window.addEventListener('scroll', checkTgOverlap);
         window.addEventListener('resize', checkTgOverlap);
 
-        // Логика выбора рейтинга в форме
         const dots = document.querySelectorAll('.rating-dot');
         const starsInput = document.getElementById('starsInput');
         dots.forEach(dot => {
@@ -1117,7 +1107,6 @@
             });
         });
 
-        // Отправка основной формы заказа
         document.getElementById('orderForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const form = e.target;
@@ -1146,7 +1135,6 @@
             }
         });
 
-        // Отправка формы отзыва
         document.getElementById('reviewForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const form = e.target;
