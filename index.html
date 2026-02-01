@@ -3,21 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    
     <meta name="robots" content="index, follow" />
     <meta name="yandex-verification" content="7989a7dd019f6ce2" />
     <meta name="google-site-verification" content="JyFFBJMj_TwStz7_DLytP1GHHnSyWDaan2frp0JtuYI" />
     <meta name="google-site-verification" content="google95be795dc3a59691" />
-    
     <!-- FAVICON SETTINGS -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <link rel="icon" href="favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="logo.jpg">
-    
     <title>Оцифровка видеокассет в Москве — Быстро и качественно | Ринат</title>
     <meta name="description" content="Профессиональная оцифровка видеокассет VHS, MiniDV, Hi8. Срок от 24 часов. Бесплатно заеду по любому адресу в пределах МКАД. Цена 23 руб/min.">
-    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,28 +21,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/imask"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    
     <style>
-        /* Глобальный запрет на разбиение слов */
         * {
-            word-break: keep-all !important; 
-            overflow-wrap: break-word !important; 
-            hyphens: none !important; 
+            word-break: keep-all !important;
+            overflow-wrap: break-word !important;
+            hyphens: none !important;
         }
-
         body {
             font-family: 'Montserrat', sans-serif;
             scroll-behavior: smooth;
             font-weight: 400;
             letter-spacing: 0.01em;
-            font-size: 16px; 
+            font-size: 16px;
             overflow-x: hidden;
             background-color: #ffffff;
             line-height: 1.6;
-            color: #1a1a1a; 
+            color: #1a1a1a;
             -webkit-font-smoothing: antialiased;
         }
-
         h1 {
             font-size: clamp(1.8rem, 8vw, 3.75rem) !important;
             line-height: 1.2 !important;
@@ -54,7 +46,6 @@
             width: 100%;
             text-align: center;
         }
-
         .title-flow-effect {
             background: linear-gradient(
                 to right,
@@ -73,12 +64,10 @@
             animation: flow-shimmer 6s linear infinite;
             display: inline-block;
         }
-
         @keyframes flow-shimmer {
             0% { background-position: 100% 50%; }
             100% { background-position: -300% 50%; }
         }
-
         @media (max-width: 768px) {
             body { font-size: 18px; line-height: 1.7; }
             h2 { font-size: 1.75rem !important; font-weight: 700 !important; }
@@ -89,77 +78,69 @@
             .card-label { font-size: 16px !important; }
             .elegant-btn { font-size: 16px !important; padding: 24px 30px !important; }
             .premium-label-header { font-size: 8px !important; }
-            .magnify-wrapper { font-size: 18px !important; } 
+            .magnify-wrapper { font-size: 18px !important; }
         }
-        
+    
         h1, h2, h3, .font-bold { font-weight: 600 !important; letter-spacing: 0.02em; }
         .thin-header { font-weight: 500 !important; text-transform: uppercase; }
-
         .vhs-background { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: #ffffff; }
         .vhs-pattern {
             position: absolute; inset: 0; opacity: 0.03;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='80' viewBox='0 0 100 60'%3E%3Cg fill='%23000000'%3E%3Cpath d='M10 10h80v40H10V10zm4 4v32h72V14H14z'/%3E%3Ccircle cx='35' cy='30' r='6'/%3E%3Ccircle cx='65' cy='30' r='6'/%3E%3Cpath d='M25 40h50v40H25z'/%3E%3C/g%3E%3C/svg%3E");
             background-size: 120px 80px;
         }
-
         .glass-block {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(20px);
-            border: 3px solid #e2e8f0; 
+            border: 3px solid #e2e8f0;
             border-radius: 48px;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08), 0 5px 15px rgba(0, 0, 0, 0.04);
             position: relative;
             overflow: hidden;
         }
-
         .magnify-wrapper {
             display: inline-flex;
             justify-content: center;
             gap: 0;
-            color: #dc2626; 
-            font-size: 24px; 
+            color: #dc2626;
+            font-size: 24px;
             flex-wrap: wrap;
         }
-
         .magnify-wrapper span {
             display: inline-block;
             transition: transform 0.15s ease;
             animation: magnify-letter 2s ease-in-out infinite;
         }
-
         @keyframes magnify-letter {
             0%, 10%, 30%, 100% { transform: scale(1); opacity: 0.8; }
-            20% { 
-                transform: scale(1.4); 
-                opacity: 1; 
-                filter: brightness(1.2); 
+            20% {
+                transform: scale(1.4);
+                opacity: 1;
+                filter: brightness(1.2);
             }
         }
-
         .header-static-blue {
             color: #24A1DE;
             text-shadow: none !important;
         }
-
         .price-glass-reflection {
             color: #24A1DE;
             position: relative;
             display: inline-block;
             line-height: 1;
             padding-bottom: 2px;
-            text-shadow: none; 
+            text-shadow: none;
             font-variant-numeric: tabular-nums;
         }
-
         .light-beam-effect {
             position: relative;
             display: inline-block;
             background: linear-gradient(
-                to right, 
-                #24A1DE 0%, 
-                #24A1DE 40%, 
-                #ffffff 50%, 
-                #24A1DE 60%, 
+                to right,
+                #24A1DE 0%,
+                #24A1DE 40%,
+                #ffffff 50%,
+                #24A1DE 60%,
                 #24A1DE 100%
             );
             background-size: 200% auto;
@@ -168,39 +149,38 @@
             background-clip: text;
             animation: beam-swipe 3s linear infinite;
         }
-
         @keyframes beam-swipe {
             0% { background-position: 200% 0; }
             100% { background-position: -200% 0; }
         }
-
         .icon-backdrop {
             width: 72px; height: 72px; background: #f8fafc; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             margin-bottom: 1.5rem; color: #24A1DE; font-size: 28px;
         }
-
         .soft-card-static {
-            background: #f8fafc; 
+            background: #f8fafc;
             border: 3px solid #e2e8f0; border-radius: 20px;
-            padding: 20px; display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); cursor: pointer; transition: all 0.2s ease;
+            padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            gap: 12px;
         }
-        .soft-card-static:hover { border-color: #24A1DE; transform: translateY(-2px); background: #ffffff; }
-
+        .cassette-type-img {
+            max-height: 100px;
+            object-fit: contain;
+        }
+        .cassette-type-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            color: #000000;
+        }
         .counter-btn {
             width: 64px; height: 64px; display: flex; align-items: center; justify-content: center;
             border: 3px solid #cbd5e1; border-radius: 50%; color: #000000; background: #ffffff; font-size: 20px;
             flex-shrink: 0;
         }
-
-        .card-label { font-size: 14px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 700; color: #000000; display: flex; align-items: center; gap: 10px; }
-        
-        .card-label i {
-            font-size: 18px !important;
-            color: #24A1DE;
-        }
-
         .elegant-btn {
             background: #dc2626; color: #ffffff; border-radius: 100px;
             font-size: 15px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;
@@ -211,45 +191,37 @@
         .elegant-btn:hover { background: #ef4444; box-shadow: 0 15px 40px rgba(220, 38, 38, 0.4); }
         .elegant-btn:active { transform: scale(0.98); }
         .elegant-btn-pulse { animation: button-attention 1.5s ease-in-out infinite; }
-
         @keyframes button-attention {
             0% { transform: scale(1); box-shadow: 0 15px 35px rgba(220, 38, 38, 0.3); }
             50% { transform: scale(1.03); box-shadow: 0 18px 40px rgba(220, 38, 38, 0.45); background-color: #f87171; }
             100% { transform: scale(1); box-shadow: 0 15px 35px rgba(220, 38, 38, 0.3); }
         }
-
         .notice-entry-shake {
             animation: shake-triple 0.4s ease-in-out 3;
         }
-
         @keyframes shake-triple {
             0%, 100% { transform: translateX(0); }
             25% { transform: translateX(-8px); }
             75% { transform: translateX(8px); }
         }
-
         .attention-shake {
             animation: vigorous-shake 3s ease-in-out infinite;
             display: inline-block;
         }
-
         @keyframes vigorous-shake {
             0%, 70%, 100% { transform: translateX(0); }
             72%, 78%, 84%, 90%, 96% { transform: translateX(-3px) rotate(-1deg); }
             75%, 81%, 87%, 93%, 99% { transform: translateX(3px) rotate(1deg); }
         }
-
         .pulse-text {
             animation: text-pulse 2.5s infinite ease-in-out;
             color: #64748b;
         }
-
         @keyframes text-pulse {
             0% { opacity: 0.5; transform: scale(1); }
             50% { opacity: 1; transform: scale(1.01); }
             100% { opacity: 0.5; transform: scale(1); }
         }
-
         .btn-outline-tg {
             background: transparent;
             color: #24A1DE;
@@ -262,27 +234,25 @@
             color: #0088CC;
             border-color: #0088CC;
         }
-
         .form-input { width: 100%; padding: 14px 20px; border: 3px solid #cbd5e1; background: #f8fafc; border-radius: 18px; font-size: 16px; outline: none; color: #000000; }
         .form-input:focus { border-color: #24A1DE; }
-
         .tg-float {
-            position: fixed; 
-            bottom: 24px; 
+            position: fixed;
+            bottom: 24px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 60;
             background: linear-gradient(135deg, #24A1DE 0%, #0088CC 100%);
-            color: #ffffff; 
-            padding: 16px 28px; 
+            color: #ffffff;
+            padding: 16px 28px;
             border-radius: 100px;
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
+            display: flex;
+            align-items: center;
+            gap: 12px;
             text-decoration: none;
-            box-shadow: 0 8px 25px rgba(36, 161, 222, 0.4); 
-            transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; 
-            cursor: pointer; 
+            box-shadow: 0 8px 25px rgba(36, 161, 222, 0.4);
+            transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
             border: none;
             white-space: nowrap;
         }
@@ -298,7 +268,6 @@
         .tg-float:active {
             transform: translateX(-50) scale(0.96);
         }
-
         .modal-overlay {
             display: none; position: fixed; inset: 0; z-index: 100;
             background: rgba(255, 255, 255, 0.15);
@@ -309,27 +278,82 @@
             transition: opacity 0.3s ease;
         }
         .modal-overlay.active { display: flex; opacity: 1; }
-        
+    
         .modal-content {
-            background: #f8fafc; 
+            background: #f8fafc;
             width: 100%; max-width: 480px; border-radius: 40px;
-            padding: 36px 24px; border: 3px solid #e2e8f0; 
+            border: 3px solid #e2e8f0;
             box-shadow: 0 40px 100px rgba(0,0,0,0.12), 0 10px 30px rgba(0,0,0,0.05);
             position: relative;
             transform: scale(0.8);
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
             max-height: 95vh;
-            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
         }
         .modal-overlay.active .modal-content { transform: scale(1); opacity: 1; }
-
         .modal-content.fade-out {
             transform: scale(0.95) !important;
             opacity: 0 !important;
             pointer-events: none;
         }
-
-        /* КЛАСС ДЛЯ ЦИФРОВОГО РАСПАДА */
+        /* Скрытие скроллбара во всех модалках */
+        .modal-body {
+            overflow-y: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .modal-body::-webkit-scrollbar {
+            display: none;
+        }
+        /* Хедер с кнопками — всегда сверху при скролле, без подложки */
+        .modal-header {
+            position: sticky;
+            top: 0;
+            background: transparent;
+            z-index: 10;
+            padding: 24px 24px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .modal-back-btn {
+            width: 48px;
+            height: 48px;
+            background: transparent;
+            border: 3px solid #e2e8f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: none;
+        }
+        .modal-back-btn:hover {
+            border-color: #24A1DE;
+            color: #24A1DE;
+        }
+        .modal-close-btn {
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .modal-close-btn:hover {
+            color: #64748b;
+        }
+        .modal-body {
+            padding: 24px;
+            flex: 1;
+            text-align: center;
+        }
+        @media (max-width: 480px) {
+            .modal-header { padding: 20px 20px 0; }
+            .modal-body { padding: 20px; }
+        }
         .binary-particle {
             position: fixed;
             pointer-events: none;
@@ -340,22 +364,20 @@
             user-select: none;
             will-change: transform, opacity;
         }
-
         .header-logo-wrapper {
-            width: 42px; 
-            height: 42px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            border-radius: 10px; 
-            overflow: hidden; 
-            flex-shrink: 0; 
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
             background: rgba(255, 255, 255, 0.2);
-            border: 2px solid #ffffff; 
+            border: 2px solid #ffffff;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         .header-logo { width: 100%; height: 100%; object-fit: contain; }
-
         .gallery-container {
             display: flex;
             align-items: center;
@@ -365,7 +387,6 @@
             margin: 20px 0;
             position: relative;
         }
-
         .gallery-image-wrapper {
             flex-grow: 1;
             display: flex;
@@ -373,7 +394,6 @@
             align-items: center;
             max-width: 320px;
         }
-
         .gallery-image-wrapper img {
             max-width: 100%;
             height: auto;
@@ -381,7 +401,6 @@
             border-radius: 16px;
             object-fit: contain;
         }
-
         .side-nav-btn {
             width: 44px;
             height: 44px;
@@ -397,13 +416,11 @@
             flex-shrink: 0;
             z-index: 10;
         }
-
         .side-nav-btn:hover {
             border-color: #24A1DE;
             color: #24A1DE;
             background: white;
         }
-
         .calc-grid {
             display: flex;
             flex-direction: column;
@@ -435,7 +452,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            flex: 1; 
+            flex: 1;
             min-width: 0;
         }
         .calc-val {
@@ -453,7 +470,6 @@
             margin-top: 1rem;
             letter-spacing: 0.05em;
         }
-
         .total-price-wrapper {
             position: relative;
             display: inline-flex;
@@ -466,7 +482,6 @@
             margin-left: 8px;
             bottom: 0.2em;
         }
-
         @media (max-width: 480px) {
             .side-nav-btn { width: 36px; height: 36px; font-size: 14px; }
             .gallery-container { gap: 5px; }
@@ -474,15 +489,13 @@
             .counter-btn { width: 56px; height: 56px; }
             .modal-content { padding: 32px 20px; }
             .elegant-btn { padding: 18px 24px !important; font-size: 14px !important; }
-            .card-label i { font-size: 20px !important; } 
         }
-
         .header-red-bg {
-            background-color: #dc2626 !important; 
+            background-color: #dc2626 !important;
         }
-        .header-red-bg .thin-header, 
+        .header-red-bg .thin-header,
         .header-red-bg .premium-label-header {
-            color: #ffffff !important; 
+            color: #ffffff !important;
         }
         .header-red-bg .order-btn-white {
             border-color: #ffffff !important;
@@ -493,8 +506,6 @@
             color: #dc2626 !important;
         }
         .form-row { margin-bottom: 1rem; }
-
-        /* СТИЛЬ ПЛАШКИ FAQ */
         .faq-banner {
             display: flex;
             align-items: center;
@@ -508,7 +519,7 @@
             transition: all 0.2s ease;
             text-decoration: none;
             color: #1a1a1a;
-            max-width: 100%;
+            width: 100%;
         }
         .faq-banner:hover {
             border-color: #24A1DE;
@@ -526,8 +537,6 @@
             text-transform: uppercase;
             letter-spacing: 0.1em;
         }
-
-        /* НОВЫЙ БЛОК ОТЗЫВОВ */
         .review-card {
             background: #f8fafc;
             border: 2px solid #e2e8f0;
@@ -546,8 +555,6 @@
             margin-bottom: 15px;
             font-size: 14px;
         }
-
-        /* РЕЙТИНГ В ФОРМЕ */
         .rating-select {
             display: flex;
             gap: 10px;
@@ -566,19 +573,50 @@
             background: #fbbf24;
             border-color: #fbbf24;
         }
+        .cassette-detail-card {
+            background: #ffffff;
+            border: 3px solid #e2e8f0;
+            border-radius: 28px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+        }
+        .cassette-detail-card:hover {
+            border-color: #24A1DE;
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(36,161,222,0.12);
+        }
+        .cassette-detail-img {
+            max-height: 200px;
+            object-fit: contain;
+            margin-bottom: 24px;
+            border-radius: 16px;
+        }
+        .cassette-detail-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #24A1DE;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .cassette-detail-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #24A1DE;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
-
     <div class="vhs-background">
         <div class="vhs-pattern"></div>
     </div>
-
     <button id="floatingTgBtn" onclick="openTelegram()" class="tg-float">
         <i class="fab fa-telegram-plane text-2xl"></i>
         <span class="text-[13px] uppercase tracking-widest font-bold">Задать вопрос в Telegram</span>
     </button>
-
     <header class="fixed w-full z-40 header-red-bg shadow-lg border-b border-red-700">
         <div class="container mx-auto px-5 h-20 flex items-center justify-between">
             <div class="flex items-center gap-4">
@@ -599,7 +637,6 @@
             </button>
         </div>
     </header>
-
     <main>
         <section class="relative pt-32 pb-8">
             <div class="container mx-auto px-4">
@@ -616,8 +653,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- Секция типов кассет -->
         <section class="py-6">
             <div class="container mx-auto px-4">
                 <div class="max-w-4xl mx-auto text-center mb-8">
@@ -626,17 +661,39 @@
                     </p>
                 </div>
                 <div class="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <div class="soft-card-static" onclick="openGallery('vhs')"><span class="card-label">VHS <i class="far fa-eye"></i></span></div>
-                    <div class="soft-card-static" onclick="openGallery('vhs-c')"><span class="card-label">VHS-C <i class="far fa-eye"></i></span></div>
-                    <div class="soft-card-static" onclick="openGallery('8mm')"><span class="card-label">8mm <i class="far fa-eye"></i></span></div>
-                    <div class="soft-card-static" onclick="openGallery('hi8')"><span class="card-label">Hi8 <i class="far fa-eye"></i></span></div>
-                    <div class="soft-card-static" onclick="openGallery('digital8')"><span class="card-label">Digital8 <i class="far fa-eye"></i></span></div>
-                    <div class="soft-card-static" onclick="openGallery('minidv')"><span class="card-label">MiniDV <i class="far fa-eye"></i></span></div>
+                    <div class="soft-card-static">
+                        <img src="vhs.png" alt="VHS" class="cassette-type-img">
+                        <div class="cassette-type-title">VHS</div>
+                    </div>
+                    <div class="soft-card-static">
+                        <img src="vhc c.png" alt="VHS-C" class="cassette-type-img">
+                        <div class="cassette-type-title">VHS-C</div>
+                    </div>
+                    <div class="soft-card-static">
+                        <img src="8mm.png" alt="8mm" class="cassette-type-img">
+                        <div class="cassette-type-title">8mm</div>
+                    </div>
+                    <div class="soft-card-static">
+                        <img src="hi8.png" alt="Hi8" class="cassette-type-img">
+                        <div class="cassette-type-title">Hi8</div>
+                    </div>
+                    <div class="soft-card-static">
+                        <img src="digital8.png" alt="Digital8" class="cassette-type-img">
+                        <div class="cassette-type-title">Digital8</div>
+                    </div>
+                    <div class="soft-card-static">
+                        <img src="mini dv.png" alt="MiniDV" class="cassette-type-img">
+                        <div class="cassette-type-title">MiniDV</div>
+                    </div>
+                </div>
+                <div class="max-w-4xl mx-auto mt-8">
+                    <button onclick="toggleModal('detailedCassettesModal', true)" class="faq-banner">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Подробно о типах кассет</span>
+                    </button>
                 </div>
             </div>
         </section>
-
-        <!-- Преимущества -->
         <section class="py-10">
             <div class="container mx-auto px-4">
                 <div class="glass-block py-16 px-8 max-w-5xl mx-auto grid md:grid-cols-3 gap-12">
@@ -656,18 +713,33 @@
                         <p class="text-slate-500 uppercase text-[13px] font-bold leading-relaxed mobile-larger-text">Прозрачный расчёт. Минимальный заказ — всего 2070 ₽.</p>
                     </div>
                 </div>
-                
-                <!-- ПЛАШКА ПОДРОБНЕЕ -->
-                <div class="max-w-sm mx-auto mt-8 px-4">
-                    <a href="https://rinatzakirow-bot.github.io/ocifrovka/" target="_blank" class="faq-banner">
-                        <i class="fas fa-info-circle"></i>
-                        <span>Ещё более подробно</span>
-                    </a>
+            
+                <div class="mt-12">
+                    <div class="max-w-lg mx-auto space-y-4">
+                        <button onclick="toggleModal('deliveryModal', true)" class="faq-banner">
+                            <i class="fas fa-car-side"></i>
+                            <span>Как передать кассеты</span>
+                        </button>
+                        <button onclick="toggleModal('formatModal', true)" class="faq-banner">
+                            <i class="fas fa-file-video"></i>
+                            <span>В каком виде получу оцифровку</span>
+                        </button>
+                        <button onclick="toggleModal('equipmentModal', true)" class="faq-banner">
+                            <i class="fas fa-video"></i>
+                            <span>Оборудование</span>
+                        </button>
+                        <button onclick="toggleModal('deadlineModal', true)" class="faq-banner">
+                            <i class="fas fa-clock"></i>
+                            <span>Срок исполнения?</span>
+                        </button>
+                        <button onclick="toggleModal('unknownModal', true)" class="faq-banner">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Не знаете что на кассетах?</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
-
-        <!-- Калькулятор -->
         <section id="calc" class="py-10">
             <div class="container mx-auto px-4">
                 <div class="max-w-2xl mx-auto glass-block p-8 md:p-14">
@@ -675,7 +747,6 @@
                         <h2 class="text-2xl md:text-3xl uppercase tracking-widest mb-4 light-beam-effect">Рассчитайте максимально возможную стоимость</h2>
                         <p class="text-[12px] uppercase tracking-widest font-bold text-slate-400 mobile-larger-text attention-shake">Укажите количество ваших кассет</p>
                     </div>
-
                     <div class="calc-grid">
                         <div class="calc-item-block">
                             <div class="calc-item-label">Кассеты от видеокамер</div>
@@ -688,7 +759,6 @@
                             </div>
                             <div class="calc-item-sub">MiniDV, Hi8, 8mm, VHS-C</div>
                         </div>
-
                         <div class="calc-item-block">
                             <div class="calc-item-label">Стандартные VHS кассеты</div>
                             <div class="calc-controls-row">
@@ -701,7 +771,6 @@
                             <div class="calc-item-sub">Большие кассеты</div>
                         </div>
                     </div>
-
                     <div class="text-center">
                         <div class="text-6xl md:text-7xl font-bold flex items-center justify-center mb-4">
                             <div class="total-price-wrapper">
@@ -709,15 +778,13 @@
                                 <span class="currency-symbol text-2xl text-slate-300">₽</span>
                             </div>
                         </div>
-
                         <div id="finalPriceNotice" class="hidden mb-10 max-w-md mx-auto px-4">
                             <p id="targetNoticeText" class="text-[12px] md:text-[13px] uppercase tracking-widest font-bold pulse-text leading-relaxed mobile-larger-text">
                                 Окончательная стоимость обычно значительно ниже, так как кассеты крайне редко записаны полностью
                             </p>
                         </div>
-
                         <button onclick="toggleModal('orderModal', true)" class="elegant-btn elegant-btn-pulse mx-auto">Сделать заказ</button>
-                        
+                    
                         <div class="mt-4">
                             <span class="text-[12px] uppercase tracking-[0.2em] font-bold text-slate-400 mobile-larger-text">Готово будет уже завтра</span>
                         </div>
@@ -725,15 +792,13 @@
                 </div>
             </div>
         </section>
-
-        <!-- БЛОК ОТЗЫВОВ -->
         <section id="reviews" class="py-20">
             <div class="container mx-auto px-4">
                 <div class="max-w-4xl mx-auto text-center mb-12">
                     <h2 class="text-2xl md:text-3xl uppercase tracking-[0.2em] font-bold mb-4">Отзывы клиентов</h2>
                     <p class="text-[11px] md:text-[13px] uppercase tracking-[0.25em] font-bold text-slate-400">Что говорят о моей работе</p>
                 </div>
-                
+            
                 <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                     <div class="review-card">
                         <div class="stars-gold">★★★★★</div>
@@ -746,7 +811,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="review-card">
                         <div class="stars-gold">★★★★★</div>
                         <p class="text-[14px] font-medium leading-relaxed mb-6 italic">"Нужно было срочно оцифровать 5 кассет MiniDV для фильма. Ринат сделал всё за сутки. Цвета сочные, звук чистый. Рекомендую как профессионала своего дела."</p>
@@ -758,7 +822,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="review-card">
                         <div class="stars-gold">★★★★★</div>
                         <p class="text-[14px] font-medium leading-relaxed mb-6 italic">"Самый честный сервис. По калькулятору выходило 5000, а по факту заплатил 3200, потому что кассеты были записаны наполовину. Огромное спасибо за честность!"</p>
@@ -771,37 +834,37 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- КНОПКА ОСТАВИТЬ ОТЗЫВ -->
                 <div class="text-center">
                     <button onclick="toggleModal('reviewModal', true)" class="elegant-btn btn-outline-tg mx-auto !w-auto">Оставить отзыв</button>
                 </div>
             </div>
         </section>
     </main>
-
-    <!-- Модальное окно для нового отзыва -->
+    <!-- Все модальные окна (полный список) -->
     <div id="reviewModal" class="modal-overlay">
         <div class="modal-content">
-            <button onclick="toggleModal('reviewModal', false)" class="absolute top-5 right-5 text-slate-300 p-2 border-none bg-transparent cursor-pointer hover:text-slate-500 transition-colors">
-                <i class="fas fa-times text-xl"></i>
-            </button>
-            <div id="reviewFormContainer">
+            <div class="modal-header">
+                <button onclick="toggleModal('reviewModal', false)" class="modal-back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button onclick="toggleModal('reviewModal', false)" class="modal-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
                 <div class="text-center mb-6">
                     <h3 class="text-xl font-bold uppercase tracking-wider mb-1">Ваш отзыв</h3>
                     <p class="text-[10px] text-slate-400 uppercase font-bold tracking-widest mobile-larger-text">Ваше мнение очень важно для меня</p>
                 </div>
-                <form id="reviewForm" action="https://formspree.io/f/xkowabkp" method="POST" class="space-y-4">
+                <form id="reviewForm" action="https://formspree.io/f/xkowabkp" method="POST" class="space-y-4 max-w-md mx-auto w-full">
                     <div class="form-row">
-                        <label class="text-[10px] uppercase font-bold text-slate-400 ml-2 mb-1 block mobile-larger-text">Как вас зовут?</label>
+                        <label class="text-[10px] uppercase font-bold text-slate-400 mb-1 block mobile-larger-text">Как вас зовут?</label>
                         <input type="text" name="name" required placeholder="Имя Фамилия" class="form-input">
                     </div>
-                    
                     <div class="form-row">
-                        <label class="text-[10px] uppercase font-bold text-slate-400 ml-2 mb-1 block mobile-larger-text">Ваш отзыв</label>
+                        <label class="text-[10px] uppercase font-bold text-slate-400 mb-1 block mobile-larger-text">Ваш отзыв</label>
                         <textarea name="review" required rows="4" placeholder="Напишите пару слов о моей работе..." class="form-input"></textarea>
                     </div>
-
                     <div class="form-row text-center">
                          <label class="text-[10px] uppercase font-bold text-slate-400 mb-2 block">Оценка</label>
                          <div class="rating-select" id="ratingDots">
@@ -813,143 +876,236 @@
                          </div>
                          <input type="hidden" name="stars" id="starsInput" value="5">
                     </div>
-
                     <input type="hidden" name="_subject" value="Новый отзыв на сайте">
-                    
                     <button type="submit" id="reviewSubmitBtn" class="elegant-btn mt-2 !py-4">Опубликовать</button>
                 </form>
-            </div>
-            <div id="reviewSuccessMessage" class="hidden text-center py-6">
-                <i class="fas fa-heart text-5xl mb-4 text-red-500"></i>
-                <h3 class="text-xl font-bold uppercase mb-2">Спасибо!</h3>
-                <p class="text-slate-500 uppercase text-[12px] font-bold mobile-larger-text">Ваш отзыв отправлен на модерацию</p>
-                <button onclick="toggleModal('reviewModal', false)" class="mt-8 underline font-bold uppercase text-[11px] text-[#24A1DE] bg-transparent border-none cursor-pointer">Закрыть окно</button>
+                <div id="reviewSuccessMessage" class="hidden text-center py-6">
+                    <i class="fas fa-heart text-5xl mb-4 text-red-500"></i>
+                    <h3 class="text-xl font-bold uppercase mb-2">Спасибо!</h3>
+                    <p class="text-slate-500 uppercase text-[12px] font-bold mobile-larger-text">Ваш отзыв отправлен на модерацию</p>
+                    <button onclick="toggleModal('reviewModal', false)" class="mt-8 underline font-bold uppercase text-[11px] text-[#24A1DE] bg-transparent border-none cursor-pointer">Закрыть окно</button>
+                </div>
             </div>
         </div>
     </div>
-
-    <!-- Модальное окно заказа -->
     <div id="orderModal" class="modal-overlay">
         <div class="modal-content">
-            <button onclick="toggleModal('orderModal', false)" class="absolute top-5 right-5 text-slate-300 p-2 border-none bg-transparent cursor-pointer hover:text-slate-500 transition-colors">
-                <i class="fas fa-times text-xl"></i>
-            </button>
-            <div id="formContainer">
+            <div class="modal-header">
+                <button onclick="toggleModal('orderModal', false)" class="modal-back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button onclick="toggleModal('orderModal', false)" class="modal-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
                 <div class="text-center mb-6">
                     <h3 class="text-xl font-bold uppercase tracking-wider mb-1">Оформить заявку</h3>
                     <p class="text-[10px] text-slate-400 uppercase font-bold tracking-widest mobile-larger-text">Бесплатно приеду за кассетами и привезу обратно</p>
                 </div>
-                <form id="orderForm" action="https://formspree.io/f/xkowabkp" method="POST" class="space-y-4">
+                <form id="orderForm" action="https://formspree.io/f/xkowabkp" method="POST" class="space-y-4 max-w-md mx-auto w-full">
                     <div class="form-row">
-                        <label class="text-[10px] uppercase font-bold text-slate-400 ml-2 mb-1 block mobile-larger-text">Телефон</label>
+                        <label class="text-[10px] uppercase font-bold text-slate-400 mb-1 block mobile-larger-text">Телефон</label>
                         <input type="tel" id="phoneInput" name="phone" required placeholder="+7 (___) ___-__-__" class="form-input">
                     </div>
-                    
                     <div class="form-row">
-                        <label class="text-[10px] uppercase font-bold text-slate-400 ml-2 mb-1 block mobile-larger-text">Адрес в Москве</label>
+                        <label class="text-[10px] uppercase font-bold text-slate-400 mb-1 block mobile-larger-text">Адрес в Москве</label>
                         <textarea name="address" required rows="2" placeholder="Улица, дом, квартира" class="form-input"></textarea>
                     </div>
-
                     <input type="hidden" name="cam_qty" id="h_cam" value="0">
                     <input type="hidden" name="vhs_qty" id="h_vhs" value="0">
                     <input type="hidden" name="total" id="h_total" value="0">
                     <input type="hidden" name="_subject" value="Новый заказ на оцифровку">
-                    
                     <button type="submit" id="submitBtn" class="elegant-btn mt-2 !py-4">Отправить заявку</button>
-                    
                     <div class="flex flex-col items-center">
-                        <div class="w-full h-[1px] bg-slate-100 my-4 flex items-center justify-center">
-                        </div>
+                        <div class="w-full h-[1px] bg-slate-100 my-4"></div>
                         <span class="text-[10px] uppercase text-[#24A1DE] font-bold tracking-[0.2em] mb-1">или просто напишите</span>
                         <button type="button" onclick="openTelegram()" class="elegant-btn btn-outline-tg !max-w-full !py-4 mt-0">
                             <i class="fab fa-telegram-plane"></i> В Telegram
                         </button>
                     </div>
                 </form>
-            </div>
-            <div id="successMessage" class="hidden text-center py-6">
-                <i class="fas fa-check-circle text-5xl mb-4 text-green-500"></i>
-                <h3 class="text-xl font-bold uppercase mb-2">Спасибо за заказ.</h3>
-                <p class="text-slate-500 uppercase text-[12px] font-bold mobile-larger-text">Сейчас Вам напишу</p>
-                <button onclick="toggleModal('orderModal', false)" class="mt-8 underline font-bold uppercase text-[11px] text-[#24A1DE] bg-transparent border-none cursor-pointer">Закрыть окно</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Модальное окно галереи -->
-    <div id="imageModal" class="modal-overlay">
-        <div class="modal-content text-center" style="background: #ffffff;">
-            <button onclick="toggleModal('imageModal', false)" class="absolute top-6 right-6 text-slate-400 p-2 border-none bg-transparent cursor-pointer z-20">
-                <i class="fas fa-times text-2xl"></i>
-            </button>
-
-            <h3 id="imageTitle" class="text-xl font-bold uppercase tracking-widest mb-6">VHS</h3>
-
-            <div class="gallery-container">
-                <button onclick="navGallery(-1)" class="side-nav-btn" aria-label="Назад">
-                    <i class="fas fa-chevron-left"></i>
-                </button>
-                
-                <div class="gallery-image-wrapper">
-                    <img id="previewImage" src="" alt="Формат кассеты">
+                <div id="successMessage" class="hidden text-center py-6">
+                    <i class="fas fa-check-circle text-5xl mb-4 text-green-500"></i>
+                    <h3 class="text-xl font-bold uppercase mb-2">Спасибо за заказ.</h3>
+                    <p class="text-slate-500 uppercase text-[12px] font-bold mobile-larger-text">Сейчас Вам напишу</p>
+                    <button onclick="toggleModal('orderModal', false)" class="mt-8 underline font-bold uppercase text-[11px] text-[#24A1DE] bg-transparent border-none cursor-pointer">Закрыть окно</button>
                 </div>
-
-                <button onclick="navGallery(1)" class="side-nav-btn" aria-label="Вперед">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
             </div>
-            
-            <p id="imagePrice" class="text-[14px] md:text-[16px] text-[#24A1DE] uppercase font-bold tracking-widest mt-2 mb-2">Цена</p>
-            <p class="text-[12px] text-slate-400 uppercase font-bold tracking-widest">Кассету этого типа</p>
         </div>
     </div>
-
+    <div id="detailedCassettesModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 1200px; background: #f8fafc;">
+            <div class="modal-header">
+                <button onclick="toggleModal('detailedCassettesModal', false)" class="modal-back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button onclick="toggleModal('detailedCassettesModal', false)" class="modal-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 class="text-3xl font-bold uppercase tracking-widest text-center mb-12">Подробно о типах кассет</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
+                    <div class="cassette-detail-card">
+                        <img src="vhs.png" alt="VHS кассета" class="cassette-detail-img">
+                        <div class="cassette-detail-title">VHS</div>
+                        <p class="text-base leading-relaxed text-slate-700 mb-6">Стандартные полноразмерные кассеты VHS (Video Home System). Использовались в домашних видеомагнитофонах. Максимальная длительность записи — до 240 минут в режиме LP (long play).</p>
+                        <div class="cassette-detail-price">до 4140 ₽</div>
+                    </div>
+                    <div class="cassette-detail-card">
+                        <img src="vhc c.png" alt="VHS-C кассета" class="cassette-detail-img">
+                        <div class="cassette-detail-title">VHS-C</div>
+                        <p class="text-base leading-relaxed text-slate-700 mb-6">Компактная версия VHS для портативных видеокамер. Кассеты меньшего размера, для воспроизведения требуется адаптер в обычный VHS-плеер. Длительность записи — до 60 минут.</p>
+                        <div class="cassette-detail-price">до 1380 ₽</div>
+                    </div>
+                    <div class="cassette-detail-card">
+                        <img src="8mm.png" alt="8mm (Video8) кассета" class="cassette-detail-img">
+                        <div class="cassette-detail-title">8mm (Video8)</div>
+                        <p class="text-base leading-relaxed text-slate-700 mb-6">Аналоговый формат на 8-мм ленте, разработанный Sony. Компактные кассеты для камкордеров, хорошее качество изображения для своего времени. Длительность — до 120 минут.</p>
+                        <div class="cassette-detail-price">до 2070 ₽</div>
+                    </div>
+                    <div class="cassette-detail-card">
+                        <img src="hi8.png" alt="Hi8 кассета" class="cassette-detail-img">
+                        <div class="cassette-detail-title">Hi8</div>
+                        <p class="text-base leading-relaxed text-slate-700 mb-6">Улучшенная версия Video8 с повышенной полосой частот (High Band). Лучшая цветопередача и разрешение (около 400 строк) по сравнению с обычным Video8.</p>
+                        <div class="cassette-detail-price">до 2070 ₽</div>
+                    </div>
+                    <div class="cassette-detail-card">
+                        <img src="digital8.png" alt="Digital8 кассета" class="cassette-detail-img">
+                        <div class="cassette-detail-title">Digital8</div>
+                        <p class="text-base leading-relaxed text-slate-700 mb-6">Цифровой формат на той же 8-мм ленте. Совместим с аналоговыми Hi8/Video8 плеерами. Качество — стандарт DV (500 строк), длительность до 60 минут в цифровом режиме.</p>
+                        <div class="cassette-detail-price">до 2070 ₽</div>
+                    </div>
+                    <div class="cassette-detail-card">
+                        <img src="mini dv.png" alt="MiniDV кассета" class="cassette-detail-img">
+                        <div class="cassette-detail-title">MiniDV</div>
+                        <p class="text-base leading-relaxed text-slate-700 mb-6">Миниатюрные цифровые кассеты формата DV. Высокое качество видео (500 строк горизонтального разрешения), чистый звук. Использовались в цифровых камкордерах, длительность до 90 минут.</p>
+                        <div class="cassette-detail-price">до 1380 ₽</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="deliveryModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button onclick="toggleModal('deliveryModal', false)" class="modal-back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button onclick="toggleModal('deliveryModal', false)" class="modal-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 class="text-2xl font-bold uppercase tracking-wider mb-8">Как передать кассеты</h3>
+                <p class="text-lg leading-relaxed mb-6">Я бесплатно приеду за кассетами по любому адресу в пределах МКАД и привезу готовые файлы обратно.</p>
+                <p class="text-lg leading-relaxed mb-8">Если вам удобнее — можете привезти кассеты самостоятельно (адрес согласуем в переписке).</p>
+                <button onclick="toggleModal('deliveryModal', false); toggleModal('orderModal', true)" class="elegant-btn mx-auto">Оформить заказ</button>
+                <button onclick="toggleModal('deliveryModal', false); openTelegram()" class="elegant-btn btn-outline-tg mx-auto mt-4">Написать в Telegram</button>
+            </div>
+        </div>
+    </div>
+    <div id="formatModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button onclick="toggleModal('formatModal', false)" class="modal-back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button onclick="toggleModal('formatModal', false)" class="modal-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 class="text-2xl font-bold uppercase tracking-wider mb-8">В каком виде получу оцифровку</h3>
+                <p class="text-lg leading-relaxed mb-6">Файлы оцифровки запишу на Вашу флешку или отправлю ссылку на скачивание файлов оцифровки.</p>
+                <p class="text-lg leading-relaxed mb-6">Формат: MPG 720x576</p>
+                <p class="text-lg leading-relaxed mb-8">Это технический максимум того, что возможно получить с видеокассет. Кто-то обещает оцифровать кассеты в Full HD — это обман и не более чем маркетинг за исключением кассет mini DV записаных в формате full HD но такие встречаются крайне редко. С ними тоже работаю но стоимость оцифровки подобных кассет в два раза выше.</p>
+                <button onclick="toggleModal('formatModal', false); toggleModal('orderModal', true)" class="elegant-btn mx-auto">Оформить заказ</button>
+                <button onclick="toggleModal('formatModal', false); openTelegram()" class="elegant-btn btn-outline-tg mx-auto mt-4">Написать в Telegram</button>
+            </div>
+        </div>
+    </div>
+    <div id="equipmentModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button onclick="toggleModal('equipmentModal', false)" class="modal-back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button onclick="toggleModal('equipmentModal', false)" class="modal-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 class="text-2xl font-bold uppercase tracking-wider mb-8">Оборудование</h3>
+                <p class="text-lg leading-relaxed mb-6">Оцифровка производится на топовых студийных видеомагнитофонах S-VHS (Panasonic и JVC профессиональной серии).</p>
+                <p class="text-lg leading-relaxed mb-6">Для конвертации используется легендарный профессиональный видеоконвертер Canopus ADVC-300 — один из лучших устройств для оцифровки аналогового видео.</p>
+                <p class="text-lg leading-relaxed mb-4 font-bold">Преимущества Canopus ADVC-300:</p>
+                <ul class="text-left text-base leading-relaxed space-y-3 max-w-md mx-auto">
+                    <li>• Встроенный цифровой Time Base Corrector (TBC) — устраняет дрожание изображения и корректирует ошибки синхронизации, характерные для старых кассет.</li>
+                    <li>• Профессиональная 3D Y/C-сепарация — обеспечивает чистое разделение яркости и цветности, минимизируя артефакты и улучшая цветопередачу.</li>
+                    <li>• Высококачественный аналого-цифровой преобразователь (13-битный) — даёт максимальную детализацию и минимум шума.</li>
+                    <li>• Поддержка Locked Audio — синхронизация звука без потерь и дрейфа.</li>
+                    <li>• Цифровой вывод через FireWire без сжатия — передача сигнала в компьютер в реальном времени без потери качества.</li>
+                    <li>• Профессиональный уровень, проверенный десятилетиями в студиях и архивах — это «золотой стандарт» для оцифровки VHS и аналогичных форматов.</li>
+                </ul>
+                <p class="text-lg leading-relaxed mt-6 mb-8">Благодаря этому оборудованию я получаю максимально возможное качество с ваших кассет — лучше, чем у большинства сервисов.</p>
+                <button onclick="toggleModal('equipmentModal', false); toggleModal('orderModal', true)" class="elegant-btn mx-auto">Оформить заказ</button>
+                <button onclick="toggleModal('equipmentModal', false); openTelegram()" class="elegant-btn btn-outline-tg mx-auto mt-4">Написать в Telegram</button>
+            </div>
+        </div>
+    </div>
+    <div id="deadlineModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button onclick="toggleModal('deadlineModal', false)" class="modal-back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button onclick="toggleModal('deadlineModal', false)" class="modal-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 class="text-2xl font-bold uppercase tracking-wider mb-8">Срок исполнения</h3>
+                <p class="text-lg leading-relaxed mb-8">Если у Вас менее 6 кассет, то ссылочки на скачивание файлов оцифровки будут у Вас уже на следующий день. Если больше, то работа займет 2–3 дня.</p>
+                <button onclick="toggleModal('deadlineModal', false); toggleModal('orderModal', true)" class="elegant-btn mx-auto">Оформить заказ</button>
+                <button onclick="toggleModal('deadlineModal', false); openTelegram()" class="elegant-btn btn-outline-tg mx-auto mt-4">Написать в Telegram</button>
+            </div>
+        </div>
+    </div>
+    <div id="unknownModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button onclick="toggleModal('unknownModal', false)" class="modal-back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button onclick="toggleModal('unknownModal', false)" class="modal-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 class="text-2xl font-bold uppercase tracking-wider mb-8">Не знаете что на кассетах?</h3>
+                <p class="text-lg leading-relaxed mb-6">Если у вас есть кассеты с неизвестным содержимым, я отправлю вам три скриншота с каждой из них. Как правило, этого достаточно, чтобы определить, нужна ли оцифровка.</p>
+                <p class="text-lg leading-relaxed mb-6">Стоимость опции: 300 ₽ за одну кассету.</p>
+                <p class="text-lg leading-relaxed mb-8">Если оцифровка не потребуется вовсе, заказ оценивается как минимальный т. е. 2070 ₽.</p>
+                <button onclick="toggleModal('unknownModal', false); toggleModal('orderModal', true)" class="elegant-btn mx-auto">Оформить заказ</button>
+                <button onclick="toggleModal('unknownModal', false); openTelegram()" class="elegant-btn btn-outline-tg mx-auto mt-4">Написать в Telegram</button>
+            </div>
+        </div>
+    </div>
     <footer class="p-10 text-center text-gray-400 text-xs uppercase tracking-widest border-t border-gray-50">
         © 2024 Rinat Ocifrovka. Все права защищены.
     </footer>
-
     <script>
         const textToMagnify = "Готово уже завтра";
         const container = document.getElementById('magnifyText');
-        
+    
         textToMagnify.split('').forEach((char, index) => {
             const span = document.createElement('span');
-            span.textContent = char === ' ' ? '\u00A0' : char; 
-            span.style.animationDelay = `${index * 0.05}s`; 
+            span.textContent = char === ' ' ? '\u00A0' : char;
+            span.style.animationDelay = `${index * 0.05}s`;
             container.appendChild(span);
         });
-
-        const galleryFormats = [
-            { id: 'vhs', label: 'VHS', file: 'vhs.png', price: 'до 4140 руб. за каждую' },
-            { id: 'vhs-c', label: 'VHS-C', file: 'vhc c.png', price: 'до 1380 руб. за каждую' },
-            { id: '8mm', label: '8mm', file: '8mm.png', price: 'до 2070 руб. за каждую' },
-            { id: 'hi8', label: 'Hi8', file: 'hi8.png', price: 'до 2070 руб. за каждую' },
-            { id: 'digital8', label: 'Digital8', file: 'digital8.png', price: 'до 2070 руб. за каждую' },
-            { id: 'minidv', label: 'MiniDV', file: 'mini dv.png', price: 'до 1380 руб. за каждую' }
-        ];
-        
-        let currentGalleryIndex = 0;
-
-        function openGallery(formatId) {
-            currentGalleryIndex = galleryFormats.findIndex(f => f.id === formatId);
-            updateGalleryUI();
-            toggleModal('imageModal', true);
-        }
-
-        function navGallery(step) {
-            currentGalleryIndex = (currentGalleryIndex + step + galleryFormats.length) % galleryFormats.length;
-            updateGalleryUI();
-        }
-
-        function updateGalleryUI() {
-            const format = galleryFormats[currentGalleryIndex];
-            const img = document.getElementById('previewImage');
-            const title = document.getElementById('imageTitle');
-            const price = document.getElementById('imagePrice');
-            title.innerText = format.label;
-            img.src = format.file;
-            price.innerText = format.price;
-        }
 
         function openTelegram() {
             const username = 'RinatZakiroff';
@@ -961,87 +1117,69 @@
                 window.open(`https://t.me/${username}`, '_blank');
             }
         }
-
         let quantities = { cam: 0, vhs: 0 };
         IMask(document.getElementById('phoneInput'), { mask: '+{7} (000) 000-00-00' });
-
-        /**
-         * Плавный цифровой распад с КРУПНЫМИ цифрами
-         */
         function binaryDissolve(element) {
             const rect = element.getBoundingClientRect();
             const width = rect.width;
             const height = rect.height;
-            // Уменьшаем количество из-за крупного размера для баланса производительности
-            const particleCount = Math.min((width * height) / 400, 150); 
-
+            const particleCount = Math.min((width * height) / 400, 150);
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('span');
                 particle.className = 'binary-particle';
                 particle.textContent = Math.round(Math.random());
-                
-                // Равномерный старт
+            
                 const startX = rect.left + Math.random() * width;
                 const startY = rect.top + Math.random() * height;
-                
+            
                 particle.style.left = startX + 'px';
                 particle.style.top = startY + 'px';
-                // СДЕЛАНО КРУПНЕЕ: диапазон от 18px до 32px
                 particle.style.fontSize = (Math.random() * 14 + 18) + 'px';
-                particle.style.opacity = (Math.random() * 0.6) + 0.4; 
-
+                particle.style.opacity = (Math.random() * 0.6) + 0.4;
                 document.body.appendChild(particle);
-
-                // Плавная траектория "рассеивания"
                 const destX = (Math.random() - 0.5) * 300;
-                const destY = (Math.random() * 400); 
+                const destY = (Math.random() * 400);
                 const rotate = (Math.random() - 0.5) * 360;
-
                 const anim = particle.animate([
                     { transform: 'translate(0, 0) rotate(0deg) scale(1)', opacity: particle.style.opacity },
                     { transform: `translate(${destX}px, ${destY}px) rotate(${rotate}deg) scale(0.3)`, opacity: 0 }
                 ], {
-                    duration: 1500 + Math.random() * 1000, 
-                    easing: 'cubic-bezier(0.1, 0, 0.2, 1)', 
+                    duration: 1500 + Math.random() * 1000,
+                    easing: 'cubic-bezier(0.1, 0, 0.2, 1)',
                     fill: 'forwards'
                 });
-
                 anim.onfinish = () => particle.remove();
             }
         }
-
         function toggleModal(id, show) {
             const modal = document.getElementById(id);
+            if (!modal) return;
             const content = modal.querySelector('.modal-content');
             if (show) {
                 modal.style.display = 'flex';
                 document.body.style.overflow = 'hidden';
                 requestAnimationFrame(() => {
                     modal.classList.add('active');
-                    content.classList.remove('fade-out');
+                    if (content) content.classList.remove('fade-out');
                 });
             } else {
-                // Запускаем эффект распада перед закрытием
-                binaryDissolve(content);
-                
-                content.classList.add('fade-out');
+                if (content) binaryDissolve(content);
+                if (content) content.classList.add('fade-out');
                 modal.style.opacity = '0';
                 setTimeout(() => {
                     modal.classList.remove('active');
                     modal.style.display = 'none';
                     modal.style.opacity = '';
-                    content.classList.remove('fade-out');
+                    if (content) content.classList.remove('fade-out');
                     document.body.style.overflow = 'auto';
-                }, 400); 
+                }, 400);
             }
         }
-
         function updateQty(type, delta) {
             quantities[type] = Math.max(0, quantities[type] + delta);
             document.getElementById(type === 'cam' ? 'valCam' : 'valVhs').innerText = quantities[type];
             calculate();
         }
-
         function calculate() {
             const pricePerMinute = 23;
             const minOrder = 2070;
@@ -1062,33 +1200,28 @@
             } else {
                 notice.classList.add('hidden');
             }
-            checkTgOverlap(); 
+            checkTgOverlap();
         }
-
         function checkTgOverlap() {
             const tgBtn = document.getElementById('floatingTgBtn');
             const notice = document.getElementById('finalPriceNotice');
             const targetText = document.getElementById('targetNoticeText');
-            
+        
             if (!tgBtn || !notice || !targetText) return;
-
             if (notice.classList.contains('hidden')) {
                 tgBtn.style.opacity = '1';
                 tgBtn.style.pointerEvents = 'auto';
                 tgBtn.style.transform = 'translateX(-50%) translateY(0)';
                 return;
             }
-
             const tgRect = tgBtn.getBoundingClientRect();
             const textRect = targetText.getBoundingClientRect();
-
             const isOverlapping = !(
-                tgRect.top > textRect.bottom || 
-                tgRect.bottom < textRect.top || 
-                tgRect.left > textRect.right || 
+                tgRect.top > textRect.bottom ||
+                tgRect.bottom < textRect.top ||
+                tgRect.left > textRect.right ||
                 tgRect.right < textRect.left
             );
-
             if (isOverlapping) {
                 tgBtn.style.opacity = '0';
                 tgBtn.style.pointerEvents = 'none';
@@ -1099,11 +1232,8 @@
                 tgBtn.style.transform = 'translateX(-50%) translateY(0)';
             }
         }
-
         window.addEventListener('scroll', checkTgOverlap);
         window.addEventListener('resize', checkTgOverlap);
-
-        // Логика выбора рейтинга в форме
         const dots = document.querySelectorAll('.rating-dot');
         const starsInput = document.getElementById('starsInput');
         dots.forEach(dot => {
@@ -1117,8 +1247,6 @@
                 });
             });
         });
-
-        // Отправка основной формы заказа
         document.getElementById('orderForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const form = e.target;
@@ -1133,8 +1261,8 @@
                     headers: { 'Accept': 'application/json' }
                 });
                 if (response.ok) {
-                    document.getElementById('formContainer').classList.add('hidden');
                     document.getElementById('successMessage').classList.remove('hidden');
+                    form.closest('.modal-body').querySelector('form').classList.add('hidden');
                     form.reset();
                 } else {
                     alert('Ошибка при отправке.');
@@ -1146,8 +1274,6 @@
                 submitBtn.innerText = originalBtnText;
             }
         });
-
-        // Отправка формы отзыва
         document.getElementById('reviewForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const form = e.target;
@@ -1161,8 +1287,8 @@
                     headers: { 'Accept': 'application/json' }
                 });
                 if (response.ok) {
-                    document.getElementById('reviewFormContainer').classList.add('hidden');
                     document.getElementById('reviewSuccessMessage').classList.remove('hidden');
+                    form.closest('.modal-body').querySelector('form').classList.add('hidden');
                     form.reset();
                 } else {
                     alert('Ошибка при отправке.');
