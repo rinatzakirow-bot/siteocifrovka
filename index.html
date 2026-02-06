@@ -80,7 +80,7 @@
             .premium-label-header { font-size: 8px !important; }
             .magnify-wrapper { font-size: 18px !important; }
         }
-    
+  
         h1, h2, h3, .font-bold { font-weight: 600 !important; letter-spacing: 0.02em; }
         .thin-header { font-weight: 500 !important; text-transform: uppercase; }
         .vhs-background { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: #ffffff; }
@@ -278,7 +278,7 @@
             transition: opacity 0.3s ease;
         }
         .modal-overlay.active { display: flex; opacity: 1; }
-    
+  
         .modal-content {
             background: #f8fafc;
             width: 100%; max-width: 480px; border-radius: 40px;
@@ -317,23 +317,26 @@
             justify-content: space-between;
             align-items: flex-start;
         }
+        /* НОВАЯ КНОПКА НАЗАД — матовое стекло, компактная, без твёрдой подложки */
         .modal-back-btn {
-            width: 48px;
-            height: 48px;
-            background: transparent;
-            border: 3px solid #e2e8f0;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: none;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: #64748b;
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
             box-shadow: none;
         }
         .modal-back-btn:hover {
-            border-color: #24A1DE;
+            background: rgba(255, 255, 255, 0.35);
             color: #24A1DE;
         }
         .modal-close-btn {
@@ -353,6 +356,34 @@
         @media (max-width: 480px) {
             .modal-header { padding: 20px 20px 0; }
             .modal-body { padding: 20px; }
+        }
+        /* Специально для модального окна заказа — кнопка назад удалена, крестик справа */
+        #orderModal .modal-header {
+            justify-content: flex-end;
+        }
+        /* НОВАЯ КНОПКА "НАЗАД" ВНИЗУ МОДАЛОК */
+        .glass-back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 16px 40px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: none;
+            border-radius: 100px;
+            color: #64748b;
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .glass-back-btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+            color: #24A1DE;
         }
         .binary-particle {
             position: fixed;
@@ -607,6 +638,24 @@
             color: #24A1DE;
             margin-top: 20px;
         }
+        /* Новые стили для фото в модалке оборудования */
+        .equipment-img {
+            max-height: 280px;
+            object-fit: contain;
+            border-radius: 20px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .equipment-img-caption {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            color: #64748b;
+            margin-top: 12px;
+            margin-bottom: 32px;
+        }
     </style>
 </head>
 <body>
@@ -713,16 +762,16 @@
                         <p class="text-slate-500 uppercase text-[13px] font-bold leading-relaxed mobile-larger-text">Прозрачный расчёт. Минимальный заказ — всего 2070 ₽.</p>
                     </div>
                 </div>
-            
+          
                 <div class="mt-12">
                     <div class="max-w-lg mx-auto space-y-4">
                         <button onclick="toggleModal('deliveryModal', true)" class="faq-banner">
                             <i class="fas fa-car-side"></i>
-                            <span>Как передать кассеты</span>
+                            <span>Как передать кассеты?</span>
                         </button>
                         <button onclick="toggleModal('formatModal', true)" class="faq-banner">
                             <i class="fas fa-file-video"></i>
-                            <span>В каком виде получу оцифровку</span>
+                            <span>В каком виде получите оцифровку?</span>
                         </button>
                         <button onclick="toggleModal('equipmentModal', true)" class="faq-banner">
                             <i class="fas fa-video"></i>
@@ -784,7 +833,7 @@
                             </p>
                         </div>
                         <button onclick="toggleModal('orderModal', true)" class="elegant-btn elegant-btn-pulse mx-auto">Сделать заказ</button>
-                    
+                  
                         <div class="mt-4">
                             <span class="text-[12px] uppercase tracking-[0.2em] font-bold text-slate-400 mobile-larger-text">Готово будет уже завтра</span>
                         </div>
@@ -798,7 +847,7 @@
                     <h2 class="text-2xl md:text-3xl uppercase tracking-[0.2em] font-bold mb-4">Отзывы клиентов</h2>
                     <p class="text-[11px] md:text-[13px] uppercase tracking-[0.25em] font-bold text-slate-400">Что говорят о моей работе</p>
                 </div>
-            
+          
                 <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                     <div class="review-card">
                         <div class="stars-gold">★★★★★</div>
@@ -885,15 +934,18 @@
                     <p class="text-slate-500 uppercase text-[12px] font-bold mobile-larger-text">Ваш отзыв отправлен на модерацию</p>
                     <button onclick="toggleModal('reviewModal', false)" class="mt-8 underline font-bold uppercase text-[11px] text-[#24A1DE] bg-transparent border-none cursor-pointer">Закрыть окно</button>
                 </div>
+                <div class="mt-12">
+                    <button onclick="toggleModal('reviewModal', false)" class="glass-back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        Назад
+                    </button>
+                </div>
             </div>
         </div>
     </div>
     <div id="orderModal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
-                <button onclick="toggleModal('orderModal', false)" class="modal-back-btn">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
                 <button onclick="toggleModal('orderModal', false)" class="modal-close-btn">
                     <i class="fas fa-times"></i>
                 </button>
@@ -974,7 +1026,7 @@
                     <div class="cassette-detail-card">
                         <img src="digital8.png" alt="Digital8 кассета" class="cassette-detail-img">
                         <div class="cassette-detail-title">Digital8</div>
-                        <p class="text-base leading-relaxed text-slate-700 mb-6">Цифровой формат на той же 8-мм ленте. Совместим с аналоговыми Hi8/Video8 плеерами. Качество — стандарт DV (500 строк), длительность до 60 минут в цифровом режиме.</p>
+                        <p class="text-base leading-relaxed text-slate-700 mb-6">Цифровой формат на той же 8-мм ленте. Не совместим с аналоговыми Hi8/Video8 плеерами. Качество — стандарт DV (500 строк), длительность до 60 минут в цифровом режиме.</p>
                         <div class="cassette-detail-price">до 2070 ₽</div>
                     </div>
                     <div class="cassette-detail-card">
@@ -983,6 +1035,12 @@
                         <p class="text-base leading-relaxed text-slate-700 mb-6">Миниатюрные цифровые кассеты формата DV. Высокое качество видео (500 строк горизонтального разрешения), чистый звук. Использовались в цифровых камкордерах, длительность до 90 минут.</p>
                         <div class="cassette-detail-price">до 1380 ₽</div>
                     </div>
+                </div>
+                <div class="mt-12">
+                    <button onclick="toggleModal('detailedCassettesModal', false)" class="glass-back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        Назад
+                    </button>
                 </div>
             </div>
         </div>
@@ -998,11 +1056,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h3 class="text-2xl font-bold uppercase tracking-wider mb-8">Как передать кассеты</h3>
+                <h3 class="text-2xl font-bold uppercase tracking-wider mb-8">Как передать кассеты?</h3>
                 <p class="text-lg leading-relaxed mb-6">Я бесплатно приеду за кассетами по любому адресу в пределах МКАД и привезу готовые файлы обратно.</p>
-                <p class="text-lg leading-relaxed mb-8">Если вам удобнее — можете привезти кассеты самостоятельно (адрес согласуем в переписке).</p>
-                <button onclick="toggleModal('deliveryModal', false); toggleModal('orderModal', true)" class="elegant-btn mx-auto">Оформить заказ</button>
-                <button onclick="toggleModal('deliveryModal', false); openTelegram()" class="elegant-btn btn-outline-tg mx-auto mt-4">Написать в Telegram</button>
+                <p class="text-lg leading-relaxed mb-6">Если вам удобнее — можете привезти кассеты самостоятельно (адрес согласуем в переписке).</p>
+                <p class="text-lg leading-relaxed mb-8">Если адрес за пределами МКАД — работаю через доставку Яндекс Маркет (стоимость доставки оплачивается отдельно).</p>
+                <div class="mt-12">
+                    <button onclick="toggleModal('deliveryModal', false)" class="glass-back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        Назад
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -1017,12 +1080,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                <h3 class="text-2xl font-bold uppercase tracking-wider mb-8">В каком виде получу оцифровку</h3>
+                <h3 class="text-2xl font-bold uppercase tracking-wider mb-8">В каком виде получите оцифровку?</h3>
                 <p class="text-lg leading-relaxed mb-6">Файлы оцифровки запишу на Вашу флешку или отправлю ссылку на скачивание файлов оцифровки.</p>
                 <p class="text-lg leading-relaxed mb-6">Формат: MPG 720x576</p>
                 <p class="text-lg leading-relaxed mb-8">Это технический максимум того, что возможно получить с видеокассет. Кто-то обещает оцифровать кассеты в Full HD — это обман и не более чем маркетинг за исключением кассет mini DV записаных в формате full HD но такие встречаются крайне редко. С ними тоже работаю но стоимость оцифровки подобных кассет в два раза выше.</p>
-                <button onclick="toggleModal('formatModal', false); toggleModal('orderModal', true)" class="elegant-btn mx-auto">Оформить заказ</button>
-                <button onclick="toggleModal('formatModal', false); openTelegram()" class="elegant-btn btn-outline-tg mx-auto mt-4">Написать в Telegram</button>
+                <div class="mt-12">
+                    <button onclick="toggleModal('formatModal', false)" class="glass-back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        Назад
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -1039,7 +1106,15 @@
             <div class="modal-body">
                 <h3 class="text-2xl font-bold uppercase tracking-wider mb-8">Оборудование</h3>
                 <p class="text-lg leading-relaxed mb-6">Оцифровка производится на топовых студийных видеомагнитофонах S-VHS (Panasonic и JVC профессиональной серии).</p>
+                
+                <img src="vhsc.png" alt="Студийный видеомагнитофон S-VHS" class="equipment-img">
+                <div class="equipment-img-caption">Студийный видеомагнитофон S-VHS</div>
+                
                 <p class="text-lg leading-relaxed mb-6">Для конвертации используется легендарный профессиональный видеоконвертер Canopus ADVC-300 — один из лучших устройств для оцифровки аналогового видео.</p>
+                
+                <img src="canopus.png" alt="Canopus ADVC-300" class="equipment-img">
+                <div class="equipment-img-caption">Canopus ADVC-300</div>
+                
                 <p class="text-lg leading-relaxed mb-4 font-bold">Преимущества Canopus ADVC-300:</p>
                 <ul class="text-left text-base leading-relaxed space-y-3 max-w-md mx-auto">
                     <li>• Встроенный цифровой Time Base Corrector (TBC) — устраняет дрожание изображения и корректирует ошибки синхронизации, характерные для старых кассет.</li>
@@ -1050,8 +1125,12 @@
                     <li>• Профессиональный уровень, проверенный десятилетиями в студиях и архивах — это «золотой стандарт» для оцифровки VHS и аналогичных форматов.</li>
                 </ul>
                 <p class="text-lg leading-relaxed mt-6 mb-8">Благодаря этому оборудованию я получаю максимально возможное качество с ваших кассет — лучше, чем у большинства сервисов.</p>
-                <button onclick="toggleModal('equipmentModal', false); toggleModal('orderModal', true)" class="elegant-btn mx-auto">Оформить заказ</button>
-                <button onclick="toggleModal('equipmentModal', false); openTelegram()" class="elegant-btn btn-outline-tg mx-auto mt-4">Написать в Telegram</button>
+                <div class="mt-12">
+                    <button onclick="toggleModal('equipmentModal', false)" class="glass-back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        Назад
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -1068,8 +1147,12 @@
             <div class="modal-body">
                 <h3 class="text-2xl font-bold uppercase tracking-wider mb-8">Срок исполнения</h3>
                 <p class="text-lg leading-relaxed mb-8">Если у Вас менее 6 кассет, то ссылочки на скачивание файлов оцифровки будут у Вас уже на следующий день. Если больше, то работа займет 2–3 дня.</p>
-                <button onclick="toggleModal('deadlineModal', false); toggleModal('orderModal', true)" class="elegant-btn mx-auto">Оформить заказ</button>
-                <button onclick="toggleModal('deadlineModal', false); openTelegram()" class="elegant-btn btn-outline-tg mx-auto mt-4">Написать в Telegram</button>
+                <div class="mt-12">
+                    <button onclick="toggleModal('deadlineModal', false)" class="glass-back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        Назад
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -1088,8 +1171,12 @@
                 <p class="text-lg leading-relaxed mb-6">Если у вас есть кассеты с неизвестным содержимым, я отправлю вам три скриншота с каждой из них. Как правило, этого достаточно, чтобы определить, нужна ли оцифровка.</p>
                 <p class="text-lg leading-relaxed mb-6">Стоимость опции: 300 ₽ за одну кассету.</p>
                 <p class="text-lg leading-relaxed mb-8">Если оцифровка не потребуется вовсе, заказ оценивается как минимальный т. е. 2070 ₽.</p>
-                <button onclick="toggleModal('unknownModal', false); toggleModal('orderModal', true)" class="elegant-btn mx-auto">Оформить заказ</button>
-                <button onclick="toggleModal('unknownModal', false); openTelegram()" class="elegant-btn btn-outline-tg mx-auto mt-4">Написать в Telegram</button>
+                <div class="mt-12">
+                    <button onclick="toggleModal('unknownModal', false)" class="glass-back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        Назад
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -1099,14 +1186,13 @@
     <script>
         const textToMagnify = "Готово уже завтра";
         const container = document.getElementById('magnifyText');
-    
+  
         textToMagnify.split('').forEach((char, index) => {
             const span = document.createElement('span');
             span.textContent = char === ' ' ? '\u00A0' : char;
             span.style.animationDelay = `${index * 0.05}s`;
             container.appendChild(span);
         });
-
         function openTelegram() {
             const username = 'RinatZakiroff';
             const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
@@ -1128,10 +1214,10 @@
                 const particle = document.createElement('span');
                 particle.className = 'binary-particle';
                 particle.textContent = Math.round(Math.random());
-            
+          
                 const startX = rect.left + Math.random() * width;
                 const startY = rect.top + Math.random() * height;
-            
+          
                 particle.style.left = startX + 'px';
                 particle.style.top = startY + 'px';
                 particle.style.fontSize = (Math.random() * 14 + 18) + 'px';
@@ -1206,7 +1292,7 @@
             const tgBtn = document.getElementById('floatingTgBtn');
             const notice = document.getElementById('finalPriceNotice');
             const targetText = document.getElementById('targetNoticeText');
-        
+      
             if (!tgBtn || !notice || !targetText) return;
             if (notice.classList.contains('hidden')) {
                 tgBtn.style.opacity = '1';
@@ -1292,7 +1378,7 @@
                     form.reset();
                 } else {
                     alert('Ошибка при отправке.');
-                }
+                }ф
             } catch (error) {
                 alert('Ошибка соединения.');
             } finally {
