@@ -80,7 +80,7 @@
             .premium-label-header { font-size: 8px !important; }
             .magnify-wrapper { font-size: 18px !important; }
         }
-  
+ 
         h1, h2, h3, .font-bold { font-weight: 600 !important; letter-spacing: 0.02em; }
         .thin-header { font-weight: 500 !important; text-transform: uppercase; }
         .vhs-background { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: #ffffff; }
@@ -278,7 +278,7 @@
             transition: opacity 0.3s ease;
         }
         .modal-overlay.active { display: flex; opacity: 1; }
-  
+ 
         .modal-content {
             background: #f8fafc;
             width: 100%; max-width: 480px; border-radius: 40px;
@@ -656,6 +656,24 @@
             margin-top: 12px;
             margin-bottom: 32px;
         }
+        /* Стили для видео в модалке "Подробно об оцифровке" */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: #000;
+        }
     </style>
 </head>
 <body>
@@ -762,7 +780,7 @@
                         <p class="text-slate-500 uppercase text-[13px] font-bold leading-relaxed mobile-larger-text">Прозрачный расчёт. Минимальный заказ — всего 2070 ₽.</p>
                     </div>
                 </div>
-          
+         
                 <div class="mt-12">
                     <div class="max-w-lg mx-auto space-y-4">
                         <button onclick="toggleModal('deliveryModal', true)" class="faq-banner">
@@ -772,6 +790,11 @@
                         <button onclick="toggleModal('formatModal', true)" class="faq-banner">
                             <i class="fas fa-file-video"></i>
                             <span>В каком виде получите оцифровку?</span>
+                        </button>
+                        <!-- НОВАЯ КНОПКА ДЛЯ ОТКРЫТИЯ МОДАЛКИ С ВИДЕО -->
+                        <button onclick="toggleModal('podrobnoObOcifrovkeModal', true)" class="faq-banner">
+                            <i class="fas fa-play-circle"></i>
+                            <span>Подробно об оцифровке</span>
                         </button>
                         <button onclick="toggleModal('equipmentModal', true)" class="faq-banner">
                             <i class="fas fa-video"></i>
@@ -833,7 +856,7 @@
                             </p>
                         </div>
                         <button onclick="toggleModal('orderModal', true)" class="elegant-btn elegant-btn-pulse mx-auto">Сделать заказ</button>
-                  
+                 
                         <div class="mt-4">
                             <span class="text-[12px] uppercase tracking-[0.2em] font-bold text-slate-400 mobile-larger-text">Готово будет уже завтра</span>
                         </div>
@@ -847,7 +870,7 @@
                     <h2 class="text-2xl md:text-3xl uppercase tracking-[0.2em] font-bold mb-4">Отзывы клиентов</h2>
                     <p class="text-[11px] md:text-[13px] uppercase tracking-[0.25em] font-bold text-slate-400">Что говорят о моей работе</p>
                 </div>
-          
+         
                 <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                     <div class="review-card">
                         <div class="stars-gold">★★★★★</div>
@@ -1093,6 +1116,34 @@
             </div>
         </div>
     </div>
+    <!-- НОВАЯ МОДАЛКА С ВИДЕО -->
+    <div id="podrobnoObOcifrovkeModal" class="modal-overlay">
+        <div class="modal-content" style="max-width: 900px;">
+            <div class="modal-header">
+                <button onclick="toggleModal('podrobnoObOcifrovkeModal', false)" class="modal-back-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button onclick="toggleModal('podrobnoObOcifrovkeModal', false)" class="modal-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 class="text-2xl font-bold uppercase tracking-wider mb-8 text-center">Подробно об оцифровке</h3>
+                <div class="video-wrapper">
+                    <video controls preload="metadata" poster="">
+                        <source src="podrobno-ob-ocifrovke.mp4" type="video/mp4">
+                        Ваш браузер не поддерживает воспроизведение видео.
+                    </video>
+                </div>
+                <div class="mt-12">
+                    <button onclick="toggleModal('podrobnoObOcifrovkeModal', false)" class="glass-back-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        Назад
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div id="equipmentModal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -1106,15 +1157,15 @@
             <div class="modal-body">
                 <h3 class="text-2xl font-bold uppercase tracking-wider mb-8">Оборудование</h3>
                 <p class="text-lg leading-relaxed mb-6">Оцифровка производится на топовых студийных видеомагнитофонах S-VHS (Panasonic и JVC профессиональной серии).</p>
-                
+               
                 <img src="vhsc.png" alt="Студийный видеомагнитофон S-VHS" class="equipment-img">
                 <div class="equipment-img-caption">Студийный видеомагнитофон S-VHS</div>
-                
+               
                 <p class="text-lg leading-relaxed mb-6">Для конвертации используется легендарный профессиональный видеоконвертер Canopus ADVC-300 — один из лучших устройств для оцифровки аналогового видео.</p>
-                
+               
                 <img src="canopus.png" alt="Canopus ADVC-300" class="equipment-img">
                 <div class="equipment-img-caption">Canopus ADVC-300</div>
-                
+               
                 <p class="text-lg leading-relaxed mb-4 font-bold">Преимущества Canopus ADVC-300:</p>
                 <ul class="text-left text-base leading-relaxed space-y-3 max-w-md mx-auto">
                     <li>• Встроенный цифровой Time Base Corrector (TBC) — устраняет дрожание изображения и корректирует ошибки синхронизации, характерные для старых кассет.</li>
@@ -1186,7 +1237,7 @@
     <script>
         const textToMagnify = "Готово уже завтра";
         const container = document.getElementById('magnifyText');
-  
+ 
         textToMagnify.split('').forEach((char, index) => {
             const span = document.createElement('span');
             span.textContent = char === ' ' ? '\u00A0' : char;
@@ -1214,10 +1265,10 @@
                 const particle = document.createElement('span');
                 particle.className = 'binary-particle';
                 particle.textContent = Math.round(Math.random());
-          
+         
                 const startX = rect.left + Math.random() * width;
                 const startY = rect.top + Math.random() * height;
-          
+         
                 particle.style.left = startX + 'px';
                 particle.style.top = startY + 'px';
                 particle.style.fontSize = (Math.random() * 14 + 18) + 'px';
@@ -1292,7 +1343,7 @@
             const tgBtn = document.getElementById('floatingTgBtn');
             const notice = document.getElementById('finalPriceNotice');
             const targetText = document.getElementById('targetNoticeText');
-      
+     
             if (!tgBtn || !notice || !targetText) return;
             if (notice.classList.contains('hidden')) {
                 tgBtn.style.opacity = '1';
@@ -1378,7 +1429,7 @@
                     form.reset();
                 } else {
                     alert('Ошибка при отправке.');
-                }ф
+                }
             } catch (error) {
                 alert('Ошибка соединения.');
             } finally {
