@@ -80,6 +80,7 @@
             .premium-label-header { font-size: 8px !important; }
             .magnify-wrapper { font-size: 18px !important; }
         }
+  
         h1, h2, h3, .font-bold { font-weight: 600 !important; letter-spacing: 0.02em; }
         .thin-header { font-weight: 500 !important; text-transform: uppercase; }
         .vhs-background { position: fixed; inset: 0; z-index: -1; pointer-events: none; background: #ffffff; }
@@ -277,6 +278,7 @@
             transition: opacity 0.3s ease;
         }
         .modal-overlay.active { display: flex; opacity: 1; }
+  
         .modal-content {
             background: #f8fafc;
             width: 100%; max-width: 480px; border-radius: 40px;
@@ -654,24 +656,6 @@
             margin-top: 12px;
             margin-bottom: 32px;
         }
-        /* Стили для видео в модалке "Подробно об оцифровке" */
-        .video-wrapper {
-            position: relative;
-            padding-bottom: 56.25%; /* 16:9 */
-            height: 0;
-            overflow: hidden;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-        }
-        .video-wrapper video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            background: #000;
-        }
     </style>
 </head>
 <body>
@@ -709,7 +693,7 @@
                     <h1 class="mb-6 uppercase font-bold header-static-blue">
                         <span class="title-flow-effect">Оцифровка <br> видеокассет</span>
                     </h1>
-                    <div class="text-lg text-slate-600 max-w-2xl mx-auto mb-8 mobile014-description">
+                    <div class="text-lg text-slate-600 max-w-2xl mx-auto mb-8 mobile-description">
                         <p>Перенесите ваши теплые воспоминания в современный цифровой формат. Максимум что возможно получить с кассет гарантирую.</p>
                         <div class="mt-4 block">
                             <span class="magnify-wrapper uppercase tracking-[0.3em] font-extrabold mobile-larger-text" id="magnifyText"></span>
@@ -731,7 +715,7 @@
                         <div class="cassette-type-title">VHS</div>
                     </div>
                     <div class="soft-card-static">
-                        <img src="vhsc.png" alt="VHS-C" class="cassette-type-img">
+                        <img src="vhc c.png" alt="VHS-C" class="cassette-type-img">
                         <div class="cassette-type-title">VHS-C</div>
                     </div>
                     <div class="soft-card-static">
@@ -778,7 +762,7 @@
                         <p class="text-slate-500 uppercase text-[13px] font-bold leading-relaxed mobile-larger-text">Прозрачный расчёт. Минимальный заказ — всего 2070 ₽.</p>
                     </div>
                 </div>
-       
+          
                 <div class="mt-12">
                     <div class="max-w-lg mx-auto space-y-4">
                         <button onclick="toggleModal('deliveryModal', true)" class="faq-banner">
@@ -788,11 +772,6 @@
                         <button onclick="toggleModal('formatModal', true)" class="faq-banner">
                             <i class="fas fa-file-video"></i>
                             <span>В каком виде получите оцифровку?</span>
-                        </button>
-                        <!-- НОВАЯ КНОПКА ДЛЯ ОТКРЫТИЯ МОДАЛКИ С ВИДЕО -->
-                        <button onclick="toggleModal('podrobnoObOcifrovkeModal', true)" class="faq-banner">
-                            <i class="fas fa-play-circle"></i>
-                            <span>Подробно об оцифровке</span>
                         </button>
                         <button onclick="toggleModal('equipmentModal', true)" class="faq-banner">
                             <i class="fas fa-video"></i>
@@ -834,7 +813,7 @@
                             <div class="calc-controls-row">
                                 <button onclick="updateQty('vhs', -1)" class="counter-btn shadow-sm active:scale-95"><i class="fas fa-minus"></i></button>
                                 <div class="calc-val-container">
-                                    <span id="valVhs" class="calc calc-val">0</span>
+                                    <span id="valVhs" class="calc-val">0</span>
                                 </div>
                                 <button onclick="updateQty('vhs', 1)" class="counter-btn shadow-sm active:scale-95"><i class="fas fa-plus"></i></button>
                             </div>
@@ -854,7 +833,7 @@
                             </p>
                         </div>
                         <button onclick="toggleModal('orderModal', true)" class="elegant-btn elegant-btn-pulse mx-auto">Сделать заказ</button>
-               
+                  
                         <div class="mt-4">
                             <span class="text-[12px] uppercase tracking-[0.2em] font-bold text-slate-400 mobile-larger-text">Готово будет уже завтра</span>
                         </div>
@@ -868,7 +847,7 @@
                     <h2 class="text-2xl md:text-3xl uppercase tracking-[0.2em] font-bold mb-4">Отзывы клиентов</h2>
                     <p class="text-[11px] md:text-[13px] uppercase tracking-[0.25em] font-bold text-slate-400">Что говорят о моей работе</p>
                 </div>
-       
+          
                 <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                     <div class="review-card">
                         <div class="stars-gold">★★★★★</div>
@@ -910,7 +889,7 @@
             </div>
         </section>
     </main>
-    <!-- Все модальные окна с добавленными иконками -->
+    <!-- Все модальные окна (полный список) -->
     <div id="reviewModal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -922,8 +901,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="text-center mb-10">
-                    <i class="fas fa-comment-dots text-6xl text-[#24A1DE] mb-6"></i>
+                <div class="text-center mb-6">
                     <h3 class="text-xl font-bold uppercase tracking-wider mb-1">Ваш отзыв</h3>
                     <p class="text-[10px] text-slate-400 uppercase font-bold tracking-widest mobile-larger-text">Ваше мнение очень важно для меня</p>
                 </div>
@@ -973,8 +951,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="text-center mb-10">
-                    <i class="fas fa-cart-plus text-6xl text-[#24A1DE] mb-6"></i>
+                <div class="text-center mb-6">
                     <h3 class="text-xl font-bold uppercase tracking-wider mb-1">Оформить заявку</h3>
                     <p class="text-[10px] text-slate-400 uppercase font-bold tracking-widest mobile-larger-text">Бесплатно приеду за кассетами и привезу обратно</p>
                 </div>
@@ -995,7 +972,7 @@
                     <div class="flex flex-col items-center">
                         <div class="w-full h-[1px] bg-slate-100 my-4"></div>
                         <span class="text-[10px] uppercase text-[#24A1DE] font-bold tracking-[0.2em] mb-1">или просто напишите</span>
-                        <button type="button" onclick="openTelegram()" classment="elegant-btn btn-outline-tg !max-w-full !py-4 mt-0">
+                        <button type="button" onclick="openTelegram()" class="elegant-btn btn-outline-tg !max-w-full !py-4 mt-0">
                             <i class="fab fa-telegram-plane"></i> В Telegram
                         </button>
                     </div>
@@ -1020,9 +997,6 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="text-center mb-10">
-                    <i class="fas fa-tape text-6xl text-[#24A1DE]"></i>
-                </div>
                 <h3 class="text-3xl font-bold uppercase tracking-widest text-center mb-12">Подробно о типах кассет</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
                     <div class="cassette-detail-card">
@@ -1032,7 +1006,7 @@
                         <div class="cassette-detail-price">до 4140 ₽</div>
                     </div>
                     <div class="cassette-detail-card">
-                        <img src="vhsc.png" alt="VHS-C кассета" class="cassette-detail-img">
+                        <img src="vhc c.png" alt="VHS-C кассета" class="cassette-detail-img">
                         <div class="cassette-detail-title">VHS-C</div>
                         <p class="text-base leading-relaxed text-slate-700 mb-6">Компактная версия VHS для портативных видеокамер. Кассеты меньшего размера, для воспроизведения требуется адаптер в обычный VHS-плеер. Длительность записи — до 60 минут.</p>
                         <div class="cassette-detail-price">до 1380 ₽</div>
@@ -1082,9 +1056,6 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="text-center mb-10">
-                    <i class="fas fa-truck text-6xl text-[#24A1DE]"></i>
-                </div>
                 <h3 class="text-2xl font-bold uppercase tracking-wider mb-8">Как передать кассеты?</h3>
                 <p class="text-lg leading-relaxed mb-6">Я бесплатно приеду за кассетами по любому адресу в пределах МКАД и привезу готовые файлы обратно.</p>
                 <p class="text-lg leading-relaxed mb-6">Если вам удобнее — можете привезти кассеты самостоятельно (адрес согласуем в переписке).</p>
@@ -1109,45 +1080,12 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="text-center mb-10">
-                    <i class="fas fa-file-video text-6xl text-[#24A1DE]"></i>
-                </div>
                 <h3 class="text-2xl font-bold uppercase tracking-wider mb-8">В каком виде получите оцифровку?</h3>
                 <p class="text-lg leading-relaxed mb-6">Файлы оцифровки запишу на Вашу флешку или отправлю ссылку на скачивание файлов оцифровки.</p>
                 <p class="text-lg leading-relaxed mb-6">Формат: MPG 720x576</p>
                 <p class="text-lg leading-relaxed mb-8">Это технический максимум того, что возможно получить с видеокассет. Кто-то обещает оцифровать кассеты в Full HD — это обман и не более чем маркетинг за исключением кассет mini DV записаных в формате full HD но такие встречаются крайне редко. С ними тоже работаю но стоимость оцифровки подобных кассет в два раза выше.</p>
                 <div class="mt-12">
                     <button onclick="toggleModal('formatModal', false)" class="glass-back-btn">
-                        <i class="fas fa-arrow-left"></i>
-                        Назад
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="podrobnoObOcifrovkeModal" class="modal-overlay">
-        <div class="modal-content" style="max-width: 900px;">
-            <div class="modal-header">
-                <button onclick="toggleModal('podrobnoObOcifrovkeModal', false)" class="modal-back-btn">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-                <button onclick="toggleModal('podrobnoObOcifrovkeModal', false)" class="modal-close-btn">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="text-center mb-10">
-                    <i class="fas fa-play-circle text-6xl text-[#24A1DE]"></i>
-                </div>
-                <h3 class="text-2xl font-bold uppercase tracking-wider mb-8 text-center">Подробно об оцифровке</h3>
-                <div class="video-wrapper">
-                    <video controls preload="metadata" poster="video-poster.jpg">
-                        <source src="podrobno-ob-ocifrovke.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает воспроизведение видео.
-                    </video>
-                </div>
-                <div class="mt-12">
-                    <button onclick="toggleModal('podrobnoObOcifrovkeModal', false)" class="glass-back-btn">
                         <i class="fas fa-arrow-left"></i>
                         Назад
                     </button>
@@ -1166,16 +1104,17 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="text-center mb-10">
-                    <i class="fas fa-video text-6xl text-[#24A1DE]"></i>
-                </div>
                 <h3 class="text-2xl font-bold uppercase tracking-wider mb-8">Оборудование</h3>
                 <p class="text-lg leading-relaxed mb-6">Оцифровка производится на топовых студийных видеомагнитофонах S-VHS (Panasonic и JVC профессиональной серии).</p>
+                
                 <img src="vhsc.png" alt="Студийный видеомагнитофон S-VHS" class="equipment-img">
                 <div class="equipment-img-caption">Студийный видеомагнитофон S-VHS</div>
+                
                 <p class="text-lg leading-relaxed mb-6">Для конвертации используется легендарный профессиональный видеоконвертер Canopus ADVC-300 — один из лучших устройств для оцифровки аналогового видео.</p>
+                
                 <img src="canopus.png" alt="Canopus ADVC-300" class="equipment-img">
                 <div class="equipment-img-caption">Canopus ADVC-300</div>
+                
                 <p class="text-lg leading-relaxed mb-4 font-bold">Преимущества Canopus ADVC-300:</p>
                 <ul class="text-left text-base leading-relaxed space-y-3 max-w-md mx-auto">
                     <li>• Встроенный цифровой Time Base Corrector (TBC) — устраняет дрожание изображения и корректирует ошибки синхронизации, характерные для старых кассет.</li>
@@ -1206,9 +1145,6 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="text-center mb-10">
-                    <i class="fas fa-clock text-6xl text-[#24A1DE]"></i>
-                </div>
                 <h3 class="text-2xl font-bold uppercase tracking-wider mb-8">Срок исполнения</h3>
                 <p class="text-lg leading-relaxed mb-8">Если у Вас менее 6 кассет, то ссылочки на скачивание файлов оцифровки будут у Вас уже на следующий день. Если больше, то работа займет 2–3 дня.</p>
                 <div class="mt-12">
@@ -1231,9 +1167,6 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="text-center mb-10">
-                    <i class="fas fa-question-circle text-6xl text-[#24A1DE]"></i>
-                </div>
                 <h3 class="text-2xl font-bold uppercase tracking-wider mb-8">Не знаете что на кассетах?</h3>
                 <p class="text-lg leading-relaxed mb-6">Если у вас есть кассеты с неизвестным содержимым, я отправлю вам три скриншота с каждой из них. Как правило, этого достаточно, чтобы определить, нужна ли оцифровка.</p>
                 <p class="text-lg leading-relaxed mb-6">Стоимость опции: 300 ₽ за одну кассету.</p>
@@ -1253,6 +1186,7 @@
     <script>
         const textToMagnify = "Готово уже завтра";
         const container = document.getElementById('magnifyText');
+  
         textToMagnify.split('').forEach((char, index) => {
             const span = document.createElement('span');
             span.textContent = char === ' ' ? '\u00A0' : char;
@@ -1280,10 +1214,10 @@
                 const particle = document.createElement('span');
                 particle.className = 'binary-particle';
                 particle.textContent = Math.round(Math.random());
-       
+          
                 const startX = rect.left + Math.random() * width;
                 const startY = rect.top + Math.random() * height;
-       
+          
                 particle.style.left = startX + 'px';
                 particle.style.top = startY + 'px';
                 particle.style.fontSize = (Math.random() * 14 + 18) + 'px';
@@ -1358,7 +1292,7 @@
             const tgBtn = document.getElementById('floatingTgBtn');
             const notice = document.getElementById('finalPriceNotice');
             const targetText = document.getElementById('targetNoticeText');
-   
+      
             if (!tgBtn || !notice || !targetText) return;
             if (notice.classList.contains('hidden')) {
                 tgBtn.style.opacity = '1';
@@ -1444,7 +1378,7 @@
                     form.reset();
                 } else {
                     alert('Ошибка при отправке.');
-                }
+                }ф
             } catch (error) {
                 alert('Ошибка соединения.');
             } finally {
